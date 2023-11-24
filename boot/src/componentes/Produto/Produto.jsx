@@ -11,6 +11,8 @@ export default function Produto() {
                 <h1 id="produto">Produto</h1>
                 <img src="img/App.png" alt=""/>
             </div>
+            <br />
+            <br />
             <hr />
         </>
     );

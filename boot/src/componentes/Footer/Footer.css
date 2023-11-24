@@ -2,145 +2,139 @@
 /* Footer*/
 
 
-.footer {
+.footer- {
     position: relative;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 #img_footer {
     width: 100%;
+    margin-top: 10px;
     border-radius: 20px;
-    
-}
-
-.nome_logo {
-    display: flex;
-    margin-left: 150px;
 }
 
 #logo_footer {
     width: 80px;
     position: absolute;
-    top: 30px;
-    left: 150px;
-    text-align: center;
+    top: 5px;
+    left: 100px;
     padding: 10px;
 }
 
 #nome_footer {
     color: white;
-    padding-left: 10px;
     position: absolute;
-    top: 30px;
-    left: 240px;
+    top: 10px;
+    left: 160px;
     text-align: center;
     padding: 10px;
 }
 
-#txt_equip1{
-    width: 400px;
+#txt_equip1-{
     color: white;
-    padding-left: 10px;
+    font-size: 25px;
     position: absolute;
-    top: 120px;
-    left: 80px;
-    text-align: center;
-    padding: 10px;
+    left: 40px;
+    top: 90px;
 }
-#txt_equip2{
-    width: 400px;
+#txt_equip2-{
+    width: 500px;
+    font-size: 25px;
     color: white;
-    padding-left: 10px;
     position: absolute;
-    top: 180px;
-    left: 80px;
-    text-align: center;
-    padding: 10px;
+    left: 40px;
+    top: 160px;
 }
-#txt_equip3{
-    width: 400px;
+#txt_equip3-{
+    width: 500px;
+    font-size: 25px;
     color: white;
-    padding-left: 10px;
     position: absolute;
-    top: 330px;
-    left: 80px;
-    text-align: center;
-    padding: 10px;
+    left: 40px;
+    top: 350px;
 }
-.contato{
+.email{
+    width: 350px;
     color: white;
-    padding-left: 10px;
     position: absolute;
     top: 30px;
-    left: 600px;
+    left: 560px;
     text-align: center;
     padding: 10px;
 }
+
+.telefone{
+    width: 350px;
+    color: white;
+    position: absolute;
+    top: 190px;
+    left: 550px;
+    text-align: center;
+    padding: 10px;
+}
+
 #redesocial{
+    width: 400px;
     color: white;
     padding-left: 10px;
     position: absolute;
     top: 30px;
-    left: 1050px;
-    text-align: center;
+    left: 980px;
     padding: 10px;
 }
 .inst img{
     width: 60px;
+    margin-left: -50px;
 }
 
 .inst{
     display: flex;
     color: white;
-    padding-left: 10px;
     position: absolute;
-    top: 110px;
+    top: 100px;
     left: 1060px;
-    text-align: center;
     padding: 10px;
 }
 
 .wz img{
     width: 60px;
+    margin-left: -50px;
 }
 
 .wz{
     display: flex;
     color: white;
-    padding-left: 10px;
     position: absolute;
-    top: 190px;
+    top: 170px;
     left: 1060px;
-    text-align: center;
     padding: 10px;
 }
 
 .face img{
     width: 60px;
+    margin-left: -50px;
 }
 
 .face{
     display: flex;
     color: white;
-    padding-left: 10px;
     position: absolute;
-    top: 270px;
+    top: 240px;
     left: 1060px;
-    text-align: center;
     padding: 10px;
 }
 
 .tw img{
     width: 60px;
+    margin-left: -50px;
 }
 
 .tw{
     display: flex;
     color: white;
-    padding-left: 10px;
     position: absolute;
-    top: 350px;
+    top: 320px;
     left: 1060px;
-    text-align: center;
     padding: 10px;
 }
 

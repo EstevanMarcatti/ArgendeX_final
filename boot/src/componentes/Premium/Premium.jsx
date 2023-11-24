@@ -1,8 +1,5 @@
 import './Premium.css'
 
-
-
-
 export default function Premium() {
 
     return (
@@ -54,6 +51,8 @@ export default function Premium() {
                     </div>
 
                 </div>
+                <br />
+                <br />
                 <hr />
             </div>
 

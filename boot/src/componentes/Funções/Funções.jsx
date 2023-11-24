@@ -13,18 +13,6 @@ export default function Funções() {
             <h2 className="func" id="func">Funções e Vantagens</h2> 
 
             <br />
-            <section id="lista"/>
-                <ul>
-                    <li><img className="icone" src="img/chek.png" alt="" /></li>
-                    <li><img className="icone" src="img/chek.png" alt="" /></li>
-                    <li><img className="icone" src="img/chek.png" alt="" /></li>
-                    <li><img className="icone" src="img/chek.png" alt="" /></li>
-                    <li><img className="icone" src="img/chek.png" alt="" /></li>
-                    <li><img className="icone" src="img/chek.png" alt="" /></li>
-                    <li><img className="icone" src="img/chek.png" alt="" /></li>
-                    <li><img className="icone" src="img/chek.png" alt="" /></li>
-                </ul>
-                <section/>
                 <p className="texto">
                     1. Organização: um site de agenda de tarefas permite que você organize suas tarefas diárias,<br />
                     semanais e

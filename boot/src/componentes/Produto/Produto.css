@@ -9,31 +9,7 @@
 
 .produto img {
     width: 1000px;
-    margin-left: 250px;
+    margin-left: 170px;
     border-radius: 20px;
-}
-
-/*espaço entre as pag*/
-
-hr {
-    margin-top: 200px;
-}
-
-#fim {
-    margin-top: 50px;
-}
-
-.icone {
-    width: 40px;
-    padding-left: 150px;
-    padding-top: 28px;
-
-}
-
-.icon {
-    width: 40px;
-    padding-left: 150px;
-
-
-
+    margin-top: 20px;
 }
