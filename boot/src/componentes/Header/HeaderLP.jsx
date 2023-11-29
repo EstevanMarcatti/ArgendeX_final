@@ -15,7 +15,7 @@ export default function HeaderLP() {
                     <h1 id="title">ArgendeX</h1>
               {/*Inicio do menu de opcoes*/}
         <div className="menu">
-            <nav>
+            <nav id='nav-header'>
                  
                 <a href="#func">
                     <li>Funções</li>

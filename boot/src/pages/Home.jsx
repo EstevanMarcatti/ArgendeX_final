@@ -19,7 +19,7 @@ export default function Home() {
             </header>
 
             <body>
-                <div className="container">
+                <div >
                     <CentralLP />
 
                     <Funções />

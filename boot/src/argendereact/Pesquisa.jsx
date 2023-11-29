@@ -9,7 +9,7 @@ function Pesquisa() {
   return (
     <Navbar expand="lg" className="">
       <Container fluid>
-        <Navbar.Brand href="#"><img src="https://thumbs2.imgbox.com/8f/f7/O2W2p42o_t.jpg" alt="" id='logo' /></Navbar.Brand>
+        <Navbar.Brand href="#"><img src="https://thumbs2.imgbox.com/8f/f7/O2W2p42o_t.jpg" alt="" id='logo-pesq' /></Navbar.Brand>
         <Navbar.Toggle aria-controls="navbarScroll" />
         <Navbar.Collapse id="navbarScroll">
           <Form className="d-flex">

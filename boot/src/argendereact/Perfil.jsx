@@ -10,8 +10,8 @@ function Perfil() {
   return (
      
     <>
-      <Button onClick={() => setSmShow(true)} className="me-2" id='button_perfil'>
-        <img src="https://thumbs2.imgbox.com/67/4f/St9N6SJO_t.png" alt="" id='fotoperfil'/>
+      <Button onClick={() => setSmShow(true)} className="me-2" id='button_perfil-prf'>
+        <img src="https://thumbs2.imgbox.com/67/4f/St9N6SJO_t.png" alt="" id='fotoperfil-prf'/>
       </Button>
       <Modal
         size="lg"
@@ -21,12 +21,12 @@ function Perfil() {
       >
         <Modal.Header closeButton>
           <Modal.Title id="example-modal-sizes-title-sm">
-            <img src="https://thumbs2.imgbox.com/67/4f/St9N6SJO_t.png" alt="" id='fotoperfil2'/>
+            <img src="https://thumbs2.imgbox.com/67/4f/St9N6SJO_t.png" alt="" id='fotoperfil2-prf'/>
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
             <div>
-                <h1 id='h1lemb'>Principais Lembretes</h1>
+                <h1 id='h1lemb-prf'>Principais Lembretes</h1>
                 <Anotacoes/>
             </div>
         </Modal.Body>

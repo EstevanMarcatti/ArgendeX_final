@@ -154,10 +154,10 @@ const horarios =[
 export default function Horarios() {
     return (
         <div>
-            <div id='styleHorario'>
-                <Navbar  id='sephora'>
-                    <Container id='containerhora'>
-                        <Navbar.Brand href="" id='horas'>
+            <div id='styleHorario-hor'>
+                <Navbar  id='sephora-hor'>
+                    <Container id='containerhora-hor'>
+                        <Navbar.Brand href="" id='horas-hor'>
                             {horarios.map(function (item) {
                                 return (
                                     <Add

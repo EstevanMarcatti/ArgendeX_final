@@ -18,8 +18,8 @@ function BarraNavegacao() {
           <img src="https://thumbs2.imgbox.com/ff/78/j3SE39yI_t.jpg" alt="" id='tresriscos' />
         </Button>
       </div>
-      <Offcanvas show={show} onHide={handleClose} backdrop="static" id='modalmenu'>
-        <Offcanvas.Header closeButton data-bs-theme="dark" id='escritamodal'>
+      <Offcanvas show={show} onHide={handleClose} backdrop="static" id='modalmenu-brr'>
+        <Offcanvas.Header closeButton data-bs-theme="dark" id='escritamodal-brr'>
 
           <Offcanvas.Title>
             <img src="https://thumbs2.imgbox.com/8f/f7/O2W2p42o_t.jpg" alt="" />

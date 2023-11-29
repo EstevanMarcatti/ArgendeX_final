@@ -4,7 +4,7 @@
 
 #branco {
     color: white;
-    margin-left: -30px;
+    text-align: center;
     font-size: 25px;
     margin-top: 20px;
     
@@ -13,10 +13,8 @@
 
 #verde {
     color: rgb(81, 255, 0);
-    margin-left: -30px;
-    padding-top: 20px;
+    text-align: center;
     font-size: 35px;
-    width: 80%;
 }
 
 .meio {
@@ -27,8 +25,8 @@
 
 #logocobre{
     position: absolute;
-    left: 80%;
-    top: 530px;
+    left: 88%;
+    top: 680px;
 }
 
 
