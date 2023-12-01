@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import './cadastro.css';
 
 
+
 const App = () => {
   const [formValues, setFormValues] = useState({
     nome: '',
@@ -19,11 +20,13 @@ const App = () => {
     }));
   };
 
+  const [mensagensErro, setMensagensErro] = useState([]);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
-      const response = await fetch('http://localhost:5000/receber-dados', {
+      const resposta = await fetch('http://localhost:5000/receber-dados', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -31,18 +34,38 @@ const App = () => {
         body: JSON.stringify(formValues),
       });
 
-      if (response.ok) {
-        console.log('Dados enviados com sucesso!');
+      const resultado = await resposta.json();
+
+      if (resultado.erro) {
+        // Exibe mensagens de erro no console.log ou em algum local visível
+        console.error('Erro no servidor:', resultado.mensagens);
+
+        // Atualiza o estado com as mensagens de erro para exibição no formulário
+        setMensagensErro(resultado.mensagens);
       } else {
-        console.error('Erro ao enviar dados.');
+        // Dados foram processados com sucesso
+        console.log('Dados processados com sucesso!', resposta);
       }
     } catch (error) {
-      console.error('Erro na requisição:', error);
+      console.error('Erro ao enviar dados:', error);
     }
   };
 
   return (
+
     <div className="form-container">
+
+      {mensagensErro.length > 0 && (
+        <div style={{ color: 'red' }}>
+          <p>Erro ao processar os dados:</p>
+          <ul>
+            {mensagensErro.map((mensagem, index) => (
+              <li key={index}>{mensagem.mensagem}</li>
+            ))}
+          </ul>
+        </div>
+      )}
+
       <div id='back-cadastro'>
         <div id="container-Cadastro">
           <div className="inicio-cadastro">
@@ -51,7 +74,6 @@ const App = () => {
           <h2 id="text">
             Crie sua conta no <b id="text1-cadastro">ArgendeX</b>
           </h2>
-          <h1>ArgendeX</h1>
           <form onSubmit={handleSubmit} id="register-form-cadastro">
             <div className="form-box spacing-cadastro">
               <label for="name">Nome Completo</label>
@@ -78,11 +100,11 @@ const App = () => {
                 Data de Nascimento:
               </label>
               <input
-                  type="date"
-                  name="dataNascimento"
-                  value={formValues.dataNascimento}
-                  onChange={handleChange}
-                />
+                type="date"
+                name="dataNascimento"
+                value={formValues.dataNascimento}
+                onChange={handleChange}
+              />
             </div>
             <div>
               <input type="checkbox" name="agreement" id="agreement-cadastro" required />
@@ -104,9 +126,9 @@ const App = () => {
       </div>
       <p className="error-validation template"></p>
       <script src="../../js/jscadastro.js"></script>
+
     </div>
   );
-
 };
 
 export default App;
