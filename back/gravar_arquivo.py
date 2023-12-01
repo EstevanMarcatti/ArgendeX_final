@@ -1,3 +1,4 @@
+
 def gravar_em_arquivo(dados, nome_arquivo='dados.txt'):
     # Função para processar e gravar dados em um arquivo de texto
     try:
