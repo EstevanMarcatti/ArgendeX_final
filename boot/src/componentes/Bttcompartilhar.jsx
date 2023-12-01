@@ -1,3 +1,16 @@
+
+{/* 
+    Compartilhar Componente
+    Otavio
+    08/11/2023 (ultima alteração)
+    Descrição Detalhada :
+      Apenas contem o botão de compartilhar verde
+      e tem como função de compartilhar suas tarefas com outros usuarios 
+    Observações Pertinentes:
+ */}
+
+
+
 import { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';

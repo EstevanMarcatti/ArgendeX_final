@@ -1,3 +1,16 @@
+
+{/* 
+    Componente Header (Funções de navegação do site)
+    Joao Gabriel
+    29/11/2023 (ultima alteração)
+    Descrição Detalhada :
+        Parte do MENU de nosso site contendo abas de
+        navegação do site.
+    Observações Pertinentes:
+ */}
+
+
+
 import {Link} from 'react-router-dom'
 
 import './HeaderLP.css'

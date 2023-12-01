@@ -1,4 +1,14 @@
-import './css_geral.css'
+
+{/* 
+    perfil Componente (calendario)
+    Estevan/Arthur
+    08/11/2023 (ultima alteração)
+    Descrição Detalhada :
+         um perfil com as lembretes importantes e algumas das 
+        informações básicas do usuario
+    Observações Pertinentes:
+ */}
+ import './css_geral.css'
 import { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';

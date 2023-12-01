@@ -1,3 +1,16 @@
+    
+{/* 
+    Componentes De Funções
+    Joao Gabriel
+    29/11/2023 (ultima alteração)
+    Descrição Detalhada :
+        Contendo detalhes das vantagens do produto
+        de nosso site podendo chamar o cliente e 
+        com certeza de que e isso que precisa.
+    Observações Pertinentes:
+ */}
+
+
 import './Funções.css'
 
 

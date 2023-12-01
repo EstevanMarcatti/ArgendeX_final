@@ -1,3 +1,17 @@
+
+{/* 
+    Planos Componente
+    Rafael Vieira
+    08/11/2023 (ultima alteração)
+    Descrição Detalhada :
+        Parte de nosso site onde da opções de
+        planos de acesso com vantagens e desvantagens
+        por cada plano.
+    Observações Pertinentes:
+ */}
+
+
+
 import './Premium.css'
 
 export default function Premium() {

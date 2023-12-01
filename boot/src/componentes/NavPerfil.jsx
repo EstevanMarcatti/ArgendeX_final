@@ -1,3 +1,13 @@
+{/* 
+    NavPerfil Componente (calendario)
+    Arthur
+    08/11/2023 (ultima alteração)
+    Descrição Detalhada :
+        uma das partes do anotações.jsx e 
+    Observações Pertinentes:
+    lembretes importantes consultar NavBar.jsx
+ */}
+
 import Container from 'react-bootstrap/Container';
 import Navbar from 'react-bootstrap/Navbar';
 import './css_geral.css'

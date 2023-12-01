@@ -1,3 +1,17 @@
+
+{/* 
+    Add Tarefa Componente
+    Estevan
+    08/11/2023 (ultima alteração)
+    Descrição Detalhada :
+        Componente onde contem uma função
+        de nosso produto, onde adiciona tarefa 
+        de acordo com o dia e hora
+    Observações Pertinentes:
+ */}
+
+
+
 import { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';

@@ -1,3 +1,17 @@
+
+{/* 
+    Anotação Componente
+    Estevan
+    08/11/2023 (ultima alteração)
+    Descrição Detalhada :
+        Componente onde contem uma função
+        de nosso produto, onde mostra os 
+        principais do usuario
+    Observações Pertinentes:
+ */}
+
+
+
 import NavPerfil from "./NavPerfil"
           {/*o perfil de usuario */}
 const usuario = [

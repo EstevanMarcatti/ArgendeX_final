@@ -1,3 +1,19 @@
+
+{/* 
+    Footer Componente
+    Joao Gabriel
+    01/12/2023 (ultima alteração)
+    Descrição Detalhada :
+        Consiste em demontrar no final do site
+        a historia de nossa empresa e nossa forma
+        de contato
+    Observações Pertinentes:
+ */}
+
+
+
+
+
 import './Footer.css'
 
 

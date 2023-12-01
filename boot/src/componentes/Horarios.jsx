@@ -1,3 +1,14 @@
+{/* 
+    Horario Componente (calendario)
+    Estevan
+    18/10/2023 (ultima alteração)
+    Descrição Detalhada :
+     esse componente consiste em uma coluna 
+     de horarios na lateral esquerda da pagina 
+     principal
+    Observações Pertinentes:
+ */}
+
 import './css_geral.css'
 import Container from 'react-bootstrap/Container';
 import Navbar from 'react-bootstrap/Navbar';

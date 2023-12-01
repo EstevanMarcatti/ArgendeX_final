@@ -1,3 +1,18 @@
+
+{/* 
+    Produto Componente
+    Estevan
+    08/11/2023 (ultima alteração)
+    Descrição Detalhada :
+        Consiste em demontrar um exemplo
+        de como e na interface de nosso 
+        produto.
+    Observações Pertinentes:
+ */}
+
+
+
+
 import './Produto.css'
 
 

@@ -1,3 +1,11 @@
+{/* 
+    Pesquisa Componente (calendario)
+    Estevan
+    08/11/2023 (ultima alteração)
+    Descrição Detalhada :
+      uma barra de pesquisa para se encontrar lembretes 
+    Observações Pertinentes:
+ */}
 import './css_geral.css'
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';

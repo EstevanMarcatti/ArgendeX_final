@@ -1,3 +1,16 @@
+{/* 
+    Componente Slogan inicial
+    Estevan
+    29/11/2023 (ultima alteração)
+    Descrição Detalhada :
+        Um slogan com frase de markete e um
+        designer 3D sobre nosso produto.
+    Observações Pertinentes:
+ */}
+
+
+
+
 import './CentralLP.css'
 
 

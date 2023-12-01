@@ -1,3 +1,12 @@
+{/* 
+    perfil Componente (calendario)
+    Estevan/otavio
+    08/11/2023 (ultima alteração)
+    Descrição Detalhada :
+        local onde o usuario pode mudar as configurações, 
+        a senha da conta e contatar nossa equipe para auxilio 
+    Observações Pertinentes:
+ */}
 import './css_geral.css'
 import { useState } from 'react';
 import Button from 'react-bootstrap/Button';

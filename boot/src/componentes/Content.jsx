@@ -1,3 +1,15 @@
+
+{/* 
+    Routes Componente
+    Estevan
+    08/11/2023 (ultima alteração)
+    Descrição Detalhada :
+        Componente onde fica armazenado 
+        todas as rotas de nosso produto
+    Observações Pertinentes:
+ */}
+
+
 import React from "react";
 import { Routes, Route } from "react-router-dom";
 import Home from "../pages/Home";

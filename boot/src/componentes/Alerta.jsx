@@ -1,3 +1,18 @@
+
+{/* 
+    Alerta Componente
+    Joao Gabriel
+    08/11/2023 (ultima alteração)
+    Descrição Detalhada :
+        Componente onde contem uma função
+        de nosso produto, onde adiciona um alerta 
+        em cada lembrete
+    Observações Pertinentes:
+ */}
+
+
+ 
+
 import './css_geral.css'
 
 function Alerta() {
