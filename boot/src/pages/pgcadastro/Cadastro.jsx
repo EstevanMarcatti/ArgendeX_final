@@ -55,16 +55,6 @@ const App = () => {
 
     <div className="form-container">
 
-      {mensagensErro.length > 0 && (
-        <div style={{ color: 'red' }}>
-          <p>Erro ao processar os dados:</p>
-          <ul>
-            {mensagensErro.map((mensagem, index) => (
-              <li key={index}>{mensagem.mensagem}</li>
-            ))}
-          </ul>
-        </div>
-      )}
 
       <div id='back-cadastro'>
         <div id="container-Cadastro">
@@ -74,6 +64,16 @@ const App = () => {
           <h2 id="text">
             Crie sua conta no <b id="text1-cadastro">ArgendeX</b>
           </h2>
+          {mensagensErro.length > 0 && (
+            <div style={{ color: 'red' }}>
+              <p>Erro ao processar os dados:</p>
+              <ul>
+                {mensagensErro.map((mensagem, index) => (
+                  <li key={index}>{mensagem.mensagem}</li>
+                ))}
+              </ul>
+            </div>
+          )}
           <form onSubmit={handleSubmit} id="register-form-cadastro">
             <div className="form-box spacing-cadastro">
               <label for="name">Nome Completo</label>
