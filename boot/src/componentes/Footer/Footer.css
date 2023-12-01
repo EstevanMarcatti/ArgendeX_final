@@ -17,7 +17,7 @@
     width: 80px;
     position: absolute;
     top: 5px;
-    left: 100px;
+    left: 10px;
     padding: 10px;
 }
 
@@ -25,52 +25,66 @@
     color: white;
     position: absolute;
     top: 10px;
-    left: 160px;
+    left: 70px;
     text-align: center;
     padding: 10px;
 }
 
 #txt_equip1-{
     color: white;
-    font-size: 25px;
+    font-size: 20px;
     position: absolute;
-    left: 40px;
-    top: 90px;
+    left: 80px;
+    top: 120px;
+    text-align: center;
 }
 #txt_equip2-{
-    width: 500px;
-    font-size: 25px;
+    width: 400px;
+    font-size: 20px;
     color: white;
     position: absolute;
+    top: 200px;
     left: 40px;
-    top: 160px;
+    text-align: center;
 }
 #txt_equip3-{
-    width: 500px;
-    font-size: 25px;
+    width: 300px;
+    font-size: 20px;
     color: white;
     position: absolute;
-    left: 40px;
-    top: 350px;
+    top: 380px;
+    left: 80px;
+    text-align: center;
 }
 .email{
     width: 350px;
     color: white;
     position: absolute;
-    top: 30px;
+    top: 50px;
     left: 560px;
     text-align: center;
     padding: 10px;
 }
 
+.contato h3{
+    font-size: 20px;
+    margin-top: 20px;
+}
+
+
 .telefone{
     width: 350px;
     color: white;
     position: absolute;
-    top: 190px;
+    top: 240px;
     left: 550px;
     text-align: center;
     padding: 10px;
+}
+
+.telefone h3{
+    font-size: 20px;
+    margin-top: 20px;
 }
 
 #redesocial{
@@ -79,12 +93,13 @@
     padding-left: 10px;
     position: absolute;
     top: 30px;
-    left: 980px;
+    left: 1100px;
     padding: 10px;
 }
+
 .inst img{
     width: 60px;
-    margin-left: -50px;
+    margin-left: 50px;
 }
 
 .inst{
@@ -98,7 +113,7 @@
 
 .wz img{
     width: 60px;
-    margin-left: -50px;
+    margin-left: 50px;
 }
 
 .wz{
@@ -112,7 +127,7 @@
 
 .face img{
     width: 60px;
-    margin-left: -50px;
+    margin-left: 50px;
 }
 
 .face{
@@ -126,7 +141,7 @@
 
 .tw img{
     width: 60px;
-    margin-left: -50px;
+    margin-left: 50px;
 }
 
 .tw{
