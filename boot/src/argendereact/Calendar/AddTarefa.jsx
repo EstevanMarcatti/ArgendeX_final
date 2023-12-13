@@ -3,15 +3,15 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
 
-import './css_geral.css'
+import '../css_geral.css'
 
-import Impor from './Impor';
+import Impor from '../Impor';
 
-import Alerta from './alerta';
+import Alerta from '../alerta';
 
-import Data from './Data';
+import Data from '../Data';
 
-import Bttcompartilhar from './Bttcompartilhar';
+import Bttcompartilhar from '../Bttcompartilhar';
 
 
 function AddTarefa() {
