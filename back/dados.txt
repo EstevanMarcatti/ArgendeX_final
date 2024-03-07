@@ -265,20 +265,6 @@ Senha:
 
 Dados Gravados:
 
-Nome: ademir pereira
-E-mail: daadadad@gmail.com
-Cidade: sao paulo
-Data de Nascimento: 1963-06-06
-Senha: asdadada@Aada12
-
-
-Dados Gravados:
-Nome: ademir pereira
-E-mail: daadadad@gmail.com
-Cidade: sao paulo
-Data de Nascimento: 1963-06-06
-Senha: asdadada@Aada12
-
 Nome: estevan Nicoleti
 E-mail: JoaoFelipe1010@gmail.com
 Cidade: ASDFGB
