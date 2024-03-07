@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './cadastro.css';
 
 
 
+
 const App = () => {
+  const navigate = useNavigate();
   const [formValues, setFormValues] = useState({
     nome: '',
     email: '',
@@ -45,6 +48,8 @@ const App = () => {
       } else {
         // Dados foram processados com sucesso
         console.log('Dados processados com sucesso!', resposta);
+
+        navigate('/Appsite')
       }
     } catch (error) {
       console.error('Erro ao enviar dados:', error);

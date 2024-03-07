@@ -4,7 +4,7 @@ import BarraNavegacao from './BarraNavegacao'
 import Pesquisa from './Pesquisa'
 import Perfil from './Perfil'
 import Horarios from './Horarios'
-import AddTarefa from './AddTarefa'
+import AddTarefa from './Calendar/AddTarefa'
 
 
 
@@ -27,7 +27,7 @@ function App() {
       {/*calendario */}
       <body>
         <Horarios />
-        <Calendar />
+        <Calendar/>
       </body>
     
     </div>

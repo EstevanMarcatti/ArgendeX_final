@@ -77,3 +77,22 @@ h1{
   
 }
 
+/* Adicione estas regras ao seu arquivo de estilo CSS */
+
+.weekend .day-number {
+  color: #cb0000; /* Cor de fundo */
+}
+.holiday .day-number{
+  color: #cb0000; /* Cor de fundo */
+}
+.day-number.carnaval {
+  color: red;
+}
+.carnaval{
+  color: #cb0000;
+}
+
+  
+
+
+
