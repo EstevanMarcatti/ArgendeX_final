@@ -1,4 +1,4 @@
-import Button from 'react-bootstrap/Button';
+import { Link } from 'react-router-dom';
 import './css_config.css'
 
 function BlockExample() {
@@ -6,11 +6,10 @@ function BlockExample() {
 
         <div className="d-grid gap-2" id='opcoes_config'>
             <h1 id='princonfg'>Principais Configuraçoes</h1>
-            <Button variant="primary" size="lg" id='bttconta'>
-                <h1>Conta</h1>
-            </Button>
+            <li><Link to="/Subcadastro" id='bttconta'><h1>Conta</h1></Link></li>
         </div>
     );
 }
 
 export default BlockExample;
+

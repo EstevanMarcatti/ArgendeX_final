@@ -18,7 +18,9 @@ import SuporteLP from "../pages/pgsuporte/SuporteLP";
 import Login from "../pages/pglogin/Login";
 import Cadastro from '../pages/pgcadastro/Cadastro';
 import Esqsenha from "../pages/pgesqsenha/Esqsenha";
-import Appsite from '../argendereact/Appsite'
+import Appsite from '../argendereact/Appsite';
+import Subcadastro from '../pages/Subcadastro'
+
 
 
 
@@ -34,6 +36,7 @@ const Content = props => (
             <Route path="/Cadastro" element={<Cadastro />} />
             <Route path="/Esqsenha" element ={<Esqsenha />} />
             <Route path="/Appsite" element ={<Appsite />} />
+            <Route path="/Subcadastro" element={<Subcadastro/>} />
 
             
             
