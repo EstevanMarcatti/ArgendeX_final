@@ -1,6 +1,7 @@
 import Container from 'react-bootstrap/Container';
 import Navbar from 'react-bootstrap/Navbar';
 import Suporte from './Suporte';
+import Configuracoes from '../componentes/Config/Configuracoes';
 import './css_geral.css'
 
 function BrandExample() {
@@ -27,7 +28,7 @@ function BrandExample() {
       <br />
       <Navbar className="bg-body-tertiary" >
         <Container >
-          <Navbar.Brand > <img src="https://thumbs2.imgbox.com/ef/a2/3oUEMBtk_t.png" alt="" id='button_menu-nav' />Configuração</Navbar.Brand>
+          <Navbar.Brand > <img src="https://thumbs2.imgbox.com/ef/a2/3oUEMBtk_t.png" alt="" id='button_menu-nav' /><Configuracoes/></Navbar.Brand>
         </Container>
       </Navbar>
       <br />
