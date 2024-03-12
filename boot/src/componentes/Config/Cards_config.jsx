@@ -6,7 +6,7 @@ function BlockExample() {
 
         <div className="d-grid gap-2" id='opcoes_config'>
             <h1 id='princonfg'>Principais Configuraçoes</h1>
-            <li><Link to="/Subcadastro" id='bttconta'><h1>Conta</h1></Link></li>
+            <li><Link to="/Subcadastro" id='linkcadastro'><h1 id='bttconta'>Conta</h1></Link></li>
         </div>
     );
 }
