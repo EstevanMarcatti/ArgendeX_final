@@ -1,4 +1,3 @@
-
 import conexao
 
 
@@ -16,19 +15,21 @@ def inserir_Cadastro(dados_processados):
     conex.close()
 
 
-def inserir_Usuario(dados_processados):
+
+
+'''----------------------------tarefa----------------------------------------------------------------------------------------------------------'''
+
+def inserir_Tarefa(dados_processados):
     conex = conexao.conectar()
     cursor = conex.cursor()
 
-    sql = "INSERT INTO usuarios (ID_Cadastro,) VALUES (%s,)"
+    sql = "INSERT INTO tarefa (Titulo, Descricao) VALUES (%s, %s)"
     val = (dados_processados)
 
     cursor.execute(sql, val)
     conex.commit()
 
-    print("Novo usuario inserido com sucesso!")
+    print("Nova tarefa inserida com sucesso!")
     conex.close()
-     
-
 
 
