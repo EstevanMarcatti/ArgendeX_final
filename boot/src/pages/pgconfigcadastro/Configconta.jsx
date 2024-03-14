@@ -11,8 +11,6 @@ const Configconta = () => {
         nome: '',
         email: '',
         senha: '',
-        confsenha: '',
-
     });
 
     const handleChange = (e) => {
@@ -85,19 +83,18 @@ const Configconta = () => {
                             <label for="name">Atualizar Nome de Usuario</label>
                             <input type="text" name="nome" id="name-configconta" placeholder="Digite seu novo nome de usuario" value={formValues.nome} onChange={handleChange} />
                         </div>
-
+                        <br />
                         <div className="email-form">
                             <label for="email">Atualizar E-mail</label>
                             <input type="email" name="email" id="email-configconta" placeholder="Digite seu novo e-mail" value={formValues.email} onChange={handleChange} data-min-length="8"
                                 data-email-validate />
                         </div>
-
+                        <br />
                         <div className="form-box spacing">
                             <label for="senha">Atualizar Senha</label>
                             <input type="password" name="senha" id="password-configconta" placeholder="Digite sua nova senha" value={formValues.senha} onChange={handleChange} />
                         </div>
-
-
+                        <br />
                         <div className="button-form" id="box-button-configconta">
                             <input id="btn-submit-configconta" type="submit" value="Atualizar" />
                             <input id="button-configconta" type="button" value="Cancelar" onclick="limpaForm()" />

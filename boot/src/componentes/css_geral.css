@@ -13,12 +13,13 @@ header {
     background-color: black;
 }
 
-label{
+label {
     color: #ffffff;
     padding-left: 1%;
 
 }
-label{
+
+label {
     color: #ffffff;
     padding-right: 3%;
 
@@ -59,33 +60,36 @@ label{
     width: 40px;
     margin-right: 15px;
     margin-top: -2px;
-    
+
 }
-#psup{
+
+#psup {
     font-size: 20px;
     margin-bottom: -3px;
 }
-#bttsup{
+
+#bttsup {
     color: black;
     border: none;
-    background-color:#F8F9FA;
+    background-color: #F8F9FA;
     margin-top: -2px;
-    padding:0;
+    padding: 0;
 }
 
 /*Suporte-----------------------------------------------------------------------------------------------------------------------------------*/
-#titlesup{
+#titlesup {
     color: white;
     font-size: 45px;
     margin-left: 15px;
     margin-top: -3px;
 }
-#imgsup{
+
+#imgsup {
     margin-left: 500px;
     width: 300px;
 }
 
-#pesqsup{
+#pesqsup {
     text-align: center;
     color: #fff;
 }
@@ -112,23 +116,23 @@ label{
     color: white;
 }
 
-#contnavperfil{
+#contnavperfil {
     display: flex;
 }
 
 /*NavPerfil Principais lembretes------------------------------------------------------------------------------------------------------------------------------------*/
 
 #lembr {
-    
+
     margin-bottom: 5px;
-   
+
     color: black;
 }
 
-#datas{
+#datas {
     margin-top: 10px;
     color: black;
-    
+
 }
 
 
@@ -155,11 +159,11 @@ label{
     overflow: auto;
 }
 
-#styleHorario::-webkit-scrollbar{
+#styleHorario::-webkit-scrollbar {
     background-color: black;
 }
 
-#styleHorario::-webkit-scrollbar-thumb{
+#styleHorario::-webkit-scrollbar-thumb {
     background-color: green;
     border-radius: 50px;
     width: 5px;
@@ -173,15 +177,15 @@ label{
 
 /*Add adicionar horas------------------------------------------------------------------------------------------------------------------------------------*/
 
-#propshora{
+#propshora {
     margin-bottom: 5px;
-    border:2px green solid;
+    border: 2px green solid;
     border-radius: 5px;
     padding: 5px;
     background-color: black;
 }
 
-#duplahora{
+#duplahora {
     margin-bottom: 5px;
 }
 
@@ -191,18 +195,19 @@ label{
     margin-right: 5px;
 }
 
-#butthora:hover{
-    background-color:green;
+#butthora:hover {
+    background-color: green;
 }
 
-#addtarefa{
+#addtarefa {
     color: white;
 }
-#data{
+
+#data {
     color: #fff;
 }
 
-#containerhora{
+#containerhora {
     background-color: black;
 }
 
@@ -218,16 +223,18 @@ label{
     background-color: green;
 }
 
-#bttcancelar{
+#bttcancelar {
     color: white;
     background-color: red;
     border: 0;
 }
-#bttsalvar:hover{
+
+#bttsalvar:hover {
     color: white;
     background-color: gray;
 }
-#bttcancelar:hover{
+
+#bttcancelar:hover {
     color: white;
     background-color: gray;
 }
@@ -250,51 +257,57 @@ label{
     margin-right: 50px;
 }
 
-#buttonlembrete:hover{
+#buttonlembrete:hover {
     color: white;
-    background-color:green;
+    background-color: green;
 }
 
 
 /*Add adicionar tarefas(PARTE DO NIVEL DE IMPORTANCIA)------------------------------------------------------------------------------------------------------------------------------------*/
 
-.select-estiloso { /* <div> */
+.select-estiloso {
+    /* <div> */
     width: 270px;
-    height: 34px;/* novo ícone para o <select> */
+    height: 34px;
+    /* novo ícone para o <select> */
     border-radius: 5px;
     text-align: center;
     margin-bottom: 10px;
-}   
+}
 
 
 #bttcomp {
     color: white;
-    
+
 }
-.Bttcompart{
+
+.Bttcompart {
     color: white;
-    background-color: green ;
+    background-color: green;
     margin-top: 15px;
     border: 2px;
-    
+
 }
-.Bttcompart:hover{
+
+.Bttcompart:hover {
     color: white;
-    background-color:black;
+    background-color: black;
 }
-.Bttcompartilhar{
+
+.Bttcompartilhar {
     color: white;
-    background-color:green ;
+    background-color: green;
     border: none;
 }
-.Bttcompartilhar:hover{
+
+.Bttcompartilhar:hover {
     color: white;
     background-color: rgb(23, 23, 23);
 
 }
-#Bttcancel:hover{
+
+#Bttcancel:hover {
     color: white;
     background-color: rgb(23, 23, 23);
     border: none;
 }
-
