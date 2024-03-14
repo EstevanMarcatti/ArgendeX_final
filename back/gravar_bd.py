@@ -19,17 +19,3 @@ def inserir_Cadastro(dados_processados):
 
 '''----------------------------tarefa----------------------------------------------------------------------------------------------------------'''
 
-def inserir_Tarefa(dados_processados):
-    conex = conexao.conectar()
-    cursor = conex.cursor()
-
-    sql = "INSERT INTO tarefa (Titulo, Descricao) VALUES (%s, %s)"
-    val = (dados_processados)
-
-    cursor.execute(sql, val)
-    conex.commit()
-
-    print("Nova tarefa inserida com sucesso!")
-    conex.close()
-
-

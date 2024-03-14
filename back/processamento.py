@@ -56,38 +56,6 @@ def processar_dados(dados):
 
 '''--------------------------------------------------------------Tarefas---------------------------------------------------------------------'''
 
-# processamento.py
-from gravar_bd import inserir_Tarefa
-
-
-def processar_dados(dados):
-    # Função para processar os dados recebidos do Flask
-    # Retorna os dados processados
-    dados_processados = dados
-
-    lista = []
-
-    lista.append(dados_processados.get('Titulo'))
-    lista.append(dados_processados.get('descricao'))
-
-
-    mensagens_erro = []
-
-    # Remove mensagens de erro vazias
-    mensagens_erro = [msg for msg in mensagens_erro if msg['erro']]
-
-    print(mensagens_erro)
-
-    if mensagens_erro:
-        return {'erro': True, 'mensagens': mensagens_erro}
-    else:
-        # Chama a função para gravar os dados em um arquivo
-        inserir_Tarefa(lista)
-        # Retorna os dados processados
-        return {'erro': False, 'mensagem': 'Dados Processados com Sucesso!'}
-
-
-
 
 
 
