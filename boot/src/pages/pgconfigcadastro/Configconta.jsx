@@ -1,18 +1,16 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import './configconta.css'
 
 
 
 
-
-const App = () => {
+const Configconta = () => {
     const navigate = useNavigate();
     const [formValues, setFormValues] = useState({
         nome: '',
         email: '',
         senha: '',
-        confsenha: '',
-
     });
 
     const handleChange = (e) => {
@@ -58,16 +56,17 @@ const App = () => {
 
     return (
 
-        <div className="form-container">
+        <div>
 
 
-            <div id='back-cadastro'>
-                <div id="container-Cadastro">
-                    <div className="inicio-cadastro">
-                        <a id="inicial-cadastro" href="">ArgendeX</a >
+            <div id='back-configconta'>
+                <div id="container-configconta">
+                    <div className="inicioconfigconta">
+                        <h1 id='txtconta'>Configuraçao de Conta</h1>
+                        <hr />
                     </div>
-                    <h2 id="text">
-                        atuazelar sua conta no <b id="text1-cadastro">ArgendeX</b>
+                    <h2 id="text-configconta">
+                        Atualize sua conta no <b id="text1-configconta">ArgendeX</b>
                     </h2>
                     {mensagensErro.length > 0 && (
                         <div style={{ color: 'red' }}>
@@ -79,31 +78,26 @@ const App = () => {
                             </ul>
                         </div>
                     )}
-                    <form onSubmit={handleSubmit} id="register-form-cadastro">
-                        <div className="form-box spacing-cadastro">
-                            <label for="name">Nome Completo</label>
-                            <input type="text" name="nome" id="name-cadastro" placeholder="Digite seu nome" value={formValues.nome} onChange={handleChange} />
+                    <form onSubmit={handleSubmit} id="register-form-configconta">
+                        <div className="form-box spacing-configconta">
+                            <label for="name">Atualizar Nome de Usuario</label>
+                            <input type="text" name="nome" id="name-configconta" placeholder="Digite seu novo nome de usuario" value={formValues.nome} onChange={handleChange} />
                         </div>
-
+                        <br />
                         <div className="email-form">
-                            <label for="email">E-mail</label>
-                            <input type="email" name="email" id="email-cadastro" placeholder="Digite seu e-mail" value={formValues.email} onChange={handleChange} data-min-length="8"
+                            <label for="email">Atualizar E-mail</label>
+                            <input type="email" name="email" id="email-configconta" placeholder="Digite seu novo e-mail" value={formValues.email} onChange={handleChange} data-min-length="8"
                                 data-email-validate />
                         </div>
-
+                        <br />
                         <div className="form-box spacing">
-                            <label for="senha">Senha</label>
-                            <input type="password" name="senha" id="password-cadastro" placeholder="Digite sua senha" value={formValues.senha} onChange={handleChange} />
+                            <label for="senha">Atualizar Senha</label>
+                            <input type="password" name="senha" id="password-configconta" placeholder="Digite sua nova senha" value={formValues.senha} onChange={handleChange} />
                         </div>
-
-                        <div className="form-box spacing">
-                            <label for="senha">Confirmar Senha</label>
-                            <input type="password" name="confsenha" id="password-cadastro" placeholder="Digite sua senha" value={formValues.senha} onChange={handleChange} />
-                        </div>
-
-                        <div className="button-form" id="box-button-cadastro">
-                            <input id="btn-submit-cadastro" type="submit" value="Atualizar" />
-                            <input id="button-cadastro" type="button" value="Cancelar" onclick="limpaForm()" />
+                        <br />
+                        <div className="button-form" id="box-button-configconta">
+                            <input id="btn-submit-configconta" type="submit" value="Atualizar" />
+                            <input id="button-configconta" type="button" value="Cancelar" onclick="limpaForm()" />
                         </div>
 
                     </form>
@@ -115,4 +109,4 @@ const App = () => {
     )
 };
 
-export default App;
+export default Configconta;
