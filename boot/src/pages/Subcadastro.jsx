@@ -61,13 +61,13 @@ const App = () => {
         <div className="form-container">
 
 
-            <div id='back-cadastro'>
+            <div id='backcadast'>
                 <div id="container-Cadastro">
-                    <div className="inicio-cadastro">
-                        <a id="inicial-cadastro" href="">ArgendeX</a >
+                    <div className="iniciocadast">
+                        <a id="inicialcadast" href="">ArgendeX</a >
                     </div>
-                    <h2 id="text">
-                        atuazelar sua conta no <b id="text1-cadastro">ArgendeX</b>
+                    <h2 id="textcadast">
+                        atuazelar sua conta no <b id="text1cadast">ArgendeX</b>
                     </h2>
                     {mensagensErro.length > 0 && (
                         <div style={{ color: 'red' }}>
