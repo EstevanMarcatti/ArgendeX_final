@@ -15,11 +15,11 @@ def selecionar_usuarios():
     return usuarios
 
 def atualizar_cadastro():
-    usuario_id = int(input("Digite o ID do usuario que deseja atualizar:"))
+    usuario_email = int(input("Digite o email do usuario que deseja atualizar:"))
     conex = conexao.conectar()
     cursor = conex.cursor()
-    sql = "UPDATE FROM cadastro WHERE ID = %s"
-    val = (usuario_id,)
+    sql = "UPDATE FROM cadastro WHERE Email = %s"
+    val = (usuario_email,)
     cursor.execute(sql, val)
     conex.commit()
     print("Usuarios atualizados com sucesso")

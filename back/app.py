@@ -1,6 +1,7 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 from processamento import processar_dados  # Importe a função processar_dados
+from processatualizar import atualizar_dados
 
 app = Flask(__name__)
 CORS(app)  # Permita solicitações CORS
@@ -16,6 +17,16 @@ def receber_dados():
     print('************************************************************************\n')
     return jsonify(ret)
 
+@app.route('/receber-dados', methods=['POST'])
+def redefinir_dados():
+    dados = request.json
+    ret = atualizar_dados(dados)  # Chame a função processar_dados
+    
+    
+    print('************************************************************************\n')
+    print(ret)
+    print('************************************************************************\n')
+    return jsonify(ret)
 
 if __name__ == '__main__':
     app.run(debug=True)
