@@ -1,8 +1,9 @@
 import './login.css'
-import { useState } from 'react'
-import { Link } from 'react-router-dom'
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
-function LoginForm({ onLogin }) {
+function LoginForm() {
+    const navigate = useNavigate();
     const [Email, setEmail] = useState('')
     const [Senha, setSenha] = useState('')
     const [error, setError] = useState('')
@@ -18,16 +19,18 @@ function LoginForm({ onLogin }) {
                 body: JSON.stringify({ Email, Senha }),
             })
             const data = await response.json()
-            if (response.ok) {
+            if (data.erro) {
                 // Salvar informações no localStorage
-                localStorage.setItem('Email', data.Email)
-                localStorage.setItem('ID', data.ID)
-                // Chamar a função onLogin com o nome de usuário retornado
-                onLogin(data.Email)
-                console.log('Dados processados com sucesso!', response);
-                navigate('/Appsite')
-            } else {
+                console.log('Erro!', data);
                 setError(data.error)
+
+            } else {
+                console.log('Dados processados com sucesso!', data);
+                localStorage.setItem('Email', data.mensagem.Email)
+                localStorage.setItem('ID', data.mensagem.ID)
+                // Chamar a função onLogin com o nome de usuário retornado
+
+                navigate('/Appsite')
             }
         } catch (error) {
             setError('Erro ao realizar login')

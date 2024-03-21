@@ -17,10 +17,11 @@ def validar_login(email, senha):
 
     if usuario:
         # Retorna os dados do usuário se o login for bem-sucedido
-        return {'Email': email, 'Senha': senha, 'ID': usuario[0]}
+        #return {'Email': email, 'Senha': senha, 'ID': usuario[0]}
+        return {'erro': False, 'mensagem': {'Email': email, 'Senha': senha, 'ID': usuario[0]}}
     else:
         # Retorna uma mensagem de erro se as credenciais forem inválidas
-        return {'error': 'Credenciais inválidas'}, 401
+        return {'erro': True,'mensagem':{'error': 'Credenciais inválidas'}}
 
 @app.route('/login', methods=['POST'])
 def login():
