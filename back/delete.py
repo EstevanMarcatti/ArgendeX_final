@@ -2,6 +2,17 @@ import conexao
 
 # função para deletar um usuario
 
+def selecionar_usuario():
+    usuario_id = int(input("Digite o ID do usuario que deseja selecinar:"))
+    conex = conexao.conectar()
+    cursor = conex.cursor()
+    sql = "SELECT * FROM cadastro WHERE ID = %s"
+    val = (usuario_id,)
+    cursor.execute(sql, val)
+    usuario = cursor.fetchone()
+    conex.close()
+    return print(usuario)
+
 def deletar_cadastro():
     usuario_id = int(input("Digite o ID do usuario que deseja deletar:"))
     conex = conexao.conectar()
@@ -31,7 +42,9 @@ def menu():
     opcao = input("Digite o número da opção desejada:")
 
     if opcao == "1":
+        selecionar_usuario()
         deletar_cadastro()
+        
     elif opcao == "2":
         deletar_tarefa()
     else:

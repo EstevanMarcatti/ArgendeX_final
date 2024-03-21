@@ -2,24 +2,24 @@ import conexao
 
 # função para deletar um usuario
 
-def selecionar_usuario():
-    usuario_id = int(input("Digite o ID do usuario que deseja selecinar:"))
+# função para recuperar todos os autores
+def selecionar_usuarios():
+    usuario_email = input("Digite o email do usuário referente a sua conta: ")
     conex = conexao.conectar()
     cursor = conex.cursor()
-    sql = "SELECT * FROM usuario WHERE ID = %s"
-    val = (usuario_id,)
+    sql = "SELECT * FROM cadastro WHERE Email = %s"
+    val = (usuario_email,)
     cursor.execute(sql, val)
-    usuario = cursor.fetchone()
+    usuarios = cursor.fetchall()
     conex.close()
-    return print(usuario)
-
+    return usuarios
 
 def atualizar_cadastro():
-    usuario_id = int(input("Digite o ID do usuario que deseja atualizar:"))
+    usuario_email = int(input("Digite o email do usuario que deseja atualizar:"))
     conex = conexao.conectar()
     cursor = conex.cursor()
-    sql = "UPDATE FROM cadastro WHERE ID = %s"
-    val = (usuario_id,)
+    sql = "UPDATE FROM cadastro WHERE Email = %s"
+    val = (usuario_email,)
     cursor.execute(sql, val)
     conex.commit()
     print("Usuarios atualizados com sucesso")
@@ -44,7 +44,7 @@ def menu():
     opcao = input("Digite o número da opção desejada:")
 
     if opcao == "1":
-        selecionar_usuario()
+        selecionar_usuarios()
         atualizar_cadastro()
     elif opcao == "2":
         atualizar_tarefa()
