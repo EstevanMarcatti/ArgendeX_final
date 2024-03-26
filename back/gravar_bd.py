@@ -14,7 +14,7 @@ def inserir_Cadastro(dados_processados):
     print("Novo Cadastro inserido com sucesso!")
     conex.close()
 
-def redefinir_Cadastro(dados_processados):
+def Configconta(dados_processados):
     conex = conexao.conectar()
     cursor = conex.cursor()
 
