@@ -1,4 +1,4 @@
-from gravar_bd import Configconta
+
 from validacoes import (
     validar_nome,
     validar_email,

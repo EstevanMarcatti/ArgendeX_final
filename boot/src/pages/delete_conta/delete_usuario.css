@@ -1,0 +1,116 @@
+/* geral */
+
+
+
+
+
+
+#text-delete {
+    margin-top: 15px;
+    margin-bottom: 15px;
+    text-align: center;
+    color: white;
+}
+
+#text1-delete {
+    color: green;
+}
+
+
+/* form */
+#container-delete {
+    width: 500px;
+    margin-left: 100%;
+    background-color: #000000;
+    border-radius: 10px;
+    margin-top: 50px;
+    padding: 25px;
+    border: 5px green solid;
+    padding-bottom: 100px;
+}
+
+
+
+
+
+input[type="submit"],
+#button-delete {
+    float: left;
+    display: block;
+    padding: 5px 30px;
+    border: none;
+    outline: none;
+    background-color: green;
+    color: white;
+    text-shadow: 0 0 5px black;
+    font-family: inherit;
+    font-size: 25px;
+    font-family: 'arial';
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s;
+
+}
+
+input[type="submit"]:hover,
+#button-delete:hover {
+    background-color: #444444;
+    transform: scale(1.03);
+    color: white;
+}
+
+
+
+#button-delete {
+    margin-left: 25%;
+    margin-top: 20px;
+
+    background-color: red;
+}
+
+#termos-delete {
+    color: green;
+}
+
+#agreement-delete {
+    margin-right: 5px;
+}
+
+#agreement-delete,
+#agreement-label-delete {
+    display: inline-block;
+    width: auto;
+
+}
+
+.error-validation-delete {
+    color: #ff1a1a;
+    font-size: 12px;
+    position: relative;
+    bottom: 25px;
+}
+
+.template-delete {
+    display: none;
+}
+
+.submit-delete {
+    width: 100%;
+    float: left;
+}
+
+
+.volta-delete {
+    text-align: center;
+}
+
+#volta1-delete {
+    color: white;
+    font-size: 13px;
+}
+
+#volta2-delete {
+    color: white;
+    font-size: 13px;
+    margin-top: 10px;
+}

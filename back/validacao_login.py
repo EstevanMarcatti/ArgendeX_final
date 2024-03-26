@@ -23,19 +23,7 @@ def validar_login(email, senha):
         # Retorna uma mensagem de erro se as credenciais forem inválidas
         return {'erro': True,'mensagem':{'error': 'Credenciais inválidas'}}
 
-@app.route('/login', methods=['POST'])
-def login():
-    data = request.json
-    email = data.get('Email')
-    senha = data.get('Senha')
 
-    # Verificar as credenciais no banco de dados
-    if email and senha:
-        response = validar_login(email, senha)
-    else:
-        response = {'error': 'Credenciais incompletas'}, 400
-
-    return jsonify(response)
 
 if __name__ == '__main__':
     app.run(debug=True)

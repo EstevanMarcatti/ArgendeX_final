@@ -20,6 +20,7 @@ import Cadastro from '../pages/pgcadastro/Cadastro';
 import Esqsenha from "../pages/pgesqsenha/Esqsenha";
 import Appsite from '../argendereact/Appsite';
 import Configconta from '../pages/pgconfigcadastro/Configconta'
+import Delete_usuario from "../pages/delete_conta/Delete_usuario";
 
 
 
@@ -37,6 +38,7 @@ const Content = props => (
             <Route path="/Esqsenha" element ={<Esqsenha />} />
             <Route path="/Appsite" element ={<Appsite />} />
             <Route path="/Configconta" element={<Configconta/>} />
+            <Route path="/Delete_usuario" element={<Delete_usuario />} />
 
             
             

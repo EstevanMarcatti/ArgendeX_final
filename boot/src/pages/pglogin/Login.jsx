@@ -20,12 +20,13 @@ function LoginForm() {
             })
             const data = await response.json()
             if (data.erro) {
-                // Salvar informações no localStorage
+                
                 console.log('Erro!', data);
                 setError(data.error)
 
             } else {
                 console.log('Dados processados com sucesso!', data);
+                // Salvar informações no localStorage
                 localStorage.setItem('Email', data.mensagem.Email)
                 localStorage.setItem('ID', data.mensagem.ID)
                 // Chamar a função onLogin com o nome de usuário retornado
