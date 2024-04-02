@@ -23,6 +23,7 @@ function LoginForm() {
                 
                 console.log('Erro!', data);
                 setError(data.error)
+                
 
             } else {
                 console.log('Dados processados com sucesso!', data);
@@ -30,11 +31,12 @@ function LoginForm() {
                 localStorage.setItem('Email', data.mensagem.Email)
                 localStorage.setItem('ID', data.mensagem.ID)
                 // Chamar a função onLogin com o nome de usuário retornado
-
+                
                 navigate('/Appsite')
             }
         } catch (error) {
             setError('Erro ao realizar login')
+            
         }
     }
 
