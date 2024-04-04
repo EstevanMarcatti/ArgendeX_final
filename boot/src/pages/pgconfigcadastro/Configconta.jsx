@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import './configconta.css';
 
 const Configconta = () => {
@@ -9,9 +10,10 @@ const Configconta = () => {
         email: '',
         senha: ''
     });
+    const [showPassword, setShowPassword] = useState(false);
 
     useEffect(() => {
-        const ID = localStorage.getItem('ID'); // Alterado para 'ID'
+        const ID = localStorage.getItem('ID');
         if (ID) {
             fetch(`http://localhost:5000/dados-usuario/${ID}`)
                 .then(response => response.json())
@@ -36,6 +38,10 @@ const Configconta = () => {
             ...prevValues,
             [name]: value
         }));
+    };
+
+    const togglePasswordVisibility = () => {
+        setShowPassword(prevState => !prevState);
     };
 
     const handleSubmit = async (e) => {
@@ -85,7 +91,12 @@ const Configconta = () => {
                         <br />
                         <div className="form-box spacing">
                             <label htmlFor="senha">Senha</label>
-                            <input type="password" name="senha" id="password-configconta" placeholder="Digite sua senha"  value={formValues.senha} onChange={handleChange} />
+                            <div style={{ position: 'relative' }}>
+                                <input type={showPassword ? 'text' : 'password'} name="senha" id="password-configconta" placeholder="Digite sua senha"  value={formValues.senha} onChange={handleChange} />
+                                <span onClick={togglePasswordVisibility} style={{ position: 'absolute', right: '10px', top: '50%', transform: 'translateY(-50%)', cursor: 'pointer' }}>
+                                    {showPassword ? <FaEyeSlash /> : <FaEye />}
+                                </span>
+                            </div>
                         </div>
                         <br />
                         <div className="button-form" id="box-button-configconta">

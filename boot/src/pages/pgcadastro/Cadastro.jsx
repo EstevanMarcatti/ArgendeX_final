@@ -1,9 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './cadastro.css';
-
-
-
+import { FaEye, FaEyeSlash } from 'react-icons/fa';
 
 const App = () => {
   const navigate = useNavigate();
@@ -49,22 +47,24 @@ const App = () => {
         // Dados foram processados com sucesso
         console.log('Dados processados com sucesso!', resposta);
 
-        navigate('/Appsite')
+        navigate('/Appsite');
       }
     } catch (error) {
       console.error('Erro ao enviar dados:', error);
     }
   };
 
+  // Estado para controlar a visibilidade da senha
+  const [showPassword, setShowPassword] = useState(false);
+
   return (
-
     <div className="form-container">
-
-
-      <div id='back-cadastro'>
+      <div id="back-cadastro">
         <div id="container-Cadastro">
           <div className="inicio-cadastro">
-            <a id="inicial-cadastro" href="">ArgendeX</a >
+            <a id="inicial-cadastro" href="">
+              ArgendeX
+            </a>
           </div>
           <h2 id="text">
             Crie sua conta no <b id="text1-cadastro">ArgendeX</b>
@@ -81,22 +81,36 @@ const App = () => {
           )}
           <form onSubmit={handleSubmit} id="register-form-cadastro">
             <div className="form-box spacing-cadastro">
-              <label for="name">Nome Completo</label>
+              <label htmlFor="name">Nome Completo</label>
               <input type="text" name="nome" id="name-cadastro" placeholder="Digite seu nome" value={formValues.nome} onChange={handleChange} />
             </div>
 
             <div className="email-form">
-              <label for="email">E-mail</label>
+              <label htmlFor="email">E-mail</label>
               <input type="email" name="email" id="email-cadastro" placeholder="Digite seu e-mail" value={formValues.email} onChange={handleChange} data-min-length="8"
                 data-email-validate />
             </div>
 
             <div className="form-box spacing">
-              <label for="senha">Senha</label>
-              <input type="password" name="senha" id="password-cadastro" placeholder="Digite sua senha" value={formValues.senha} onChange={handleChange} />
+              <label htmlFor="senha">Senha</label>
+              <div className="password-input">
+                <input
+                  type={showPassword ? 'text' : 'password'}
+                  name="senha"
+                  id="password-cadastro"
+                  placeholder="Digite sua senha"
+                  value={formValues.senha}
+                  onChange={handleChange}
+                />
+                {/* Botão para alternar a visibilidade da senha */}
+                <button type="button" className="password-toggle" onClick={() => setShowPassword(!showPassword)}>
+                  {showPassword ? <FaEyeSlash /> : <FaEye />}
+                </button>
+              </div>
             </div>
+
             <div className="form-box spacing">
-              <label for='cidade'>Cidade</label>
+              <label htmlFor="cidade">Cidade</label>
               <input type="text" name="cidade" value={formValues.cidade} onChange={handleChange} placeholder="Digite sua cidade" />
             </div>
 
@@ -113,12 +127,12 @@ const App = () => {
             </div>
             <div>
               <input type="checkbox" name="agreement" id="agreement-cadastro" required />
-              <label for="agreement" id="agreement-label-cadastro">Eu li e aceito os <a href="#" id='termos-cadastro'>termos de uso</a></label>
+              <label htmlFor="agreement" id="agreement-label-cadastro">Eu li e aceito os <a href="#" id='termos-cadastro'>termos de uso</a></label>
             </div>
 
             <div className="button-form" id="box-button-cadastro">
               <input id="btn-submit-cadastro" type="submit" value="Registrar" />
-              <input id="button-cadastro" type="button" value="Cancelar" onclick="limpaForm()" />
+              <input id="button-cadastro" type="button" value="Cancelar" onClick="limpaForm()" />
             </div>
 
             <div className="volta-cadastro">

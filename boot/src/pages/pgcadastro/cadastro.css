@@ -1,6 +1,4 @@
 /* geral */
-
-
 #back-cadastro {
     background-image:url(./amanhecer.jpeg);
     padding: 509px;
@@ -75,14 +73,14 @@ input[type="submit"],
 #button-cadastro {
     float: left;
     display: block;
-    padding: 5px 30px;
+    padding: 5px 20px; /* Reduzi o padding dos botões */
     border: none;
     outline: none;
     background-color: green;
     color: white;
     text-shadow: 0 0 5px black;
     font-family: inherit;
-    font-size: 25px;
+    font-size: 20px; /* Reduzi o tamanho da fonte */
     font-family: 'arial';
     border-radius: 6px;
     cursor: pointer;
@@ -105,6 +103,8 @@ input[type="submit"]:hover,
     margin-left: 10px;
     margin-top: 20px;
     background-color: red;
+    padding: 5px 20px; /* Reduzi o padding dos botões */
+    font-size: 20px; /* Reduzi o tamanho da fonte */
 }
 #termos-cadastro{
     color: green;

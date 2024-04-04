@@ -1,15 +1,17 @@
 import './login.css'
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { FaEye, FaEyeSlash } from 'react-icons/fa';
 
 function LoginForm() {
     const navigate = useNavigate();
-    const [Email, setEmail] = useState('')
-    const [Senha, setSenha] = useState('')
-    const [error, setError] = useState('')
+    const [Email, setEmail] = useState('');
+    const [Senha, setSenha] = useState('');
+    const [error, setError] = useState('');
+    const [showPassword, setShowPassword] = useState(false); // Estado para controlar a visibilidade da senha
 
     const handleSubmit = async (e) => {
-        e.preventDefault()
+        e.preventDefault();
         try {
             const response = await fetch('http://localhost:5000/login', {
                 method: 'POST',
@@ -18,25 +20,16 @@ function LoginForm() {
                 },
                 body: JSON.stringify({ Email, Senha }),
             })
-            const data = await response.json()
+            const data = await response.json();
             if (data.erro) {
-                
-                console.log('Erro!', data);
-                setError(data.error)
-                
-
+                setError(data.error);
             } else {
-                console.log('Dados processados com sucesso!', data);
-                // Salvar informações no localStorage
-                localStorage.setItem('Email', data.mensagem.Email)
-                localStorage.setItem('ID', data.mensagem.ID)
-                // Chamar a função onLogin com o nome de usuário retornado
-                
-                navigate('/Appsite')
+                localStorage.setItem('Email', data.mensagem.Email);
+                localStorage.setItem('ID', data.mensagem.ID);
+                navigate('/Appsite');
             }
         } catch (error) {
-            setError('Erro ao realizar login')
-            
+            setError('Erro ao realizar login');
         }
     }
 
@@ -67,16 +60,22 @@ function LoginForm() {
 
                     <div className='form-box spacing-login'>
                         <label htmlFor='lastname'>Senha</label>
-                        <input
-                            type='password'
-                            value={Senha}
-                            onChange={(e) => setSenha(e.target.value)}
-                            name='password'
-                            id='password-login'
-                            placeholder='Digite sua senha'
-                            data-password-validate
-                            data-required
-                        />
+                        <div className="password-input">
+                            <input
+                                type={showPassword ? 'text' : 'password'}
+                                value={Senha}
+                                onChange={(e) => setSenha(e.target.value)}
+                                name='password'
+                                id='password-login'
+                                placeholder='Digite sua senha'
+                                data-password-validate
+                                data-required
+                            />
+                            {/* Botão para alternar a visibilidade da senha */}
+                            <button type="button" onClick={() => setShowPassword(!showPassword)}>
+                                {showPassword ? <FaEyeSlash /> : <FaEye />}
+                            </button>
+                        </div>
                     </div>
 
                     <div className='div-button'>
@@ -107,4 +106,4 @@ function LoginForm() {
     )
 }
 
-export default LoginForm
+export default LoginForm;
