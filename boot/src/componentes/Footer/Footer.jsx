@@ -33,7 +33,7 @@ export default function Footer() {
             <div className="all_footer-"/>
                 <div id='texto_equipe'/>
                     <h3 id='txt_equip1-'>Projetado e construído com todo <br/> o amor do mundo pela equipe JTP.</h3>
-                    <h3 id='txt_equip2-'>Bem-vindo ao ArgendeX, onde a voce organiza sua vida! <br/> Somos a equipe JovenTechPro,
+                    <h3 id='txt_equip2-'>Bem-vindo ao ArgendeX, onde você organiza sua vida! <br/> Somos a equipe JovenTechPro,
                         um grupo de jovens entusiastas da programação,<br/> comprometidos em criar soluções tecnológicas
                         excepcionais.</h3>
                     <h3 id='txt_equip3-'>JovenTechPro - Transformando ideias em realidade através da programação.</h3>
@@ -48,7 +48,7 @@ export default function Footer() {
                         <h2>Telefone</h2>
                         <h3>+55 (19) 99838-8670</h3>
                         <h3>+55 (11) 94031-1533</h3>
-                        <h3>+55 (19) 99905-2831</h3>
+                        <h3>+55 (19) 99905-2839</h3>
                     </div>
                 </div>
                 <div>
