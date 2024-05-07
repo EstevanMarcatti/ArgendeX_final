@@ -18,7 +18,7 @@ import SuporteLP from "../pages/pgsuporte/SuporteLP";
 import Login from "../pages/pglogin/Login";
 import Cadastro from '../pages/pgcadastro/Cadastro';
 import Esqsenha from "../pages/pgesqsenha/Esqsenha";
-import Appsite from '../argendereact/Appsite';
+import Appsite from './Appsite';
 import Configconta from '../pages/pgconfigcadastro/Configconta'
 import Delete_usuario from "../pages/delete_conta/Delete_usuario";
 

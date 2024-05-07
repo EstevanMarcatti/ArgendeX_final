@@ -1,17 +1,16 @@
+
 import './login.css'
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { FaEye, FaEyeSlash } from 'react-icons/fa';
 
 function LoginForm() {
     const navigate = useNavigate();
-    const [Email, setEmail] = useState('');
-    const [Senha, setSenha] = useState('');
-    const [error, setError] = useState('');
-    const [showPassword, setShowPassword] = useState(false); // Estado para controlar a visibilidade da senha
+    const [Email, setEmail] = useState('')
+    const [Senha, setSenha] = useState('')
+    const [error, setError] = useState('')
 
     const handleSubmit = async (e) => {
-        e.preventDefault();
+        e.preventDefault()
         try {
             const response = await fetch('http://localhost:5000/login', {
                 method: 'POST',
@@ -20,49 +19,56 @@ function LoginForm() {
                 },
                 body: JSON.stringify({ Email, Senha }),
             })
-            const data = await response.json();
+            const data = await response.json()
             if (data.erro) {
-                setError(data.error);
+
+                console.log('Erro!', data);
+                setError(data.error)
+
+
             } else {
-                localStorage.setItem('Email', data.mensagem.Email);
-                localStorage.setItem('ID', data.mensagem.ID);
-                navigate('/Appsite');
+                console.log('Dados processados com sucesso!', data);
+                // Salvar informações no localStorage
+                localStorage.setItem('Email', data.mensagem.Email)
+                localStorage.setItem('ID', data.mensagem.ID)
+                // Chamar a função onLogin com o nome de usuário retornado
+
+                navigate('/Appsite')
             }
         } catch (error) {
-            setError('Erro ao realizar login');
+            setError('Erro ao realizar login')
+
         }
     }
 
     return (
         <div id='back-login'>
             <div id='container-login'>
-                <div className='inicio-login'>
-                    <a id='inicial-login' href=''>
-                        ArgendeX
-                    </a>
-                </div>
-                <h1>Conecte-se e organize sua agenda.</h1>
-                <form onSubmit={handleSubmit}>
-                    {error && <p>{error}</p>}
-                    <div className='email-form-login'>
-                        <label htmlFor='email'>E-mail</label>
-                        <input
-                            type='email'
-                            value={Email}
-                            onChange={(e) => setEmail(e.target.value)}
-                            name='email'
-                            id='email-login'
-                            placeholder='Digite seu e-mail'
-                            data-min-length='8'
-                            data-email-validate
-                        />
-                    </div>
+                <div class="login-box">
 
-                    <div className='form-box spacing-login'>
-                        <label htmlFor='lastname'>Senha</label>
-                        <div className="password-input">
+                    <div className='inicio-login'>
+
+                        <h2 id='inicial-login'>ArgendeX</h2>
+                    </div>
+                    <h1>Conecte-se e organize sua agenda.</h1>
+                    <form onSubmit={handleSubmit}>
+                        {error && <p>{error}</p>}
+                        <div class="user-box">
                             <input
-                                type={showPassword ? 'text' : 'password'}
+                                type='text'
+                                value={Email}
+                                onChange={(e) => setEmail(e.target.value)}
+                                name='email'
+                                id='email-login'
+                                placeholder='Digite seu e-mail'
+                                data-min-length='8'
+                                data-email-validate
+                            />
+                            <label htmlFor='email'>Email</label>
+                        </div>
+                        <div class="user-box">
+                            <input
+                                type='password'
                                 value={Senha}
                                 onChange={(e) => setSenha(e.target.value)}
                                 name='password'
@@ -71,39 +77,37 @@ function LoginForm() {
                                 data-password-validate
                                 data-required
                             />
-                            {/* Botão para alternar a visibilidade da senha */}
-                            <button type="button" onClick={() => setShowPassword(!showPassword)}>
-                                {showPassword ? <FaEyeSlash /> : <FaEye />}
-                            </button>
+                            <label htmlFor='lastname'>Senha</label>
+                        </div><center>
+
+                            <a href="#">
+                                <button type="submit" class="btn" id='button-login'>
+                                    Entrar
+                                    <span></span>
+                                </button>
+
+                            </a></center>
+                        <div className='volta-login'>
+                            <p id='volta1-login'>
+                                Esqueceu sua senha?
+                                <a id='text1-login' href='Esqsenha'>
+                                    {' '}
+                                   ----- clique aqui -----
+                                </a>
+                            </p>
+                            <p id='volta2-login'>
+                                Precisa de ajuda?
+                                <a id='text1-login' href='Suporte'>
+                                    {' '}
+                                    Acesse nossa central de ajuda.
+                                </a>
+                            </p>
                         </div>
-                    </div>
-
-                    <div className='div-button'>
-                        <button type='submit' id='button-login'>
-                            Entrar
-                        </button>
-                    </div>
-
-                    <div className='volta-login'>
-                        <p id='volta1-login'>
-                            Esqueceu sua senha?
-                            <a id='text1-login' href='Esqsenha'>
-                                {' '}
-                                clique aqui
-                            </a>
-                        </p>
-                        <p id='volta2-login'>
-                            Precisa de ajuda?
-                            <a id='text1-login' href='Suporte'>
-                                {' '}
-                                Acesse nossa central de ajuda.
-                            </a>
-                        </p>
-                    </div>
-                </form>
+                    </form>
+                </div>
             </div>
         </div>
     )
 }
 
-export default LoginForm;
+export default LoginForm
