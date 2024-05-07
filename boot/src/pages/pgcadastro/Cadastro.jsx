@@ -60,14 +60,13 @@ const App = () => {
   return (
     <div className="form-container">
       <div id="back-cadastro">
-        <div id="container-Cadastro">
-          <div className="inicio-cadastro">
-            <a id="inicial-cadastro" href="">
-              ArgendeX
-            </a>
+        <div className='cadastro-box'>
+          <div className='inicio-cadastro'>
+
+            <h2 id='inicial-cadastro'>ArgendeX</h2>
           </div>
           <h2 id="text">
-            Crie sua conta no <b id="text1-cadastro">ArgendeX</b>
+            Crie sua conta e se organize melhor!
           </h2>
           {mensagensErro.length > 0 && (
             <div style={{ color: 'red' }}>
@@ -80,19 +79,18 @@ const App = () => {
             </div>
           )}
           <form onSubmit={handleSubmit} id="register-form-cadastro">
-            <div className="form-box spacing-cadastro">
-              <label htmlFor="name">Nome Completo</label>
+            <div class="user-box">
               <input type="text" name="nome" id="name-cadastro" placeholder="Digite seu nome" value={formValues.nome} onChange={handleChange} />
+              <label htmlFor="name">Nome Completo</label>
             </div>
 
-            <div className="email-form">
-              <label htmlFor="email">E-mail</label>
-              <input type="email" name="email" id="email-cadastro" placeholder="Digite seu e-mail" value={formValues.email} onChange={handleChange} data-min-length="8"
-                data-email-validate />
+            <div className="user-box">
+              <input  name="email" id="email-cadastro" placeholder="Digite seu E-mail" value={formValues.email} onChange={handleChange} />
+              <label htmlFor="email">Nome Completo</label>
             </div>
 
-            <div className="form-box spacing">
-              <label htmlFor="senha">Senha</label>
+            <div className="user-box">
+
               <div className="password-input">
                 <input
                   type={showPassword ? 'text' : 'password'}
@@ -102,37 +100,49 @@ const App = () => {
                   value={formValues.senha}
                   onChange={handleChange}
                 />
+                <label htmlFor="senha">Senha</label>
                 {/* Botão para alternar a visibilidade da senha */}
-                <button type="button" className="password-toggle" onClick={() => setShowPassword(!showPassword)}>
-                  {showPassword ? <FaEyeSlash /> : <FaEye />}
-                </button>
+
+
               </div>
             </div>
 
-            <div className="form-box spacing">
-              <label htmlFor="cidade">Cidade</label>
+            <div className="user-box">
               <input type="text" name="cidade" value={formValues.cidade} onChange={handleChange} placeholder="Digite sua cidade" />
+              <label htmlFor="cidade">Cidade</label>
             </div>
 
-            <div className="form-box spacing">
-              <label>
-                Data de Nascimento:
-              </label>
+            <div className="user-box">
+
               <input
                 type="date"
                 name="dataNascimento"
                 value={formValues.dataNascimento}
                 onChange={handleChange}
               />
+              <label>
+                Data de Nascimento:
+              </label>
             </div>
             <div>
-              <input type="checkbox" name="agreement" id="agreement-cadastro" required />
-              <label htmlFor="agreement" id="agreement-label-cadastro">Eu li e aceito os <a href="#" id='termos-cadastro'>termos de uso</a></label>
+
+              <label class="checkbox-btn" >
+                <label for="checkbox" htmlFor="agreement">Eu li e aceito os <a href="#" id='termos-cadastro'>termos de uso</a></label>
+                <input id="checkbox" type="checkbox" required></input>
+                <span class="checkmark"></span>
+              </label>
+
+
             </div>
 
             <div className="button-form" id="box-button-cadastro">
-              <input id="btn-submit-cadastro" type="submit" value="Registrar" />
-              <input id="button-cadastro" type="button" value="Cancelar" onClick="limpaForm()" />
+              <center>
+                <a href="#">
+                  <button type="submit" class="btn" id='button-cadastro'>
+                    Entrar
+                    <span></span>
+                  </button>
+                </a></center>
             </div>
 
             <div className="volta-cadastro">
@@ -142,11 +152,11 @@ const App = () => {
             </div>
           </form>
         </div>
-      </div>
+      </div >
       <p className="error-validation template"></p>
       <script src="../../js/jscadastro.js"></script>
 
-    </div>
+    </div >
   );
 };
 

@@ -1,8 +1,8 @@
 /* geral */
 #back-cadastro {
     background-image:url(./amanhecer.jpeg);
-    padding: 509px;
-    padding-bottom: 30px;
+    padding: 759px;
+    padding-bottom: 140px;
     font-family: Arial, Helvetica, sans-serif;
     color: #ffffff;
 }
@@ -14,6 +14,7 @@
 }
 #inicial-cadastro{
     color: green;
+    font-size: 50px;
 }
 #text-cadastro{
     margin-top: 10px;
@@ -22,6 +23,12 @@
 }
 #text1-cadastro{
     color: green;
+}
+
+#text {
+    text-align: center;
+    margin-bottom: 25px;
+    font-size: 18px;
 }
 input,
 label {
@@ -37,23 +44,8 @@ a {
     color:green;
 }
 
-/* form */
-#container-Cadastro {
-    width: 500px;
-    margin-left: auto;
-    margin-right: auto;
-    background-color: #000000;
-    border-radius: 10px;
-    padding: 25px;
-    margin-top:-468px;
-    border: 5px green solid;
-}
 
-#container-Cadastro h1 {
-    text-align: center;
-    margin-bottom: 25px;
-    font-size: 18px;
-}
+
 
 label {
     font-weight: bold;
@@ -69,43 +61,17 @@ input:focus {
     border-color: #e60000;
 }
 
-input[type="submit"],
-#button-cadastro {
-    float: left;
-    display: block;
-    padding: 5px 20px; /* Reduzi o padding dos botões */
-    border: none;
-    outline: none;
-    background-color: green;
-    color: white;
-    text-shadow: 0 0 5px black;
-    font-family: inherit;
-    font-size: 20px; /* Reduzi o tamanho da fonte */
-    font-family: 'arial';
-    border-radius: 6px;
-    cursor: pointer;
-    transition: all 0.3s;
 
-}
-
-input[type="submit"]:hover,
-#button-cadastro:hover{
-    background-color: #444444;
-    transform: scale(1.03);
-    color: white;
-}
-#box-button-cadastro{
-    display: flex;
-    justify-content: space-between;
-}
 
 #button-cadastro{
-    margin-left: 10px;
-    margin-top: 20px;
-    background-color: red;
-    padding: 5px 20px; /* Reduzi o padding dos botões */
-    font-size: 20px; /* Reduzi o tamanho da fonte */
+    color: white ;
+    padding: 10px;
+    padding-right: 25px;
+    padding-left: 25px;
+    font-size: 20px;
 }
+
+
 #termos-cadastro{
     color: green;
 }
@@ -151,3 +117,181 @@ input[type="submit"]:hover,
     font-size: 13px;
     margin-top: 10px;
 }
+
+.cadastro-box {
+    position: absolute;
+    top: 60%;
+    left: 50%;
+    width: 400px;
+    padding: 40px;
+    transform: translate(-50%, -50%);
+    background: rgba(24, 20, 20, 0.987);
+    box-sizing: border-box;
+    box-shadow: 0 15px 25px rgba(0,0,0,.6);
+    border-radius: 10px;
+  }
+  
+  .cadastro-box .user-box {
+    position: relative;
+  }
+  
+  .cadastro-box .user-box input {
+    width: 100%;
+    padding: 10px 0;
+    font-size: 16px;
+    color: #fff;
+    margin-bottom: 30px;
+    border: none;
+    border-bottom: 1px solid #fff;
+    outline: none;
+    background: transparent;
+  }
+  
+  .cadastro-box .user-box label {
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 10px 0;
+    font-size: 16px;
+    color: #fff;
+    pointer-events: none;
+    transition: .5s;
+  }
+  
+  .cadastro-box .user-box input:focus ~ label,
+  .cadastro-box .user-box input:valid ~ label {
+    top: -20px;
+    left: 0;
+    color: #bdb8b8;
+    font-size: 12px;
+  }
+  
+  .cadastro-box form a {
+    position: relative;
+    display: inline-block;
+    color: #ffffff;
+
+    text-decoration: none;
+    text-transform: uppercase;
+    overflow: hidden;
+    transition: .5s;
+
+    letter-spacing: 4px
+  }
+  
+  .cadastro-box a:hover {
+    background: #03f40f;
+    color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 0 5px #03f40f,
+                0 0 25px #03f40f,
+                0 0 50px #03f40f,
+                0 0 100px #03f40f;
+  }
+  
+  .cadastro-box a span {
+    position: absolute;
+    display: block;
+  }
+  
+  @keyframes btn-anim1 {
+    0% {
+      left: -100%;
+    }
+  
+    50%,100% {
+      left: 100%;
+    }
+  }
+  
+  .cadastro-box a span:nth-child(1) {
+    bottom: 2px;
+    left: -100%;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #03f40f);
+    animation: btn-anim1 2s linear infinite;
+  }
+
+/* Customize the label (the checkbox-btn) */
+.checkbox-btn {
+    display: block;
+    position: relative;
+    padding-left: 30px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+  
+  /* Hide the browser's default checkbox */
+  .checkbox-btn input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+  }
+  
+  .checkbox-btn label {
+    cursor: pointer;
+    font-size: 14px;
+  }
+  /* Create a custom checkbox */
+  .checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 25px;
+    width: 25px;
+    border: 2.5px solid #ffffff;
+    transition: .2s linear;
+  }
+  .checkbox-btn input:checked ~ .checkmark {
+    background-color: transparent;
+  }
+  
+  /* Create the checkmark/indicator (hidden when not checked) */
+  .checkmark:after {
+    content: "";
+    position: absolute;
+    visibility: hidden;
+    opacity: 0;
+    left: 50%;
+    top: 40%;
+    width: 10px;
+    height: 14px;
+    border: 2px solid #0ea021;
+    filter: drop-shadow(0px 0px 10px #0ea021);
+    border-width: 0 2.5px 2.5px 0;
+    transition: .2s linear;
+    transform: translate(-50%, -50%) rotate(-90deg) scale(0.2);
+  }
+  
+  /* Show the checkmark when checked */
+  .checkbox-btn input:checked ~ .checkmark:after {
+    visibility: visible;
+    opacity: 1;
+    transform: translate(-50%, -50%) rotate(0deg) scale(1);
+    animation: pulse 1s ease-in;
+  }
+  
+  .checkbox-btn input:checked ~ .checkmark {
+    transform: rotate(45deg);
+    border: none;
+  }
+  
+  @keyframes pulse {
+    0%,
+    100% {
+      transform: translate(-50%, -50%) rotate(0deg) scale(1);
+    }
+    50% {
+      transform: translate(-50%, -50%) rotate(0deg) scale(1.6);
+    }
+  }
+  
+  
+
