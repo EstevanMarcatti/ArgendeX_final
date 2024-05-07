@@ -42,7 +42,7 @@ export default function Footer() {
                     <div className="email">
                         <h2>E-mail</h2>
                         <h3>Suporte@ArgendeX.com</h3>
-                        <h3>Financeiro@Argendex.com</h3>
+                        <h3>Financeiro@ArgendeX.com</h3>
                     </div>
                     <div className="telefone">
                         <h2>Telefone</h2>
