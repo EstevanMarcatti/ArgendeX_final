@@ -2,13 +2,27 @@ import * as React from 'react';
 import { View, Text, Image, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import style from "./Style_home.js";
-import useHeaderOptions from '../../components/Header.js'; // Importando o hook do header
+
 
 export default function Home() {
-    const navigation = useNavigation();
+
     
     // Usando o hook do header
-    useHeaderOptions();
+    const navigation = useNavigation();
+
+    React.useLayoutEffect(() => {
+        navigation.setOptions({
+            headerStyle: {
+                backgroundColor: '#000', // Definindo a cor verde para o header
+            },
+            headerTintColor: '#fff', // Definindo a cor do texto do header como branco
+            headerTitleStyle: { // Estilo para o texto do título do header
+                fontWeight: 'bold',
+                fontSize: 30,
+            },
+        });
+        
+    }, [navigation]);
 
     return (
         <View style={style.background}>

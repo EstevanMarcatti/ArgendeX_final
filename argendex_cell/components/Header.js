@@ -7,7 +7,7 @@ export default function useHeaderOptions() {
     React.useLayoutEffect(() => {
         navigation.setOptions({
             headerStyle: {
-                backgroundColor: '#000', // Definindo a cor verde para o header
+                backgroundColor: '#191515', // Definindo a cor verde para o header
             },
             headerTintColor: '#fff', // Definindo a cor do texto do header como branco
             headerTitleStyle: { // Estilo para o texto do título do header

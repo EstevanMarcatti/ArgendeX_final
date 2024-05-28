@@ -5,7 +5,7 @@ import Home from './Pages/Home/Home'
 import Login from './Pages/Login/Login'
 import Cadastro from './Pages/Cadastro/Cadastro'
 import TodoListScreen from './Pages/Calendar/TodoListScreen'
-import Plano from './Pages/plano/plano'
+import Addtarefa from './Pages/AddTarefa/Addtarefa'
 
 
 const Stack = createNativeStackNavigator();
@@ -19,7 +19,8 @@ function App() {
         <Stack.Screen name="Login" component={Login} />
         <Stack.Screen name="Cadastro" component={Cadastro} />
         <Stack.Screen name="Calendario" component={TodoListScreen} />
-        <Stack.Screen name="Plano" component={Plano} />
+        <Stack.Screen name="Addtarefa" component={Addtarefa} />
+
 
       </Stack.Navigator>
     </NavigationContainer>

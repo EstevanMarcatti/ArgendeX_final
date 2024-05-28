@@ -3,7 +3,7 @@ import { StyleSheet } from "react-native";
 export default styles = StyleSheet.create({
     Header: {
       flex: 1,
-      backgroundColor: '#000',
+      backgroundColor: '#191515',
       alignItems: 'center',
       justifyContent: 'center',
     },
@@ -22,7 +22,7 @@ export default styles = StyleSheet.create({
         width: '90%',
     },
     inputs: {
-        backgroundColor: '#000',
+        backgroundColor: '#191515',
         width: '90%',
         borderRadius: 5,
         padding: 10,
