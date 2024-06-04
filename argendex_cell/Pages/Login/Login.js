@@ -1,18 +1,36 @@
 import React, { useState } from "react";
-import { TextInput, KeyboardAvoidingView, TouchableOpacity, Text, ScrollView, Image, View } from "react-native";
+import { TextInput, KeyboardAvoidingView, TouchableOpacity, Text, ScrollView, Image, View, Alert } from "react-native";
 import styles from "./Styles_Login.js";
 import useHeaderOptions from '../../components/Header.js'; // Importando o hook do header
 
 const LoginForm = ({ navigation }) => {
   const [email, setEmail] = useState('');
-  const [Senha, setSenha] = useState('');
+  const [senha, setSenha] = useState('');
 
-  const handleLogin = () => {
-    console.log("Email", email);
-    setEmail('');
-    console.log("Senha", Senha);
-    setSenha('');
+  const handleLogin = async () => {
+    try {
+      const response = await fetch('http://10.135.60.26:8085/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ Email: email, Senha: senha }),
+      });
+
+      const data = await response.json();
+
+      if (data.erro) {
+        Alert.alert('Erro', data.mensagem.error);
+      } else {
+        // Sucesso no login, pode navegar para a próxima tela
+        navigation.navigate('Calendario');
+      }
+    } catch (error) {
+      console.error('Erro ao realizar login:', error);
+      Alert.alert('Erro', 'Erro ao realizar login. Tente novamente.');
+    }
   };
+
   useHeaderOptions();
 
   return (
@@ -34,13 +52,14 @@ const LoginForm = ({ navigation }) => {
         <TextInput
           style={styles.Inputs}
           placeholder="Senha"
-          value={Senha}
+          value={senha}
+          secureTextEntry
           placeholderTextColor={'#b8b8b8'}
           onChangeText={setSenha}
         />
 
-        <TouchableOpacity style={styles.btnCriar} onPress={() => navigation.navigate('Calendario')}>
-          <Text style={styles.Txtbtn} /*onPress={handleLogin}*/ >Logar</Text>
+        <TouchableOpacity style={styles.btnCriar} onPress={handleLogin}>
+          <Text style={styles.Txtbtn}>Logar</Text>
         </TouchableOpacity>
 
         <TouchableOpacity style={styles.btnvl} onPress={() => navigation.navigate('Cadastro')}>

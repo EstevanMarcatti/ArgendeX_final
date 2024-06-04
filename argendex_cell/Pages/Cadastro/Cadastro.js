@@ -1,24 +1,42 @@
 import React, { useState } from "react";
-import { View, TextInput, Image, KeyboardAvoidingView, TouchableOpacity, Button, Text} from "react-native";
+import { View, TextInput, Image, KeyboardAvoidingView, TouchableOpacity, Button, Text, Alert } from "react-native";
 import { ScrollView } from "react-native";
-import DateTimePickerModal from "react-native-modal-datetime-picker"; // Importe o DateTimePickerModal
+import DateTimePickerModal from "react-native-modal-datetime-picker";
 import useHeaderOptions from '../../components/Header.js';
 import styles from "./Styles_cadastro";
 
-const CadastroForm  = ({ navigation }) => {
+const CadastroForm = ({ navigation }) => {
     const [nome, setNome] = useState('');
     const [email, setEmail] = useState('');
     const [senha, setSenha] = useState('');
     const [cidade, setCidade] = useState('');
-    const [dataNascimento, setDataNascimento] = useState(null); // Alterado para null
-    const [showDatePicker, setShowDatePicker] = useState(false); // Estado para controlar a visibilidade do DatePicker
+    const [dataNascimento, setDataNascimento] = useState(null);
+    const [showDatePicker, setShowDatePicker] = useState(false);
+    const [mensagensErro, setMensagensErro] = useState([]);
 
-    const handledCadastro = () => {
-        console.log("Nome Completo: ", nome);
-        console.log("E_mail: ", email);
-        console.log("Senha: ", senha);
-        console.log("cidade: ", cidade);
-        console.log("DataNascimentos: ", dataNascimento);
+    const handledCadastro = async () => {
+        const dados = { nome, email, senha, cidade, dataNascimento: dataNascimento ? dataNascimento.toISOString().split('T')[0] : '' };
+
+        try {
+            const resposta = await fetch('http://10.135.60.26:8085/receber-dados', { // Substitua com o IP e a porta corretos
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(dados),
+            });
+
+            const resultado = await resposta.json();
+
+            if (resultado.erro) {
+                setMensagensErro(resultado.mensagens);
+            } else {
+                navigation.navigate('Calendario');
+            }
+        } catch (error) {
+            console.error('Erro ao enviar dados:', error);
+            Alert.alert('Erro de Rede', 'Falha na solicitação de rede. Verifique sua conexão.');
+        }
     }
 
     const handleDateConfirm = (date) => {
@@ -35,10 +53,10 @@ const CadastroForm  = ({ navigation }) => {
             </View>
 
             <ScrollView keyboardShouldPersistTaps="handled" style={styles.container}>
-                <TextInput style={styles.inputs} placeholder="Nome Completo" placeholderTextColor='#b8b8b8' value={nome} onChangeText={setNome}/>
-                <TextInput style={styles.inputs} placeholder="E-mail" placeholderTextColor='#b8b8b8' value={email} onChangeText={setEmail}/>
-                <TextInput style={styles.inputs} placeholder="Senha" placeholderTextColor='#b8b8b8' value={senha} onChangeText={setSenha}/>
-                <TextInput style={styles.inputs} placeholder="Cidade" placeholderTextColor='#b8b8b8' value={cidade} onChangeText={setCidade}/>
+                <TextInput style={styles.inputs} placeholder="Nome Completo" placeholderTextColor='#b8b8b8' value={nome} onChangeText={setNome} />
+                <TextInput style={styles.inputs} placeholder="E-mail" placeholderTextColor='#b8b8b8' value={email} onChangeText={setEmail} />
+                <TextInput style={styles.inputs} placeholder="Senha" placeholderTextColor='#b8b8b8' value={senha} onChangeText={setSenha} secureTextEntry={true} />
+                <TextInput style={styles.inputs} placeholder="Cidade" placeholderTextColor='#b8b8b8' value={cidade} onChangeText={setCidade} />
 
                 <TouchableOpacity onPress={() => setShowDatePicker(true)}>
                     <TextInput style={styles.inputs} placeholder="Selecione a data de nascimento" placeholderTextColor='#b8b8b8' editable={false} value={dataNascimento ? dataNascimento.toLocaleDateString() : ''} />
@@ -50,10 +68,18 @@ const CadastroForm  = ({ navigation }) => {
                     onConfirm={handleDateConfirm}
                     onCancel={() => setShowDatePicker(false)}
                 />
+
+                {mensagensErro.length > 0 && (
+                    <View style={{ margin: 10 }}>
+                        {mensagensErro.map((mensagem, index) => (
+                            <Text key={index} style={{ color: 'red' }}>{mensagem.mensagem}</Text>
+                        ))}
+                    </View>
+                )}
             </ScrollView>
 
-            <TouchableOpacity style={styles.btnCriar}  onPress={() => navigation.navigate('Calendario')}>
-                <Text style={styles.Txtbtn} /*onPress={handledCadastro}*/>Criar Cadastro</Text>
+            <TouchableOpacity style={styles.btnCriar} onPress={handledCadastro}>
+                <Text style={styles.Txtbtn}>Criar Cadastro</Text>
             </TouchableOpacity>
 
             <TouchableOpacity style={styles.btnvl} onPress={() => navigation.navigate('Login')}>
