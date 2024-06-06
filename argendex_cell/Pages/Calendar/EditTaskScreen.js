@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, StyleSheet, TouchableOpacity, Modal, Alert } from 'react-native';
+import { View, Text, TextInput, StyleSheet, TouchableOpacity, Alert } from 'react-native';
 import DateTimePicker from '@react-native-community/datetimepicker';
-import useHeaderOptions from '../../components/Header.js'; // Importando o hook do header
 
 const EditTaskScreen = ({ task, onSave, onCancel }) => {
     const [newTask, setNewTask] = useState(task.title);
     const [description, setDescription] = useState(task.description);
     const [category, setCategory] = useState(task.category);
     const [time, setTime] = useState(new Date());
+    const [showTimePicker, setShowTimePicker] = useState(false);
 
     const handleSave = () => {
         onSave({
@@ -17,6 +17,12 @@ const EditTaskScreen = ({ task, onSave, onCancel }) => {
             category,
             time: time.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
         });
+    };
+
+    const handleTimeChange = (event, selectedTime) => {
+        const currentTime = selectedTime || time;
+        setShowTimePicker(false);
+        setTime(currentTime);
     };
 
     return (
@@ -45,6 +51,16 @@ const EditTaskScreen = ({ task, onSave, onCancel }) => {
             <TouchableOpacity onPress={() => setShowTimePicker(true)}>
                 <Text style={styles.timePickerText}>Escolher Horário: {time.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</Text>
             </TouchableOpacity>
+            {showTimePicker && (
+                <DateTimePicker
+                    testID="dateTimePicker"
+                    value={time}
+                    mode="time"
+                    is24Hour={true}
+                    display="default"
+                    onChange={handleTimeChange}
+                />
+            )}
             <TouchableOpacity onPress={handleSave} style={styles.saveButton}>
                 <Text style={styles.buttonText}>Salvar</Text>
             </TouchableOpacity>
