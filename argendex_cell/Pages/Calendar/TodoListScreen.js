@@ -32,6 +32,7 @@ const TodoListScreen = ({ navigation }) => {
   const [searchQuery, setSearchQuery] = useState('');
   const [searchResults, setSearchResults] = useState([]);
   const [searchModalVisible, setSearchModalVisible] = useState(false);
+  const [savedTaskSuccess, setSavedTaskSuccess] = useState(false);
 
   const handleDayPress = (day) => {
     setSelectedDate(day.dateString);
@@ -67,7 +68,8 @@ const TodoListScreen = ({ navigation }) => {
       setTime(new Date());
       setNewTaskModalVisible(false);
       setSelectedDate('');
-      // Deselect the date
+      setSavedTaskSuccess(true); // Mostra a mensagem de sucesso
+      setTimeout(() => setSavedTaskSuccess(false), 3000); // Esconde a mensagem após 3 segundos
     } else {
       Alert.alert('Erro', 'Todos os campos são obrigatórios.');
     }
@@ -235,78 +237,91 @@ const TodoListScreen = ({ navigation }) => {
           textDayHeaderFontSize: 16
         }}
       />
-      <Modal visible={modalVisible} animationType="slide">
-        <View style={styles.modalContainer}>
-          <Text style={styles.modalTitle}>Tarefas para {selectedDate}</Text>
-          <FlatList data={tasksForSelectedDate} renderItem={renderTask} keyExtractor={(item, index) => index.toString()} />
-          <TouchableOpacity onPress={() => setModalVisible(false)}>
-            <Text style={styles.modalCloseButton}>Fechar</Text>
-          </TouchableOpacity>
+      <Modal visible={modalVisible} animationType="slide" transparent={true} onRequestClose={() => setModalVisible(false)}>
+        <View style={styles.modalBackground}>
+          <View style={styles.modalContainer}>
+            <Text style={styles.modalTitle}>Tarefas para {selectedDate}</Text>
+            <FlatList data={tasksForSelectedDate} renderItem={renderTask} keyExtractor={(item, index) => index.toString()} />
+            <TouchableOpacity onPress={() => setModalVisible(false)}>
+              <Text style={styles.modalCloseButton}>Fechar</Text>
+            </TouchableOpacity>
+          </View>
         </View>
       </Modal>
-      <Modal visible={newTaskModalVisible} animationType="slide">
-        <View style={styles.modalContainer}>
-          <Text style={styles.modalTitle}>Adicionar Tarefa</Text>
-          <TextInput
-            style={styles.input}
-            placeholder="Título da Tarefa"
-            placeholderTextColor="grey"
-            value={newTask}
-            onChangeText={setNewTask}
-          />
-          <TextInput
-            style={styles.input}
-            placeholder="Descrição"
-            placeholderTextColor="grey"
-            value={description}
-            onChangeText={setDescription}
-          />
-          <TextInput
-            style={styles.input}
-            placeholder="Categoria"
-            placeholderTextColor="grey"
-            value={category}
-            onChangeText={setCategory}
-          />
-          <TouchableOpacity onPress={() => setShowTimePicker(true)}>
-            <Text style={styles.timeButtonText}>Selecionar Hora: {time.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</Text>
-          </TouchableOpacity>
-          {showTimePicker && (
-            <DateTimePicker
-              value={time}
-              mode="time"
-              is24Hour={true}
-              display="default"
-              onChange={(event, selectedTime) => {
-                setShowTimePicker(false);
-                if (selectedTime) setTime(selectedTime);
-              }}
+      <Modal visible={newTaskModalVisible} animationType="slide" transparent={true} onRequestClose={() => setNewTaskModalVisible(false)}>
+        <View style={styles.modalBackground}>
+          <View style={styles.modalContainer}>
+            <Text style={styles.modalTitle}>Adicionar Tarefa</Text>
+            <TextInput
+              style={styles.input}
+              placeholder="Título da Tarefa"
+              placeholderTextColor="grey"
+              value={newTask}
+              onChangeText={setNewTask}
             />
-          )}
-          <TouchableOpacity onPress={addTask}>
-            <Text style={styles.addButton}>Adicionar</Text>
-          </TouchableOpacity>
-          <TouchableOpacity onPress={() => setNewTaskModalVisible(false)}>
-            <Text style={styles.cancelButton}>Cancelar</Text>
-          </TouchableOpacity>
+            <TextInput
+              style={styles.input}
+              placeholder="Descrição"
+              placeholderTextColor="grey"
+              value={description}
+              onChangeText={setDescription}
+            />
+            <TextInput
+              style={styles.input}
+              placeholder="Categoria"
+              placeholderTextColor="grey"
+              value={category}
+              onChangeText={setCategory}
+            />
+            <TouchableOpacity onPress={() => setShowTimePicker(true)}>
+              <Text style={styles.timeButtonText}>Selecionar Hora: {time.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</Text>
+            </TouchableOpacity>
+            {showTimePicker && (
+              <DateTimePicker
+                value={time}
+                mode="time"
+                is24Hour={true}
+                display="default"
+                onChange={(event, selectedTime) => {
+                  setShowTimePicker(false);
+                  if (selectedTime) setTime(selectedTime);
+                }}
+              />
+            )}
+            <TouchableOpacity onPress={addTask}>
+              <Text style={styles.addButton}>Adicionar</Text>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => setNewTaskModalVisible(false)}>
+              <Text style={styles.cancelButton}>Cancelar</Text>
+            </TouchableOpacity>
+          </View>
         </View>
       </Modal>
-      <Modal visible={editModalVisible} animationType="slide">
-        <EditTaskScreen task={editedTask} onSave={(updatedTask) => editTask(updatedTask)} onCancel={() => setEditModalVisible(false)} />
-      </Modal>
-      <Modal visible={searchModalVisible} animationType="slide">
-        <View style={styles.modalContainer}>
-          <Text style={styles.modalTitle}>Resultados da Pesquisa</Text>
-          {searchResults.length > 0 ? (
-            <FlatList data={searchResults} renderItem={renderSearchResult} keyExtractor={(item, index) => index.toString()} />
-          ) : (
-            <Text style={styles.noResultsText}>Nenhuma tarefa encontrada.</Text>
-          )}
-          <TouchableOpacity onPress={() => setSearchModalVisible(false)}>
-            <Text style={styles.modalCloseButton}>Fechar</Text>
-          </TouchableOpacity>
+      <Modal visible={editModalVisible} animationType="slide" transparent={true} onRequestClose={() => setEditModalVisible(false)}>
+        <View style={styles.modalBackground}>
+          <EditTaskScreen task={editedTask} onSave={(updatedTask) => editTask(updatedTask)} onCancel={() => setEditModalVisible(false)} />
         </View>
       </Modal>
+      <Modal visible={searchModalVisible} animationType="slide" transparent={true} onRequestClose={() => setSearchModalVisible(false)}>
+        <View style={styles.modalBackground}>
+          <View style={styles.modalContainer}>
+            <Text style={styles.modalTitle}>Resultados da Pesquisa</Text>
+            {searchResults.length > 0 ? (
+              <FlatList data={searchResults} renderItem={renderSearchResult} keyExtractor={(item, index) => index.toString()} />
+            ) : (
+              <Text style={styles.noResultsText}>Nenhuma tarefa encontrada.</Text>
+            )}
+            <TouchableOpacity onPress={() => setSearchModalVisible(false)}>
+              <Text style={styles.modalCloseButton}>Fechar</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      </Modal>
+      {savedTaskSuccess && (
+        <View style={styles.successMessage}>
+          <Text style={styles.successMessageText}>Tarefa adicionada com sucesso!</Text>
+        </View>
+      )}
     </View>
   );
 };
@@ -314,14 +329,16 @@ const TodoListScreen = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#191515'
+    backgroundColor: '#191515',
+    alignItems: 'center', // Align center horizontally
   },
   searchInput: {
     backgroundColor: '#333',
     color: 'white',
     padding: 10,
     margin: 10,
-    borderRadius: 5
+    borderRadius: 5,
+    width: '80%'
   },
   calendario: {
     height: 'auto',
@@ -334,11 +351,18 @@ const styles = StyleSheet.create({
     backgroundColor: 'green',
     alignSelf: 'center'
   },
-  modalContainer: {
+  modalBackground: {
     flex: 1,
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#191515'
+  },
+  modalContainer: {
+    backgroundColor: '#191515',
+    padding: 20,
+    borderRadius: 10,
+    width: '80%', // Adjusted width
+    maxHeight: '80%', // Maximum height
   },
   modalTitle: {
     fontSize: 20,
@@ -353,7 +377,8 @@ const styles = StyleSheet.create({
   taskContainer: {
     padding: 10,
     borderBottomWidth: 1,
-    borderBottomColor: 'grey'
+    borderBottomColor: 'grey',
+    width: '100%' // Adjusted width
   },
   taskTitle: {
     fontSize: 18,
@@ -389,7 +414,7 @@ const styles = StyleSheet.create({
     padding: 10,
     marginBottom: 10,
     borderRadius: 5,
-    width: '80%'
+    width: '100%'
   },
   timeButtonText: {
     color: 'green',
@@ -411,6 +436,16 @@ const styles = StyleSheet.create({
     fontSize: 16,
     textAlign: 'center',
     marginTop: 20
+  },
+  successMessage: {
+    position: 'absolute',
+    bottom: 20,
+    backgroundColor: 'green',
+    padding: 10,
+    borderRadius: 5
+  },
+  successMessageText: {
+    color: 'white'
   }
 });
 
