@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, StyleSheet, FlatList, TouchableOpacity, Modal, Alert, StatusBar } from 'react-native';
+import { View, Text, TextInput, StyleSheet, FlatList, TouchableOpacity, Modal, Alert, StatusBar, Animated, Easing } from 'react-native';
 import { Calendar, LocaleConfig } from 'react-native-calendars';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import useHeaderOptions from '../../components/HeaderCalender.js'; // Importando o hook do header
 import EditTaskScreen from './EditTaskScreen';
-
 
 // Configuração de localidade (opcional)
 LocaleConfig.locales['pt'] = {
@@ -31,11 +30,14 @@ const TodoListScreen = ({ navigation }) => {
     const [editedTask, setEditedTask] = useState(null);
     const [newTaskModalVisible, setNewTaskModalVisible] = useState(false);
     const [showConfirmation, setShowConfirmation] = useState(false);
+    const [slideAnim] = useState(new Animated.Value(-300)); // Inicialize fora da tela
+    const [menuVisible, setMenuVisible] = useState(false);
 
     // Novo estado para a pesquisa
     const [searchQuery, setSearchQuery] = useState('');
     const [searchResults, setSearchResults] = useState([]);
     const [searchModalVisible, setSearchModalVisible] = useState(false);
+
 
     const handleDayPress = (day) => {
         setSelectedDate(day.dateString);
@@ -186,10 +188,45 @@ const TodoListScreen = ({ navigation }) => {
         </View>
     );
 
+    const openMenu = () => {
+        setMenuVisible(true);
+        Animated.timing(slideAnim, {
+            toValue: 0,
+            duration: 300,
+            easing: Easing.out(Easing.ease),
+            useNativeDriver: true,
+        }).start();
+    };
+
+    const closeMenu = () => {
+        Animated.timing(slideAnim, {
+            toValue: -300,
+            duration: 300,
+            easing: Easing.in(Easing.ease),
+            useNativeDriver: true,
+        }).start(() => setMenuVisible(false));
+    };
+
+
+    const menuItems = [
+        { id: '1', title: 'Item 1' },
+        { id: '2', title: 'Item 2' },
+        // Adicione mais itens conforme necessário
+    ];
+    
+    const renderMenuItem = ({ item }) => (
+        <View>
+            <Text style={{ color: 'white' }}>{item.title}</Text>
+        </View>
+    );
     
 
     return (
         <View style={styles.container}>
+            <TouchableOpacity style={styles.menuButton} onPress={openMenu}>
+                <Text style={styles.menuButtonText}>≡</Text>
+            </TouchableOpacity>
+
             <TextInput
                 style={styles.searchInput}
                 placeholder="Pesquisar Tarefas"
@@ -320,7 +357,7 @@ const TodoListScreen = ({ navigation }) => {
                     onSave={(editedTask) => editTask(editedTask)}
                     onCancel={() => setEditModalVisible(false)}
                 />
-                
+
             </Modal>
 
             {/* Modal para mostrar os resultados da pesquisa */}
@@ -348,6 +385,20 @@ const TodoListScreen = ({ navigation }) => {
                     </View>
                 </View>
             </Modal>
+            {menuVisible && (
+                <Animated.View style={[styles.menuContainer, { transform: [{ translateX: slideAnim }] }]}>
+                    <FlatList
+                        data={menuItems}
+                        renderItem={renderMenuItem}
+                        keyExtractor={(item, index) => index.toString()}
+                    />
+                    <TouchableOpacity onPress={closeMenu} style={styles.modalButton}>
+                        <Text style={styles.modalButtonText}>Fechar Menu</Text>
+                    </TouchableOpacity>
+                </Animated.View>
+            )}
+
+
             {showConfirmation && (
                 <View style={styles.confirmationContainer}>
                     <Text style={styles.confirmationText}>Tarefa adicionada com sucesso!</Text>
@@ -499,6 +550,27 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         marginTop: 20, // Adiciona um espaçamento superior para centralizar a mensagem
     },
+    menuContainer: {
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        bottom: 0,
+        width: 250,
+        backgroundColor: '#3b3b3b',
+        zIndex: 10,
+    },
+    menuButton: {
+        position: 'absolute',
+        top: 22,
+        left: 20,
+        zIndex: 10,
+    },
+    menuButtonText: {
+        fontSize: 65,
+        color: 'white',
+    },
+    
+
 });
 
 export default TodoListScreen;
