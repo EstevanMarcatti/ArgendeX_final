@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, StyleSheet, FlatList, TouchableOpacity, Modal, Alert, StatusBar, Animated, Easing } from 'react-native';
+import { View, Text, TextInput, StyleSheet, FlatList, TouchableOpacity, Modal, Alert, Animated } from 'react-native';
 import { Calendar, LocaleConfig } from 'react-native-calendars';
 import DateTimePicker from '@react-native-community/datetimepicker';
-import useHeaderOptions from '../../components/HeaderCalender.js'; // Importando o hook do header
+import { NavigationContainer, useNavigation } from '@react-navigation/native';
+import { createDrawerNavigator } from '@react-navigation/drawer';
 import EditTaskScreen from './EditTaskScreen';
+import FontAwesome5 from 'react-native-vector-icons/FontAwesome5'; // Importação correta do ícone
+
 
 // Configuração de localidade (opcional)
 LocaleConfig.locales['pt'] = {
@@ -15,7 +18,8 @@ LocaleConfig.locales['pt'] = {
 };
 LocaleConfig.defaultLocale = 'pt';
 
-const TodoListScreen = ({ navigation }) => {
+const TodoListScreen = () => {
+    const navigation = useNavigation();
     const [selectedDate, setSelectedDate] = useState('');
     const [tasks, setTasks] = useState({});
     const [newTask, setNewTask] = useState('');
@@ -37,7 +41,6 @@ const TodoListScreen = ({ navigation }) => {
     const [searchQuery, setSearchQuery] = useState('');
     const [searchResults, setSearchResults] = useState([]);
     const [searchModalVisible, setSearchModalVisible] = useState(false);
-
 
     const handleDayPress = (day) => {
         setSelectedDate(day.dateString);
@@ -133,8 +136,6 @@ const TodoListScreen = ({ navigation }) => {
         }
     };
 
-    useHeaderOptions();
-
     const renderCustomDay = ({ date, state }) => {
         const dayOfWeek = new Date(date.year, date.month - 1, date.day).getDay();
         const isWeekend = dayOfWeek === 0 || dayOfWeek === 6;
@@ -188,44 +189,41 @@ const TodoListScreen = ({ navigation }) => {
         </View>
     );
 
-    const openMenu = () => {
-        setMenuVisible(true);
-        Animated.timing(slideAnim, {
-            toValue: 0,
-            duration: 300,
-            easing: Easing.out(Easing.ease),
-            useNativeDriver: true,
-        }).start();
-    };
+    const Drawer = createDrawerNavigator();
 
-    const closeMenu = () => {
-        Animated.timing(slideAnim, {
-            toValue: -300,
-            duration: 300,
-            easing: Easing.in(Easing.ease),
-            useNativeDriver: true,
-        }).start(() => setMenuVisible(false));
-    };
-
-
-    const menuItems = [
-        { id: '1', title: 'Item 1' },
-        { id: '2', title: 'Item 2' },
-        // Adicione mais itens conforme necessário
-    ];
-    
-    const renderMenuItem = ({ item }) => (
-        <View>
-            <Text style={{ color: 'white' }}>{item.title}</Text>
+    const HomeScreen = () => (
+        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+            <Text>Home Screen</Text>
         </View>
     );
-    
+
+    const SettingsScreen = () => (
+        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+            <Text>Settings Screen</Text>
+        </View>
+    );
+
+    const App = () => (
+        <Drawer.Navigator initialRouteName="Home">
+            <Drawer.Screen name="Home" component={HomeScreen} />
+            <Drawer.Screen name="Settings" component={SettingsScreen} />
+        </Drawer.Navigator>
+    );
+
+    const MenuIcon = () => {
+        return (
+            <View>
+                <TouchableOpacity onPress={() => setMenuVisible(true)}>
+                    <FontAwesome5 name="bars" size={24} color="black" />
+                </TouchableOpacity>
+            </View>
+        );
+    };
+
+
 
     return (
         <View style={styles.container}>
-            <TouchableOpacity style={styles.menuButton} onPress={openMenu}>
-                <Text style={styles.menuButtonText}>≡</Text>
-            </TouchableOpacity>
 
             <TextInput
                 style={styles.searchInput}
@@ -385,18 +383,7 @@ const TodoListScreen = ({ navigation }) => {
                     </View>
                 </View>
             </Modal>
-            {menuVisible && (
-                <Animated.View style={[styles.menuContainer, { transform: [{ translateX: slideAnim }] }]}>
-                    <FlatList
-                        data={menuItems}
-                        renderItem={renderMenuItem}
-                        keyExtractor={(item, index) => index.toString()}
-                    />
-                    <TouchableOpacity onPress={closeMenu} style={styles.modalButton}>
-                        <Text style={styles.modalButtonText}>Fechar Menu</Text>
-                    </TouchableOpacity>
-                </Animated.View>
-            )}
+
 
 
             {showConfirmation && (
@@ -569,7 +556,6 @@ const styles = StyleSheet.create({
         fontSize: 65,
         color: 'white',
     },
-    
 
 });
 

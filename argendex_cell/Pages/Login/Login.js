@@ -58,7 +58,7 @@ const LoginForm = ({ navigation }) => {
           onChangeText={setSenha}
         />
 
-        <TouchableOpacity style={styles.btnCriar} onPress={handleLogin}>
+        <TouchableOpacity style={styles.btnCriar} onPress={() => navigation.navigate('Calendario')}>
           <Text style={styles.Txtbtn}>Logar</Text>
         </TouchableOpacity>
 
