@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
@@ -28,8 +28,17 @@ function CustomDrawerContent() {
           </View>
 
           <TouchableOpacity style={styles.btnCriar} onPress={() => navigation.navigate('Calendario')}>
-            <Text style={styles.TxtbtnMenu}>Calendario</Text>
+            <View style={styles.display}>
+
+              <Text style={styles.TxtbtnMenu}>Calendario</Text>
+
+            </View>
+
           </TouchableOpacity>
+
+          <View style={styles.display}>
+            <Image style={styles.logocl} resizeMode='contain' source={require('./assets/images/calendario.png')} />
+          </View>
 
           <TouchableOpacity
             style={styles.btnCriar}
@@ -37,9 +46,15 @@ function CustomDrawerContent() {
           >
             <Text style={styles.TxtbtnMenu}>Planos</Text>
           </TouchableOpacity>
+          <View style={styles.display}>
+            <Image style={styles.logocl} resizeMode='contain' source={require('./assets/images/forma-de-pagamento.png')} />
+          </View>
           <TouchableOpacity style={styles.btnCriar} onPress={() => navigation.navigate('Suporte')}>
             <Text style={styles.TxtbtnMenu}>Suporte</Text>
           </TouchableOpacity>
+          <View style={styles.display}>
+            <Image style={styles.logocl} resizeMode='contain' source={require('./assets/images/apoio-suporte.png')} />
+          </View>
         </View>
       )}
     >
@@ -76,6 +91,7 @@ const styles = StyleSheet.create({
   TxtbtnMenu: {
     color: '#fff',
     fontSize: 18,
+
   },
   btnCriar: {
     backgroundColor: 'green',
@@ -91,6 +107,15 @@ const styles = StyleSheet.create({
     fontSize: 30,
     color: '#fff',
     marginTop: -35,
+  },
+  display: {
+    display: 'flex',
+  },
+  logocl: {
+    width: 40,
+    marginTop: -62,
+    marginLeft: 5,
+
   },
 
 });
