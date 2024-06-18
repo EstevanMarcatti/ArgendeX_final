@@ -9,6 +9,7 @@ import Login from './Pages/Login/Login';
 import Cadastro from './Pages/Cadastro/Cadastro';
 import TodoListScreen from './Pages/Calendar/TodoListScreen';
 import Planos from './Pages/plano/Plano';
+import Suporte from './Pages/Suporte/Suporte';
 
 const Drawer = createDrawerNavigator();
 const Stack = createNativeStackNavigator();
@@ -22,6 +23,9 @@ function CustomDrawerContent() {
       drawerContent={(props) => (
         <View style={styles.drawerContent}>
           {/* Seu conteúdo personalizado do Drawer aqui */}
+          <View>
+            <Text style={styles.TxtMenu}>Menu</Text>
+          </View>
 
           <TouchableOpacity style={styles.btnCriar} onPress={() => navigation.navigate('Calendario')}>
             <Text style={styles.TxtbtnMenu}>Calendario</Text>
@@ -33,6 +37,9 @@ function CustomDrawerContent() {
           >
             <Text style={styles.TxtbtnMenu}>Planos</Text>
           </TouchableOpacity>
+          <TouchableOpacity style={styles.btnCriar} onPress={() => navigation.navigate('Suporte')}>
+            <Text style={styles.TxtbtnMenu}>Suporte</Text>
+          </TouchableOpacity>
         </View>
       )}
     >
@@ -41,6 +48,7 @@ function CustomDrawerContent() {
       <Drawer.Screen name="Cadastro" component={Cadastro} />
       <Drawer.Screen name="Calendario" component={TodoListScreen} />
       <Drawer.Screen name="Planos" component={Planos} />
+      <Drawer.Screen name="Suporte" component={Suporte} />
     </Drawer.Navigator>
   );
 }
@@ -78,6 +86,11 @@ const styles = StyleSheet.create({
     width: '90%',
     height: 45,
     borderRadius: 5,
+  },
+  TxtMenu: {
+    fontSize: 30,
+    color: '#fff',
+    marginTop: -35,
   },
 
 });

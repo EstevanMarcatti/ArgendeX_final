@@ -1,84 +1,95 @@
-import React, { useState } from 'react';
-import { View, Text, Button, Modal, StyleSheet, TouchableOpacity } from 'react-native';
-import Cards from './CompSuporte/Cards';
-import PesqSup from './CompSuporte/PesqSup';
+import * as React from 'react';
+import { View, Text, StyleSheet, TouchableOpacity, TextInput } from 'react-native';
 
-const Suporte = () => {
-  const [modalVisible, setModalVisible] = useState(false);
+const SupportPage = () => {
+  
+  const [problema, setProblema] = React.useState('');
 
-  const handleShow = () => {
-    setModalVisible(true);
+  const handleSubmit = () => {
+    // Aqui você pode adicionar lógica para lidar com o problema submetido pelo usuário
+    console.log('Problema submetido:', problema);
+    // Exemplo simples de como lidar com a submissão do problema
+    // Pode ser implementada uma lógica para enviar o problema para um servidor, etc.
+    alert(`Problema submetido: ${problema}`);
+    // Limpar o campo de entrada depois da submissão
+    setProblema('');
   };
 
   return (
     <View style={styles.container}>
-      <TouchableOpacity style={styles.button} onPress={handleShow}>
-        <Text style={styles.buttonText}>Suporte</Text>
-      </TouchableOpacity>
+      <View style={styles.header}>
+        <Text style={styles.headerText}>Página de Suporte</Text>
+      </View>
       
-      <Modal
-        visible={modalVisible}
-        animationType="slide"
-        onRequestClose={() => setModalVisible(false)}
-      >
-        <View style={styles.modalContent}>
-          <Text style={styles.modalTitle}>Suporte</Text>
-          
-          <View style={styles.pesqsup}>
-            <Text style={styles.problemText}>Qual o seu problema???</Text>
-            <PesqSup />
-          </View>
-          
-          <View style={styles.cardsContainer}>
-            <Cards />
-          </View>
-          
-          <Button title="Fechar" onPress={() => setModalVisible(false)} />
-        </View>
-      </Modal>
+      <View style={styles.content}>
+        <Text style={styles.contentText}>
+          Bem-vindo à nossa página de suporte. Por favor, descreva seu problema abaixo:
+        </Text>
+        
+        <TextInput
+          style={styles.input}
+          value={problema}
+          onChangeText={text => setProblema(text)}
+          placeholder="Descreva seu problema aqui"
+          multiline
+          numberOfLines={4}
+        />
+        
+        <TouchableOpacity style={styles.button} onPress={handleSubmit}>
+          <Text style={styles.buttonText}>Enviar Problema</Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
-};
+}
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
+    backgroundColor: '#000', // Cor de fundo preto
+    paddingHorizontal: 20,
+    paddingTop: 50,
+  },
+  header: {
     alignItems: 'center',
+    marginBottom: 20,
   },
-  button: {
-    backgroundColor: '#007bff',
-    padding: 10,
-    borderRadius: 5,
-  },
-  buttonText: {
-    color: '#fff',
-    fontSize: 18,
-  },
-  modalContent: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginVertical: 50,
-    marginHorizontal: 20,
-  },
-  modalTitle: {
+  headerText: {
+    color: '#fff', // Cor do texto do cabeçalho
     fontSize: 24,
     fontWeight: 'bold',
-    marginBottom: 20,
   },
-  pesqsup: {
-    alignItems: 'center',
-    marginBottom: 20,
-  },
-  problemText: {
-    fontSize: 20,
-    marginBottom: 10,
-  },
-  cardsContainer: {
+  content: {
     flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  contentText: {
+    color: '#fff', // Cor do texto do conteúdo
+    fontSize: 18,
+    textAlign: 'center',
+    marginBottom: 20,
+  },
+  input: {
+    backgroundColor: '#fff', // Cor de fundo do input
     width: '100%',
+    paddingHorizontal: 20,
+    paddingVertical: 15,
+    borderRadius: 8,
+    marginBottom: 20,
+    color: '#000', // Cor do texto do input
+  },
+  button: {
+    backgroundColor: '#00FF00', // Cor verde para o botão
+    paddingVertical: 12,
+    paddingHorizontal: 20,
+    borderRadius: 8,
+  },
+  buttonText: {
+    color: '#fff', // Cor do texto do botão
+    fontSize: 18,
+    fontWeight: 'bold',
   },
 });
 
-export default Suporte;
+export default SupportPage;
