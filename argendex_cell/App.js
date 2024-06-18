@@ -1,26 +1,85 @@
 import * as React from 'react';
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Home from './Pages/Home/Home';
 import Login from './Pages/Login/Login';
 import Cadastro from './Pages/Cadastro/Cadastro';
 import TodoListScreen from './Pages/Calendar/TodoListScreen';
-import Addtarefa from './Pages/AddTarefa/Addtarefa';
+import Planos from './Pages/plano/Plano';
 
 const Drawer = createDrawerNavigator();
+const Stack = createNativeStackNavigator();
+
+function CustomDrawerContent() {
+  const navigation = useNavigation(); // Obtém a navegação usando useNavigation()
+
+  return (
+    <Drawer.Navigator
+      initialRouteName="Home"
+      drawerContent={(props) => (
+        <View style={styles.drawerContent}>
+          {/* Seu conteúdo personalizado do Drawer aqui */}
+
+          <TouchableOpacity style={styles.btnCriar} onPress={() => navigation.navigate('Calendario')}>
+            <Text style={styles.TxtbtnMenu}>Calendario</Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity
+            style={styles.btnCriar}
+            onPress={() => navigation.navigate('Planos')}
+          >
+            <Text style={styles.TxtbtnMenu}>Planos</Text>
+          </TouchableOpacity>
+        </View>
+      )}
+    >
+      <Drawer.Screen name="Home" component={Home} />
+      <Drawer.Screen name="Login" component={Login} />
+      <Drawer.Screen name="Cadastro" component={Cadastro} />
+      <Drawer.Screen name="Calendario" component={TodoListScreen} />
+      <Drawer.Screen name="Planos" component={Planos} />
+    </Drawer.Navigator>
+  );
+}
 
 function App() {
   return (
     <NavigationContainer>
-      <Drawer.Navigator initialRouteName="Home">
-        <Drawer.Screen name="Home" component={Home} />
-        <Drawer.Screen name="Login" component={Login} />
-        <Drawer.Screen name="Cadastro" component={Cadastro} />
-        <Drawer.Screen name="Calendario" component={TodoListScreen} />
-        <Drawer.Screen name="Addtarefa" component={Addtarefa} />
-      </Drawer.Navigator>
+      <CustomDrawerContent />
     </NavigationContainer>
   );
 }
+
+const styles = StyleSheet.create({
+  drawerContent: {
+    flex: 1,
+    backgroundColor: '#000', // Cor de fundo do Drawer.Navigator
+    paddingTop: 50,
+    paddingHorizontal: 20,
+  },
+  drawerText: {
+    color: '#fff', // Cor do texto no Drawer.Navigator
+    fontSize: 20,
+    marginBottom: 10,
+  },
+  TxtbtnMenu: {
+    color: '#fff',
+    fontSize: 18,
+  },
+  btnCriar: {
+    backgroundColor: 'green',
+    justifyContent: 'center',
+    marginTop: 20,
+    marginBottom: 15,
+    alignItems: 'center',
+    width: '90%',
+    height: 45,
+    borderRadius: 5,
+  },
+
+});
 
 export default App;

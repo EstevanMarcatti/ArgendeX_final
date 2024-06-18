@@ -42,6 +42,7 @@ const TodoListScreen = () => {
     const [searchResults, setSearchResults] = useState([]);
     const [searchModalVisible, setSearchModalVisible] = useState(false);
 
+    
     const handleDayPress = (day) => {
         setSelectedDate(day.dateString);
         if (tasks[day.dateString]) {
@@ -220,6 +221,20 @@ const TodoListScreen = () => {
         );
     };
 
+    React.useLayoutEffect(() => {
+        navigation.setOptions({
+            
+            headerStyle: {
+                backgroundColor: '#191515', // Definindo a cor verde para o header
+            },
+            headerTintColor: '#fff', // Definindo a cor do texto do header como branco
+            headerTitleStyle: { // Estilo para o texto do título do header
+                fontWeight: 'bold',
+                fontSize: 30,
+            },
+        });
+        
+    }, [navigation]);
 
 
     return (
@@ -407,7 +422,6 @@ const styles = StyleSheet.create({
         marginBottom: 10,
         paddingHorizontal: 10,
         height: 40,
-        marginTop: 30,
         color: 'white',
         width: 300,
         marginLeft: 80,

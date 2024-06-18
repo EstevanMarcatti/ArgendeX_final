@@ -12,6 +12,9 @@ export default function Home() {
 
     React.useLayoutEffect(() => {
         navigation.setOptions({
+            headerShown: false,
+        });
+        navigation.setOptions({
             headerStyle: {
                 backgroundColor: '#000', // Definindo a cor verde para o header
             },
