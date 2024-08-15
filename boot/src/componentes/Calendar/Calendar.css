@@ -169,3 +169,22 @@ span.day-number {
   background-color: red; /* Bolinha vermelha para finais de semana */
 }
 
+.task-list-item {
+  margin-bottom: 10px;
+}
+
+.weekend .day-number {
+  color: red; /* Cor vermelha para os dias do final de semana */
+}
+
+.holiday .day-number {
+  color: #cb0000; /* Cor vermelha para os dias de feriado */
+}
+
+.day-number.carnaval {
+  color: red;
+}
+
+.carnaval {
+  color: #cb0000;
+}
