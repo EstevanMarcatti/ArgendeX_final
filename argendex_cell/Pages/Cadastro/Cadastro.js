@@ -18,7 +18,7 @@ const CadastroForm = ({ navigation }) => {
         const dados = { nome, email, senha, cidade, dataNascimento: dataNascimento ? dataNascimento.toISOString().split('T')[0] : '' };
 
         try {
-            const resposta = await fetch('http://10.135.60.26:8085/receber-dados', { // Substitua com o IP e a porta corretos
+            const resposta = await fetch('http://10.135.60.8:8085/receber-dados', { // Substitua com o IP e a porta corretos
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

@@ -3,9 +3,8 @@ import conexao
 from flask_cors import CORS
 from processamento import processar_dados  # Importe a função processar_dados
 from processatualizar import atualizar_dados
-from validacao_login import  validar_login
+from validacao_login import validar_login
 from select_atualiz import obter_dados_usuario_por_id
-
 
 app = Flask(__name__)
 CORS(app)  # Permita solicitações CORS
@@ -15,7 +14,6 @@ def receber_dados():
     dados = request.json
     ret = processar_dados(dados)  # Chame a função processar_dados
     
-    
     print('************************************************************************\n')
     print(ret)
     print('************************************************************************\n')
@@ -24,8 +22,7 @@ def receber_dados():
 @app.route('/redefinir_dados', methods=['POST'])
 def redefinir_dados():
     dados = request.json
-    ret = atualizar_dados(dados)  # Chame a função processar_dados
-    
+    ret = atualizar_dados(dados)  # Chame a função atualizar_dados
     
     print('************************************************************************\n')
     print(ret)
@@ -42,10 +39,9 @@ def login():
     if email and senha:
         response = validar_login(email, senha)
     else:
-        response = {'error': 'Credenciais incompletas'}, 400
+        response = {'erro': 'Credenciais incompletas'}, 400
 
     return jsonify(response)
-
 
 @app.route('/delete_usuario/<int:user_id>', methods=['DELETE'])
 def delete_usuario(user_id):
@@ -54,9 +50,9 @@ def delete_usuario(user_id):
         delete_usuario_db(user_id)
         
         # Retornar a resposta com o código de status apropriado
-        return jsonify({'message': 'Usuário excluído com sucesso'}), 200
+        return jsonify({'mensagem': 'Usuário excluído com sucesso'}), 200
     except Exception as e:
-        return {'error': f'Erro ao processar solicitação: {str(e)}'}, 500
+        return jsonify({'erro': f'Erro ao processar solicitação: {str(e)}'}), 500
 
 def delete_usuario_db(user_id):
     conex = conexao.conectar()
@@ -67,10 +63,6 @@ def delete_usuario_db(user_id):
     conex.commit()
     print("Usuário deletado com sucesso")
     conex.close()
-
-
-
-
 
 @app.route('/dados-usuario/<int:ID>', methods=['GET'])
 def obter_dados_usuario(ID):
@@ -97,6 +89,5 @@ def atualizar_dados_usuario(ID):
 
     return jsonify({'mensagem': 'Dados atualizados com sucesso!'})
 
-
 if __name__ == '__main__':
-    app.run(port=8085, host='10.135.60.26', debug=True, threaded=True)
+    app.run(port=8085, host='10.135.60.8', debug=True, threaded=True)

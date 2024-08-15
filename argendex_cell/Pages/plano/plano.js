@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Image, KeyboardAvoidingView, TouchableOpacity, Text, ScrollView, StyleSheet } from "react-native";
+import { View, Image, KeyboardAvoidingView, TouchableOpacity, Text, ScrollView,  } from "react-native";
 import { useNavigation } from '@react-navigation/native';
 
 import styles from "./Styles_plano"; // Certifique-se de importar os estilos corretamente

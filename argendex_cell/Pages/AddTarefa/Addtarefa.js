@@ -1,11 +1,12 @@
 import React, { useState } from "react";
-import { TextInput, KeyboardAvoidingView, TouchableOpacity, Text, ScrollView, Image, View } from "react-native";
+import { TextInput, KeyboardAvoidingView, TouchableOpacity, Text, ScrollView, Image, View, Alert } from "react-native";
 import styles from "./Style_Add.js";
 import useHeaderOptions from '../../components/Header.js'; // Importando o hook do header
 import { DateTimePicker } from "@react-native-community/datetimepicker";
+import axios from 'axios'; // Importação do Axios para fazer requisições HTTP
 
 const Addtarefa = ({ navigation }) => {
-  const [selectedDate, setSelectedDate] = useState('');
+    const [selectedDate, setSelectedDate] = useState('');
     const [tasks, setTasks] = useState({});
     const [newTask, setNewTask] = useState('');
     const [description, setDescription] = useState('');
@@ -17,6 +18,8 @@ const Addtarefa = ({ navigation }) => {
     const [selectedTaskIndex, setSelectedTaskIndex] = useState(null);
     const [editModalVisible, setEditModalVisible] = useState(false);
     const [editedTask, setEditedTask] = useState(null);
+
+    const userID = 1; // Substitua pelo ID do usuário autenticado
 
     const handleDayPress = (day) => {
         setSelectedDate(day.dateString);
@@ -31,23 +34,39 @@ const Addtarefa = ({ navigation }) => {
         }
     };
 
-    const addTask = () => {
+    const addTask = async () => {
         if (newTask.trim() !== '') {
-            const newTasks = { ...tasks };
-            if (!newTasks[selectedDate]) {
-                newTasks[selectedDate] = [];
-            }
-            newTasks[selectedDate].push({
+            const newTaskObject = {
                 title: newTask,
                 description,
                 category,
                 time: time.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
-            });
+            };
+
+            const newTasks = { ...tasks };
+            if (!newTasks[selectedDate]) {
+                newTasks[selectedDate] = [];
+            }
+            newTasks[selectedDate].push(newTaskObject);
             setTasks(newTasks);
             setNewTask('');
             setDescription('');
             setCategory('');
             setTime(new Date());
+
+            // Enviar a tarefa para o backend
+            try {
+                await axios.post('http://10.135.60.8:8085/adicionar_tarefa', {
+                    data: selectedDate,
+                    hora: newTaskObject.time,
+                    titulo: newTaskObject.title,
+                    id_usuario: userID
+                });
+                Alert.alert('Sucesso', 'Tarefa adicionada com sucesso!');
+            } catch (error) {
+                console.error('Erro ao adicionar tarefa:', error);
+                Alert.alert('Erro', 'Não foi possível adicionar a tarefa.');
+            }
         }
     };
 
@@ -132,57 +151,56 @@ const Addtarefa = ({ navigation }) => {
         </View>
     );
 
-  return (
-    <View style={styles.taskInputContainer}>
-                <TextInput
-                    style={styles.input}
-                    placeholder="Nova Tarefa"
-                    placeholderTextColor="grey"
-                    value={newTask}
-                    onChangeText={setNewTask}
+    return (
+        <View style={styles.taskInputContainer}>
+            <TextInput
+                style={styles.input}
+                placeholder="Nova Tarefa"
+                placeholderTextColor="grey"
+                value={newTask}
+                onChangeText={setNewTask}
+            />
+            <TextInput
+                style={styles.input}
+                placeholder="Descrição"
+                placeholderTextColor="grey"
+                value={description}
+                onChangeText={setDescription}
+            />
+            <TextInput
+                style={styles.input}
+                placeholder="Categoria"
+                placeholderTextColor="grey"
+                value={category}
+                onChangeText={setCategory}
+            />
+            <TouchableOpacity onPress={() => setShowTimePicker(true)}>
+                <Text style={styles.timePickerText}>Escolher Horário: {time.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</Text>
+            </TouchableOpacity>
+            {showTimePicker && (
+                <DateTimePicker
+                    value={time}
+                    mode="time"
+                    display="default"
+                    onChange={(event, selectedTime) => {
+                        setShowTimePicker(false);
+                        if (selectedTime) {
+                            setTime(selectedTime);
+                        }
+                    }}
                 />
-                <TextInput
-                    style={styles.input}
-                    placeholder="Descrição"
-                    placeholderTextColor="grey"
-                    value={description}
-                    onChangeText={setDescription}
-                />
-                <TextInput
-                    style={styles.input}
-                    placeholder="Categoria"
-                    placeholderTextColor="grey"
-                    value={category}
-                    onChangeText={setCategory}
-                />
-                <TouchableOpacity onPress={() => setShowTimePicker(true)}>
-                    <Text style={styles.timePickerText}>Escolher Horário: {time.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</Text>
+            )}
+            {selectedTaskIndex !== null ? (
+                <TouchableOpacity onPress={() => editTask(editedTask)} style={styles.addButton}>
+                    <Text style={styles.addButtonText}>Editar</Text>
                 </TouchableOpacity>
-                {showTimePicker && (
-                    <DateTimePicker
-                        value={time}
-                        mode="time"
-                        display="default"
-                        onChange={(event, selectedTime) => {
-                            setShowTimePicker(false);
-                            if (selectedTime) {
-                                setTime(selectedTime);
-                            }
-                        }}
-                    />
-                )}
-                {selectedTaskIndex !== null ? (
-                    <TouchableOpacity onPress={editTask} style={styles.addButton}>
-                        <Text style={styles.addButtonText}>Editar</Text>
-                    </TouchableOpacity>
-                ) : (
-                    <TouchableOpacity onPress={addTask} style={styles.addButton}>
-                        <Text style={styles.addButtonText}>Adicionar</Text>
-                    </TouchableOpacity>
-                )}
-            </View>
-      );
-      
+            ) : (
+                <TouchableOpacity onPress={addTask} style={styles.addButton}>
+                    <Text style={styles.addButtonText}>Adicionar</Text>
+                </TouchableOpacity>
+            )}
+        </View>
+    );
 };
 
 export default Addtarefa;

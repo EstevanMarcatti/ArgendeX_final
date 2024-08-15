@@ -1,59 +1,51 @@
-
 import './login.css'
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 function LoginForm() {
     const navigate = useNavigate();
-    const [Email, setEmail] = useState('')
-    const [Senha, setSenha] = useState('')
-    const [error, setError] = useState('')
+    const [Email, setEmail] = useState('');
+    const [Senha, setSenha] = useState('');
+    const [error, setError] = useState('');
 
     const handleSubmit = async (e) => {
-        e.preventDefault()
+        e.preventDefault();
         try {
-            const response = await fetch('http://localhost:5000/login', {
+            const response = await fetch('http://10.135.60.8:8085/login', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({ Email, Senha }),
-            })
-            const data = await response.json()
+            });
+            const data = await response.json();
             if (data.erro) {
-
                 console.log('Erro!', data);
-                setError(data.error)
-
-
+                setError(data.erro);
             } else {
                 console.log('Dados processados com sucesso!', data);
                 // Salvar informações no localStorage
-                localStorage.setItem('Email', data.mensagem.Email)
-                localStorage.setItem('ID', data.mensagem.ID)
-                // Chamar a função onLogin com o nome de usuário retornado
-
-                navigate('/Appsite')
+                localStorage.setItem('Email', data.Email);
+                localStorage.setItem('ID', data.ID);
+                // Navegar para a página desejada
+                navigate('/Appsite');
             }
         } catch (error) {
-            setError('Erro ao realizar login')
-
+            setError('Erro ao realizar login');
         }
-    }
+    };
 
     return (
         <div id='back-login'>
             <div id='container-login'>
-                <div class="login-box">
-
+                <div className='login-box'>
                     <div className='inicio-login'>
-
                         <h2 id='inicial-login'>ArgendeX</h2>
                     </div>
                     <h1>Conecte-se e organize sua agenda.</h1>
                     <form onSubmit={handleSubmit}>
                         {error && <p>{error}</p>}
-                        <div class="user-box">
+                        <div className='user-box'>
                             <input
                                 type='text'
                                 value={Email}
@@ -61,12 +53,10 @@ function LoginForm() {
                                 name='email'
                                 id='email-login'
                                 placeholder='Digite seu e-mail'
-                                data-min-length='8'
-                                data-email-validate
                             />
                             <label htmlFor='email'>Email</label>
                         </div>
-                        <div class="user-box">
+                        <div className='user-box'>
                             <input
                                 type='password'
                                 value={Senha}
@@ -74,19 +64,15 @@ function LoginForm() {
                                 name='password'
                                 id='password-login'
                                 placeholder='Digite sua senha'
-                                data-password-validate
-                                data-required
                             />
-                            <label htmlFor='lastname'>Senha</label>
-                        </div><center>
-
-                            <a href="#">
-                                <button type="submit" class="btn" id='button-login'>
-                                    Entrar
-                                    <span></span>
-                                </button>
-
-                            </a></center>
+                            <label htmlFor='password'>Senha</label>
+                        </div>
+                        <center>
+                            <button type="submit" className='btn' id='button-login'>
+                                Entrar
+                                <span></span>
+                            </button>
+                        </center>
                         <div className='volta-login'>
                             <p id='volta1-login'>
                                 Esqueceu sua senha?
@@ -107,7 +93,7 @@ function LoginForm() {
                 </div>
             </div>
         </div>
-    )
+    );
 }
 
-export default LoginForm
+export default LoginForm;
