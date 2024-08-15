@@ -89,5 +89,70 @@ def atualizar_dados_usuario(ID):
 
     return jsonify({'mensagem': 'Dados atualizados com sucesso!'})
 
+
+
+
+
+
+@app.route('/api/tarefa', methods=['GET'])
+def get_tarefas():
+    conn = conexao.conectar()
+    cursor = conn.cursor()
+    cursor.execute("SELECT * FROM tarefa")
+    tarefas = cursor.fetchall()
+    conn.close()
+    
+    tarefas_list = [{'id': t[0], 'date': t[1], 'title': t[2], 'description': t[3], 'user_id': t[4]} for t in tarefas]
+    return jsonify(tarefas_list)
+
+@app.route('/api/tarefa', methods=['POST'])
+def create_tarefa():
+    dados = request.json
+    date = dados.get('date')
+    title = dados.get('title')
+    description = dados.get('description')
+    user_id = dados.get('user_id')
+
+    conn = conexao.conectar()
+    cursor = conn.cursor()
+    cursor.execute(
+        "INSERT INTO tarefa (date, title, description, user_id) VALUES (%s, %s, %s, %s)",
+        (date, title, description, user_id)
+    )
+    conn.commit()
+    new_id = cursor.lastrowid
+    conn.close()
+
+    return jsonify({'id': new_id, 'date': date, 'title': title, 'description': description, 'user_id': user_id})
+
+@app.route('/api/tarefa/<int:tarefa_id>', methods=['PUT'])
+def update_tarefa(tarefa_id):
+    dados = request.json
+    title = dados.get('title')
+    description = dados.get('description')
+
+    conn = conexao.conectar()
+    cursor = conn.cursor()
+    cursor.execute(
+        "UPDATE tarefa SET title = %s, description = %s WHERE id = %s",
+        (title, description, tarefa_id)
+    )
+    conn.commit()
+    conn.close()
+
+    return jsonify({'id': tarefa_id, 'title': title, 'description': description})
+
+@app.route('/api/tarefa/<int:tarefa_id>', methods=['DELETE'])
+def delete_tarefa(tarefa_id):
+    conn = conexao.conectar()
+    cursor = conn.cursor()
+    cursor.execute("DELETE FROM tarefa WHERE id = %s", (tarefa_id,))
+    conn.commit()
+    conn.close()
+
+    return jsonify({'message': 'Tarefa excluída com sucesso'})
+# Mantenha o restante do seu código original
+
+
 if __name__ == '__main__':
     app.run(port=8085, host='10.135.60.8', debug=True, threaded=True)

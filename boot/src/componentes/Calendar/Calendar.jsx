@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import Event from './Event';
-import './Calendar.css';
+import './Calendar.css'; // Assegure-se de que o CSS fornecido esteja incluído
 
 const months = [
   'Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho',
@@ -9,64 +8,74 @@ const months = [
 
 const daysOfWeek = ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sab'];
 
-const getEasterDate = (year) => {
-  // Algoritmo para calcular a data da Páscoa (Método de Computus)
-  const a = year % 19;
-  const b = Math.floor(year / 100);
-  const c = year % 100;
-  const d = Math.floor(b / 4);
-  const e = b % 4;
-  const f = Math.floor((b + 8) / 25);
-  const g = Math.floor((b - f + 1) / 3);
-  const h = (19 * a + b - d - g + 15) % 30;
-  const i = Math.floor(c / 4);
-  const k = c % 4;
-  const l = (32 + 2 * e + 2 * i - h - k) % 7;
-  const m = Math.floor((a + 11 * h + 22 * l) / 451);
-  const month = Math.floor((h + l - 7 * m + 114) / 31);
-  const day = ((h + l - 7 * m + 114) % 31) + 1;
-
-  return new Date(year, month - 1, day);
-};
-
-const isCarnaval = (year, month, day) => {
-  const easterDate = getEasterDate(year);
-  const carnavalDate = new Date(easterDate);
-  carnavalDate.setDate(easterDate.getDate() - 46);
-
-  return (
-    month === carnavalDate.getMonth() &&
-    day === carnavalDate.getDate()
-  );
-};
-
-const isBrazilianHoliday = (year, month, day) => {
-  const holidays = {
-    1: [1], // Ano Novo
-    3: [29], // Sexta-Feira Santa
-    4: [21], // Tiradentes
-    5: [1, 30], // Dia do Trabalhador / Corpos Christi
-    9: [7], // Independência do Brasil
-    10: [12], // Nossa Senhora Aparecida / Dia das Crianças
-    11: [2, 15, 20], // Finados / Proclamação da República / Consciência Negra
-    12: [24, 25, 31], // Véspera de Natal / Natal / Último dia do Ano
-  };
-
-  return holidays[month + 1] && (holidays[month + 1].includes(day) || isCarnaval(year, month, day));
-};
-
 const Calendar = () => {
   const [currentMonth, setCurrentMonth] = useState(new Date().getMonth());
   const [currentYear, setCurrentYear] = useState(new Date().getFullYear());
   const [events, setEvents] = useState([]);
+  const [selectedDate, setSelectedDate] = useState(null);
+  const [modalVisible, setModalVisible] = useState(false);
+  const [eventModalVisible, setEventModalVisible] = useState(false);
+  const [currentEvent, setCurrentEvent] = useState(null);
+  const [eventTitle, setEventTitle] = useState('');
+  const [eventTime, setEventTime] = useState('');
+  const [eventDescription, setEventDescription] = useState('');
+  const [eventCategory, setEventCategory] = useState('');
+
   const firstDayOfMonth = new Date(currentYear, currentMonth, 1).getDay();
   const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
 
   const handleAddEvent = (day) => {
-    const title = prompt('Digite evento:');
-    if (title) {
-      setEvents([...events, { date: day + 1, title }]);
+    setSelectedDate(day + 1);
+    setCurrentEvent(null); // Reset current event
+    setEventTitle('');
+    setEventTime('');
+    setEventDescription('');
+    setEventCategory('');
+    setEventModalVisible(true);
+  };
+
+  const handleSaveEvent = () => {
+    if (eventTitle && eventTime && eventDescription && eventCategory) {
+      const newEvent = {
+        id: Date.now(), // Unique ID for new tasks
+        date: selectedDate,
+        title: eventTitle,
+        time: eventTime,
+        description: eventDescription,
+        category: eventCategory
+      };
+
+      if (currentEvent) {
+        // Edit event
+        setEvents(events.map(event =>
+          event.id === currentEvent.id ? newEvent : event
+        ));
+      } else {
+        // Add new event
+        setEvents([...events, newEvent]);
+      }
+
+      // Reset form and close modals
+      setEventTitle('');
+      setEventTime('');
+      setEventDescription('');
+      setEventCategory('');
+      setCurrentEvent(null);
+      setEventModalVisible(false);
+      setModalVisible(false);
     }
+  };
+
+  const handleDeleteEvent = (id) => {
+    setEvents(events.filter(event => event.id !== id));
+    setCurrentEvent(null);
+    setEventModalVisible(false);
+  };
+
+  const handleShowTasks = (day) => {
+    setSelectedDate(day + 1);
+    setCurrentEvent(null);
+    setModalVisible(true);
   };
 
   const handlePrevMonth = () => {
@@ -87,11 +96,13 @@ const Calendar = () => {
     }
   };
 
+  const tasksForSelectedDate = events.filter(event => event.date === selectedDate);
+
   return (
     <div className="calendar">
       <div className="calendar-header">
         <button onClick={handlePrevMonth}>&lt;</button>
-        <h2 id='meses'>{months[currentMonth]} {currentYear}</h2>
+        <h1 id="meses">{months[currentMonth]} {currentYear}</h1>
         <button onClick={handleNextMonth}>&gt;</button>
       </div>
       <div className="calendar-grid">
@@ -105,21 +116,111 @@ const Calendar = () => {
         ))}
         {[...Array(daysInMonth).keys()].map((day) => {
           const isWeekend = [0, 6].includes(new Date(currentYear, currentMonth, day + 1).getDay());
-          const isHolidayDay = isBrazilianHoliday(currentYear, currentMonth, day + 1) || isCarnaval(currentYear, currentMonth, day + 1);
+          const hasEvents = events.some(event => event.date === day + 1);
 
           return (
-            <div key={day} className={`day ${isWeekend ? 'weekend' : ''} ${isHolidayDay ? 'holiday' : ''}`} onClick={() => handleAddEvent(day)}>
-              <span className={`day-number ${isCarnaval(currentYear, currentMonth, day + 1) ? 'carnaval' : ''}`}>{day + 1}</span>
-              {events.map((event, index) => {
-                if (event.date === day + 1) {
-                  return <Event key={index} title={event.title} />;
-                }
-                return null;
-              })}
+            <div
+              key={day}
+              className={`day ${isWeekend ? 'weekend' : ''}`}
+              onClick={() => handleShowTasks(day)}
+            >
+              <span className="day-number">
+                {day + 1}
+              </span>
+              {hasEvents && <div className="event-dot"></div>}
             </div>
           );
         })}
       </div>
+
+      {modalVisible && (
+        <div className="modal-calendar">
+          <div className="modal-calendar-content">
+            {tasksForSelectedDate.length > 0 ? (
+              <div>
+                <h2>Tarefas do Dia {selectedDate}</h2>
+                <div className="task-list">
+                  {tasksForSelectedDate.map(task => (
+                    <div key={task.id} className="task-list-item">
+                      <div><strong>{task.title}</strong></div>
+                      <div>{task.time}</div>
+                      <div>{task.description}</div>
+                      <div>Categoria: {task.category}</div>
+                      <div className="modal-calendar-buttons">
+                        <button onClick={() => {
+                          setCurrentEvent(task);
+                          setEventTitle(task.title);
+                          setEventTime(task.time);
+                          setEventDescription(task.description);
+                          setEventCategory(task.category);
+                          setEventModalVisible(true);
+                        }}>Editar</button>
+                        <button onClick={() => handleDeleteEvent(task.id)}>Excluir</button>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+                <button className="add-task-button" onClick={() => handleAddEvent(selectedDate - 1)}>Adicionar Tarefa</button>
+              </div>
+            ) : (
+              <div className="no-tasks-message">
+                Não há tarefas para este dia.
+                <button className="add-task-button" onClick={() => handleAddEvent(selectedDate - 1)}>Adicionar Tarefa</button>
+              </div>
+            )}
+            <button className="cancel" onClick={() => setModalVisible(false)}>Fechar</button>
+          </div>
+        </div>
+      )}
+
+      {eventModalVisible && (
+        <div className="modal-calendar">
+          <div className="modal-calendar-content">
+            <h2>{currentEvent ? 'Editar Tarefa' : 'Adicionar Tarefa'}</h2>
+            <input
+              type="text"
+              value={eventTitle}
+              onChange={(e) => setEventTitle(e.target.value)}
+              placeholder="Título"
+            />
+            <input
+              type="time"
+              value={eventTime}
+              onChange={(e) => setEventTime(e.target.value)}
+            />
+            <textarea
+              value={eventDescription}
+              onChange={(e) => setEventDescription(e.target.value)}
+              placeholder="Descrição"
+            />
+            <input
+              type="text"
+              value={eventCategory}
+              onChange={(e) => setEventCategory(e.target.value)}
+              placeholder="Categoria"
+            />
+            <div className="modal-calendar-buttons">
+              <button onClick={handleSaveEvent}>
+                {currentEvent ? 'Salvar' : 'Adicionar'}
+              </button>
+              {currentEvent && (
+                <button
+                  className="cancel"
+                  onClick={() => handleDeleteEvent(currentEvent.id)}
+                >
+                  Excluir
+                </button>
+              )}
+              <button
+                className="cancel"
+                onClick={() => setEventModalVisible(false)}
+              >
+                Fechar
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

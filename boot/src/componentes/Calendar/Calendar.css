@@ -1,3 +1,4 @@
+/* Calendar.css */
 .calendar {
   text-align: center;
   border: 3px solid green;
@@ -11,9 +12,9 @@
   width: 1500px;
   margin-left: 50px;
 }
-#meses{
-  font-size: 50px;
 
+#meses {
+  font-size: 50px;
 }
 
 .calendar-header {
@@ -22,7 +23,8 @@
   align-items: center;
   margin-bottom: 16px;
 }
-span.day-number{
+
+span.day-number {
   color: white;
 }
 
@@ -32,7 +34,6 @@ span.day-number{
   cursor: pointer;
   font-size: 30px;
   color: white;
-
 }
 
 .calendar-grid {
@@ -42,7 +43,7 @@ span.day-number{
 }
 
 .day-of-week {
-  background-color:black;
+  background-color: black;
   padding: 8px;
   font-size: 30px;
 }
@@ -65,34 +66,106 @@ span.day-number{
   font-size: 140%;
 }
 
-.event {
-  background-color: green;
+.event-dot {
+  position: absolute;
+  bottom: 10%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background-color: green; /* Default color for events */
+}
+
+.weekend .event-dot {
+  background-color: red;
+}
+
+/* Calendar.css */
+.modal-calendar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7); /* Fundo preto com transparência */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-calendar-content {
+  background-color: black; /* Fundo do modal preto */
+  color: white; /* Texto branco */
+  padding: 20px;
+  border-radius: 10px;
+  width: 400px; /* Tamanho do modal ajustado */
+  max-height: 80vh;
+  overflow-y: auto;
+}
+
+.modal-calendar-content input, 
+.modal-calendar-content textarea {
+  width: 100%;
+  margin-bottom: 10px;
+  padding: 8px;
+  border: 1px solid #444;
   border-radius: 5px;
-  color: rgb(0, 0, 0);
-  padding: 4px;
-  margin: 2px;
-}
-h1{
-  margin: 0;
-  
+  background-color: #222;
+  color: white;
 }
 
-/* Adicione estas regras ao seu arquivo de estilo CSS */
-
-.weekend .day-number {
-  color: #cb0000; /* Cor de fundo */
-}
-.holiday .day-number{
-  color: #cb0000; /* Cor de fundo */
-}
-.day-number.carnaval {
-  color: red;
-}
-.carnaval{
-  color: #cb0000;
+.modal-calendar-buttons button {
+  margin-right: 10px;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  color: white;
+  background-color: green; /* Cor do botão */
+  font-size: 16px;
 }
 
-  
+.modal-calendar-buttons button:hover {
+  background-color: silver; /* Cor ao passar o mouse */
+}
+
+.modal-calendar-buttons button.cancel {
+  background-color: red; /* Cor do botão cancelar */
+}
+
+.modal-calendar-buttons button.cancel:hover {
+  background-color: silver; /* Cor ao passar o mouse */
+}
 
 
+.task-list {
+  margin: 10px 0;
+}
+
+.task-list-item {
+  margin-bottom: 10px;
+  color: white; /* Texto das tarefas em branco */
+}
+
+.no-tasks-message {
+  text-align: center;
+  margin: 20px 0;
+  color: white; /* Mensagem em branco */
+}
+
+.event-dot {
+  position: absolute;
+  bottom: 5px; /* Alinha a bolinha ao canto inferior */
+  left: 50%;
+  transform: translateX(-50%); /* Centraliza a bolinha */
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: green;
+}
+
+.day.weekend .event-dot {
+  background-color: red; /* Bolinha vermelha para finais de semana */
+}
 
