@@ -15,13 +15,17 @@ const Configconta = () => {
     useEffect(() => {
         const ID = localStorage.getItem('ID');
         if (ID) {
-            fetch(`http://localhost:5000/dados-usuario/${ID}`)
+            fetch(`http://localhost:8085/dados-usuario/${ID}`)
                 .then(response => response.json())
                 .then(data => {
-                    if (data) {
-                        setFormValues(data);
+                    if (data.erro) {
+                        console.error('Erro ao obter dados do usuário:', data.erro);
                     } else {
-                        console.error('Usuário não encontrado.');
+                        setFormValues({
+                            nome: data.nome || '',
+                            email: data.email || '',
+                            senha: data.senha || ''
+                        });
                     }
                 })
                 .catch(error => {
@@ -46,9 +50,10 @@ const Configconta = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        const ID = localStorage.getItem('ID');
 
         try {
-            const response = await fetch(`http://localhost:5000/atualizar-dados/${localStorage.getItem('ID')}`, {
+            const response = await fetch(`http://localhost:8085/atualizar-dados/${ID}`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -57,10 +62,12 @@ const Configconta = () => {
             });
 
             if (response.ok) {
-                console.log('Dados atualizados com sucesso!');
+                const result = await response.json();
+                console.log(result.mensagem);
                 navigate('/Appsite');
             } else {
-                console.error('Erro ao atualizar dados do usuário:', response.statusText);
+                const error = await response.json();
+                console.error('Erro ao atualizar dados do usuário:', error.erro);
             }
         } catch (error) {
             console.error('Erro ao enviar dados:', error);
@@ -80,7 +87,7 @@ const Configconta = () => {
                     </h2>
                     <form onSubmit={handleSubmit} id="register-form-configconta">
                         <div className="form-box spacing-configconta">
-                            <label htmlFor="name">Nome de Usuário</label>
+                            <label htmlFor="nome">Nome de Usuário</label>
                             <input type="text" name="nome" id="name-configconta" placeholder="Digite seu nome de usuário" value={formValues.nome} onChange={handleChange} />
                         </div>
                         <br />
@@ -92,7 +99,7 @@ const Configconta = () => {
                         <div className="form-box spacing">
                             <label htmlFor="senha">Senha</label>
                             <div style={{ position: 'relative' }}>
-                                <input type={showPassword ? 'text' : 'password'} name="senha" id="password-configconta" placeholder="Digite sua senha"  value={formValues.senha} onChange={handleChange} />
+                                <input type={showPassword ? 'text' : 'password'} name="senha" id="password-configconta" placeholder="Digite sua senha" value={formValues.senha} onChange={handleChange} />
                                 <span onClick={togglePasswordVisibility} style={{ position: 'absolute', right: '10px', top: '50%', transform: 'translateY(-50%)', cursor: 'pointer' }}>
                                     {showPassword ? <FaEyeSlash /> : <FaEye />}
                                 </span>
@@ -101,7 +108,7 @@ const Configconta = () => {
                         <br />
                         <div className="button-form" id="box-button-configconta">
                             <input id="btn-submit-configconta" type="submit" value="Atualizar" />
-                            <input id="button-configconta" type="button" value="Cancelar" onClick={() => {}} />
+                            <input id="button-configconta" type="button" value="Cancelar" onClick={() => navigate('/Appsite')} />
                         </div>
                     </form>
                 </div>

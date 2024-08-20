@@ -1,4 +1,4 @@
-import './login.css'
+import './login.css';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
@@ -10,8 +10,15 @@ function LoginForm() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+
+        // Verificar se os campos estão preenchidos
+        if (!Email || !Senha) {
+            setError('Por favor, preencha todos os campos.');
+            return;
+        }
+
         try {
-            const response = await fetch('http://10.135.60.8:8085/login', {
+            const response = await fetch('http://10.135.60.12:8085/login', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -19,16 +26,20 @@ function LoginForm() {
                 body: JSON.stringify({ Email, Senha }),
             });
             const data = await response.json();
+
+            console.log('Resposta do servidor:', data); // Verificar o que está sendo retornado
+
             if (data.erro) {
-                console.log('Erro!', data);
-                setError(data.erro);
+                setError(data.mensagem.error); // Atualizar a mensagem de erro
             } else {
-                console.log('Dados processados com sucesso!', data);
-                // Salvar informações no localStorage
-                localStorage.setItem('Email', data.Email);
-                localStorage.setItem('ID', data.ID);
-                // Navegar para a página desejada
-                navigate('/Appsite');
+                // Verificar se os dados retornados estão definidos
+                if (data.mensagem.Email && data.mensagem.ID) {
+                    localStorage.setItem('Email', data.mensagem.Email);
+                    localStorage.setItem('ID', data.mensagem.ID);
+                    navigate('/Appsite');
+                } else {
+                    setError('Dados de login inválidos.');
+                }
             }
         } catch (error) {
             setError('Erro ao realizar login');
