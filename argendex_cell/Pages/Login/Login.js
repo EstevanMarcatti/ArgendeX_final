@@ -1,13 +1,15 @@
 import React, { useState } from "react";
-import { TextInput, KeyboardAvoidingView, TouchableOpacity, Text, ScrollView, Image, View, Alert } from "react-native";
+import { TextInput, KeyboardAvoidingView, TouchableOpacity, Text, ScrollView, Image, View, Alert, ActivityIndicator } from "react-native";
 import styles from "./Styles_Login.js";
 import useHeaderOptions from '../../components/Header.js'; // Importando o hook do header
 
 const LoginForm = ({ navigation }) => {
   const [email, setEmail] = useState('');
   const [senha, setSenha] = useState('');
+  const [loading, setLoading] = useState(false); // Adicionando estado de carregamento
 
   const handleLogin = async () => {
+    setLoading(true); // Inicia o carregamento
     try {
       const response = await fetch('http://10.135.60.26:8085/login', {
         method: 'POST',
@@ -20,14 +22,16 @@ const LoginForm = ({ navigation }) => {
       const data = await response.json();
 
       if (data.erro) {
-        Alert.alert('Erro', data.mensagem.error);
+        Alert.alert('Erro', data.mensagem.error || 'Erro desconhecido'); // Melhoria na mensagem de erro
       } else {
         // Sucesso no login, pode navegar para a próxima tela
-        navigation.navigate('Calendario');
+        navigation.navigate('Calendario', { userId: data.mensagem.ID }); // Passando ID do usuário se necessário
       }
     } catch (error) {
       console.error('Erro ao realizar login:', error);
       Alert.alert('Erro', 'Erro ao realizar login. Tente novamente.');
+    } finally {
+      setLoading(false); // Finaliza o carregamento
     }
   };
 
@@ -54,12 +58,12 @@ const LoginForm = ({ navigation }) => {
           placeholder="Senha"
           value={senha}
           secureTextEntry
-          placeholderTextColor={'#b8b8b8'}
+          placeholderTextColor='#b8b8b8'
           onChangeText={setSenha}
         />
 
-        <TouchableOpacity style={styles.btnCriar} onPress={() => navigation.navigate('Calendario')}>
-          <Text style={styles.Txtbtn}>Logar</Text>
+        <TouchableOpacity style={styles.btnCriar} onPress={handleLogin} disabled={loading}>
+          <Text style={styles.Txtbtn}>{loading ? <ActivityIndicator color="#fff" /> : 'Logar'}</Text>
         </TouchableOpacity>
 
         <TouchableOpacity style={styles.btnvl} onPress={() => navigation.navigate('Cadastro')}>
