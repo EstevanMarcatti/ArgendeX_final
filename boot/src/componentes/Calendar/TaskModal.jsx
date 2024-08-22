@@ -1,4 +1,3 @@
-// Calendar.jsx
 import React, { useState, useEffect } from 'react';
 import './Calendar.css'; // Certifique-se de que o CSS está correto
 
@@ -21,7 +20,8 @@ const Calendar = () => {
   const [eventTime, setEventTime] = useState('');
   const [eventDescription, setEventDescription] = useState('');
   const [eventCategory, setEventCategory] = useState('');
-  const userId = 1; // Substitua pelo ID do usuário real
+
+  const userId = localStorage.getItem('ID'); // Obtenha o ID do usuário do localStorage
 
   const firstDayOfMonth = new Date(currentYear, currentMonth, 1).getDay();
   const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
@@ -38,17 +38,18 @@ const Calendar = () => {
 
   const handleSaveEvent = async () => {
     if (eventTitle && eventTime && eventDescription && eventCategory && userId) {
+      // Criar um objeto Date com o dia selecionado, mês e ano
       const eventDate = new Date(currentYear, currentMonth, selectedDate);
       const formattedDate = `${eventDate.getFullYear()}-${String(eventDate.getMonth() + 1).padStart(2, '0')}-${String(eventDate.getDate()).padStart(2, '0')}`;
 
       const newEvent = {
         id: currentEvent ? currentEvent.id : null,
-        date: formattedDate,
+        date: formattedDate, // Enviar a data formatada para o backend
         title: eventTitle,
         time: eventTime,
         description: eventDescription,
         category: eventCategory,
-        user_id: userId
+        user_id: userId // Use o ID do usuário
       };
 
       try {
@@ -81,7 +82,7 @@ const Calendar = () => {
           }
 
           // Atualizar a lista de eventos local
-          setEvents(prevEvents => [...prevEvents, newEvent]);
+          setEvents([...events, newEvent]);
         }
 
         // Resetar formulário e fechar modais
@@ -92,9 +93,6 @@ const Calendar = () => {
         setCurrentEvent(null);
         setEventModalVisible(false);
         setModalVisible(false);
-
-        // Atualizar o modal do dia selecionado
-        setModalVisible(true);
       } catch (error) {
         console.error('Erro ao salvar evento:', error.message);
       }
@@ -105,16 +103,22 @@ const Calendar = () => {
 
   const handleDeleteEvent = async (id) => {
     try {
-      await fetch(`/api/tarefa/${id}`, {
-        method: 'DELETE'
+      const response = await fetch('http://localhost:8085/tasks', {
+        method: 'DELETE',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ id })
       });
+
+      if (!response.ok) {
+        throw new Error(`Erro ao excluir tarefa: ${response.statusText}`);
+      }
 
       // Atualizar a lista de eventos local
       setEvents(events.filter(event => event.id !== id));
       setCurrentEvent(null);
       setEventModalVisible(false);
     } catch (error) {
-      console.error('Erro ao excluir tarefa:', error);
+      console.error('Erro ao excluir tarefa:', error.message);
     }
   };
 
@@ -142,24 +146,34 @@ const Calendar = () => {
     }
   };
 
-  const tasksForSelectedDate = events.filter(event => event.date === `${currentYear}-${String(currentMonth + 1).padStart(2, '0')}-${String(selectedDate).padStart(2, '0')}`);
+  const tasksForSelectedDate = events.filter(event => {
+    const eventDate = new Date(event.date);
+    const selectedDateObj = new Date(currentYear, currentMonth, selectedDate);
+    return eventDate.toDateString() === selectedDateObj.toDateString();
+  });
 
   useEffect(() => {
     const fetchEvents = async () => {
       try {
-        const response = await fetch('/api/tarefa');
+        const response = await fetch('http://localhost:8085/tasks');
+        
+        // Verifica o status da resposta
         if (!response.ok) {
-          throw new Error('Erro na resposta da API');
+          const errorText = await response.text();
+          console.error('Erro na resposta da API:', errorText);
+          throw new Error(`Erro na resposta da API: ${response.statusText}`);
         }
+
+        // Tenta converter a resposta para JSON
         const data = await response.json();
-        setEvents(data);
+        setEvents(data.filter(event => event.user_id === userId));
       } catch (error) {
-        console.error('Erro ao carregar tarefas:', error);
+        console.error('Erro ao carregar tarefas:', error.message);
       }
     };
 
     fetchEvents();
-  }, [currentMonth, currentYear]);
+  }, [userId]);
 
   return (
     <div className="calendar">
@@ -179,7 +193,10 @@ const Calendar = () => {
         ))}
         {[...Array(daysInMonth).keys()].map((day) => {
           const isWeekend = [0, 6].includes(new Date(currentYear, currentMonth, day + 1).getDay());
-          const hasEvents = events.some(event => event.date === `${currentYear}-${String(currentMonth + 1).padStart(2, '0')}-${String(day + 1).padStart(2, '0')}`);
+          const hasEvents = events.some(event => {
+            const eventDate = new Date(event.date);
+            return eventDate.getDate() === day + 1 && eventDate.getMonth() === currentMonth && eventDate.getFullYear() === currentYear;
+          });
 
           return (
             <div
@@ -263,23 +280,8 @@ const Calendar = () => {
               placeholder="Categoria"
             />
             <div className="modal-calendar-buttons">
-              <button onClick={handleSaveEvent}>
-                {currentEvent ? 'Salvar' : 'Adicionar'}
-              </button>
-              {currentEvent && (
-                <button
-                  className="cancel"
-                  onClick={() => handleDeleteEvent(currentEvent.id)}
-                >
-                  Excluir
-                </button>
-              )}
-              <button
-                className="cancel"
-                onClick={() => setEventModalVisible(false)}
-              >
-                Fechar
-              </button>
+              <button onClick={handleSaveEvent}>Salvar</button>
+              <button onClick={() => setEventModalVisible(false)}>Cancelar</button>
             </div>
           </div>
         </div>
