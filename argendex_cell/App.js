@@ -8,7 +8,7 @@ import Home from './Pages/Home/Home';
 import Login from './Pages/Login/Login';
 import Cadastro from './Pages/Cadastro/Cadastro';
 import TodoListScreen from './Pages/Calendar/TodoListScreen';
-import Planos from './Pages/plano/Plano';
+import Planos from './Pages/plano/plano';
 import Suporte from './Pages/Suporte/Suporte';
 
 const Drawer = createDrawerNavigator();
