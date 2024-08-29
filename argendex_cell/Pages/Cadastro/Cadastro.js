@@ -5,29 +5,44 @@ import useHeaderOptions from '../../components/Header.js';
 import styles from "./Styles_cadastro";
 
 const CadastroForm = ({ navigation }) => {
-    const [nome, setNome] = useState('');
-    const [email, setEmail] = useState('');
-    const [senha, setSenha] = useState('');
-    const [cidade, setCidade] = useState('');
-    const [dataNascimento, setDataNascimento] = useState(null);
-    const [showDatePicker, setShowDatePicker] = useState(false);
+    const [formValues, setFormValues] = useState({
+        nome: '',
+        email: '',
+        cidade: '',
+        dataNascimento: '',
+        senha: '',
+    });
+
     const [mensagensErro, setMensagensErro] = useState([]);
-    const [loading, setLoading] = useState(false); // Estado para mostrar carregamento
-    const [showPassword, setShowPassword] = useState(false); // Controla a visibilidade da senha
+    const [loading, setLoading] = useState(false);
+    const [showPassword, setShowPassword] = useState(false);
+    const [showDatePicker, setShowDatePicker] = useState(false);
+
+    const handleChange = (name, value) => {
+        setFormValues((prevValues) => ({
+            ...prevValues,
+            [name]: value,
+        }));
+    };
+
+    const handleDateConfirm = (date) => {
+        setShowDatePicker(false);
+        handleChange('dataNascimento', date.toISOString().split('T')[0]);
+    };
 
     const validarDados = () => {
         const erros = [];
-        if (!nome || !email || !senha || !cidade || !dataNascimento) {
+        if (!formValues.nome || !formValues.email || !formValues.senha || !formValues.cidade || !formValues.dataNascimento) {
             erros.push('Todos os campos são obrigatórios.');
         }
-        if (!/\S+@\S+\.\S+/.test(email)) {
+        if (!/\S+@\S+\.\S+/.test(formValues.email)) {
             erros.push('E-mail inválido.');
         }
-        if (senha.length < 6) {
+        if (formValues.senha.length < 6) {
             erros.push('A senha deve ter pelo menos 6 caracteres.');
         }
         return erros;
-    }
+    };
 
     const handledCadastro = async () => {
         const errosValidacao = validarDados();
@@ -36,53 +51,49 @@ const CadastroForm = ({ navigation }) => {
             return;
         }
 
-        setLoading(true); // Inicia o carregamento
-
-        const dados = { 
-            nome, 
-            email, 
-            senha, 
-            cidade, 
-            dataNascimento: dataNascimento ? dataNascimento.toISOString().split('T')[0] : '' 
-        };
+        setLoading(true);
 
         try {
-            const resposta = await fetch('http://10.135.60.8:8085/receber-dados', {
+            const resposta = await fetch('http://10.135.60.36:8085/receber-dados', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify(dados),
+                body: JSON.stringify(formValues),
             });
 
             if (!resposta.ok) {
-                const errorData = await resposta.json();
-                throw new Error(errorData.mensagem.error || 'Erro desconhecido');
+                // Se a resposta não for um JSON, tenta ler como texto
+                const errorText = await resposta.text();
+                try {
+                    const errorData = JSON.parse(errorText);
+                    throw new Error(errorData.erro || 'Erro desconhecido');
+                } catch (e) {
+                    throw new Error('Resposta do servidor não é JSON válido');
+                }
             }
 
             const resultado = await resposta.json();
 
             if (resultado.erro) {
-                setMensagensErro([resultado.mensagem.error || 'Erro desconhecido']);
+                console.error('Erro no servidor:', resultado.erro);
+                setMensagensErro([resultado.erro]);
             } else {
+                console.log('Dados processados com sucesso!', resultado);
                 Alert.alert('Sucesso', 'Cadastro realizado com sucesso!', [
                     { 
                         text: 'OK', 
-                        onPress: () => navigation.navigate('Calendario') // Navegar para a página do calendário
+                        onPress: () => navigation.navigate('Calendario') 
                     }
                 ]);
             }
         } catch (error) {
             console.error('Erro ao enviar dados:', error);
             Alert.alert('Erro', error.message || 'Erro desconhecido');
+            setMensagensErro([error.message || 'Erro desconhecido']);
         } finally {
-            setLoading(false); // Finaliza o carregamento
+            setLoading(false);
         }
-    }
-
-    const handleDateConfirm = (date) => {
-        setShowDatePicker(false);
-        setDataNascimento(date);
     };
 
     useHeaderOptions();
@@ -98,22 +109,22 @@ const CadastroForm = ({ navigation }) => {
                     style={styles.inputs}
                     placeholder="Nome Completo"
                     placeholderTextColor='#b8b8b8'
-                    value={nome}
-                    onChangeText={setNome}
+                    value={formValues.nome}
+                    onChangeText={(value) => handleChange('nome', value)}
                 />
                 <TextInput
                     style={styles.inputs}
                     placeholder="E-mail"
                     placeholderTextColor='#b8b8b8'
-                    value={email}
-                    onChangeText={setEmail}
+                    value={formValues.email}
+                    onChangeText={(value) => handleChange('email', value)}
                 />
                 <TextInput
                     style={styles.inputs}
                     placeholder="Senha"
                     placeholderTextColor='#b8b8b8'
-                    value={senha}
-                    onChangeText={setSenha}
+                    value={formValues.senha}
+                    onChangeText={(value) => handleChange('senha', value)}
                     secureTextEntry={!showPassword}
                 />
                 <TouchableOpacity onPress={() => setShowPassword(!showPassword)}>
@@ -123,8 +134,8 @@ const CadastroForm = ({ navigation }) => {
                     style={styles.inputs}
                     placeholder="Cidade"
                     placeholderTextColor='#b8b8b8'
-                    value={cidade}
-                    onChangeText={setCidade}
+                    value={formValues.cidade}
+                    onChangeText={(value) => handleChange('cidade', value)}
                 />
 
                 <TouchableOpacity onPress={() => setShowDatePicker(true)}>
@@ -133,7 +144,7 @@ const CadastroForm = ({ navigation }) => {
                         placeholder="Selecione a data de nascimento"
                         placeholderTextColor='#b8b8b8'
                         editable={false}
-                        value={dataNascimento ? dataNascimento.toLocaleDateString() : ''}
+                        value={formValues.dataNascimento}
                     />
                 </TouchableOpacity>
 

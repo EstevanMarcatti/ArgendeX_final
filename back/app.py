@@ -24,9 +24,13 @@ def login():
 
 @app.route('/receber-dados', methods=['POST'])
 def receber_dados():
-    dados = request.json
-    ret = processar_dados(dados)
-    return jsonify(ret)
+    try:
+        dados = request.json
+        ret = processar_dados(dados)
+        return jsonify(ret)
+    except Exception as e:
+        return jsonify({'erro': 'Erro interno do servidor', 'mensagem': str(e)}), 500
+
 
 @app.route('/redefinir_dados', methods=['POST'])
 def redefinir_dados():
