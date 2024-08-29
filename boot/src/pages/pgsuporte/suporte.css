@@ -1,5 +1,5 @@
-/* Geral */
-#back-suporte {
+/* geral */
+#back-cadastro {
     background-image: url(./amanhecer.jpeg);
     padding: 759px;
     padding-bottom: 140px;
@@ -7,37 +7,27 @@
     color: #ffffff;
 }
 
-.inicio-suporte {
+.inicio-cadastro {
     color: green;
     font-size: 60px;
     text-align: center;
 }
 
-#inicial-suporte {
+#inicial-cadastro {
     color: green;
     font-size: 50px;
 }
 
-#text-suporte {
+#text {
+    margin-top: 10px;
+    margin-bottom: 10px;
     text-align: center;
-    margin-bottom: 25px;
-    font-size: 18px;
 }
 
-#text1-suporte {
-    color: #4c4949;
-}
-
-input,
-label,
-textarea {
+input, label, textarea {
     display: block;
     outline: none;
     width: 100%;
-}
-
-input,
-textarea {
     color: #000000;
 }
 
@@ -45,34 +35,37 @@ a {
     color: green;
 }
 
-/* Formulário */
-#container-Suporte {
+.cadastro-box {
+    position: absolute;
+    top: 60%;
+    left: 50%;
     width: 400px;
-    margin: 0 auto;
-    background: rgba(24, 20, 20, 0.987);
-    border-radius: 10px;
     padding: 40px;
-    box-shadow: 0 15px 25px rgba(0, 0, 0, 0.6);
+    transform: translate(-50%, -50%);
+    background: rgba(24, 20, 20, 0.987);
+    box-sizing: border-box;
+    box-shadow: 0 15px 25px rgba(0, 0, 0, .6);
+    border-radius: 10px;
 }
 
-.user-box {
+.cadastro-box .user-box {
     position: relative;
-    margin-bottom: 30px;
 }
 
-.user-box input,
-.user-box textarea {
+.cadastro-box .user-box input,
+.cadastro-box .user-box textarea {
     width: 100%;
     padding: 10px 0;
     font-size: 16px;
     color: #fff;
+    margin-bottom: 30px;
     border: none;
     border-bottom: 1px solid #fff;
+    outline: none;
     background: transparent;
-    box-sizing: border-box;
 }
 
-.user-box label {
+.cadastro-box .user-box label {
     position: absolute;
     top: 0;
     left: 0;
@@ -80,127 +73,88 @@ a {
     font-size: 16px;
     color: #fff;
     pointer-events: none;
-    transition: 0.5s;
+    transition: .5s;
 }
 
-.user-box input:focus ~ label,
-.user-box input:valid ~ label,
-.user-box textarea:focus ~ label,
-.user-box textarea:valid ~ label {
+.cadastro-box .user-box input:focus ~ label,
+.cadastro-box .user-box input:valid ~ label,
+.cadastro-box .user-box textarea:focus ~ label,
+.cadastro-box .user-box textarea:valid ~ label {
     top: -20px;
     left: 0;
     color: #bdb8b8;
     font-size: 12px;
 }
 
-textarea {
-    resize: vertical;
-    min-height: 100px;
-    padding-top: 20px; /* Espaço para o label */
+/* Atualização para diminuir o tamanho do campo de texto "Fale conosco" */
+.cadastro-box .user-box textarea {
+    height: 100px; /* Diminui a altura do campo de texto */
+    width: 100%; /* Mantém a largura ocupando 100% do contêiner */
 }
 
-.label-suporte {
-    margin-bottom: 5px;
-    font-size: 16px;
+#button-cadastro {
+    color: white;
+    padding: 10px;
+    padding-right: 25px;
+    padding-left: 25px;
+    font-size: 20px;
 }
 
-.button-form {
-    text-align: center;
-    margin-top: 20px; /* Adiciona um espaço acima dos botões */
+#box-button-cadastro {
+    display: flex;
+    justify-content: center;
 }
 
-/* Botões de Enviar e Limpar */
-.btn,
-#button-suporte {
-    color: white; /* Cor do texto dos botões */
-    padding: 12px 30px; /* Aumentado o padding para um tamanho maior */
-    font-size: 18px; /* Aumentado o tamanho da fonte */
-    border: 2px solid; /* Adiciona uma borda visível */
-    border-radius: 6px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    margin: 0 10px; /* Adiciona espaço entre os botões */
-    background: none; /* Remove a cor de fundo */
-    text-transform: uppercase; /* Torna o texto em maiúsculas */
-}
-
-#btn-submit-suporte {
-    border-color: green; /* Define a cor da borda para verde */
-    font-size: 18px; /* Tamanho da fonte aumentado */
-    padding: 15px 35px; /* Aumentado o padding para um tamanho maior */
-    color: white; /* Cor do texto do botão "Enviar" */
-}
-
-#btn-submit-suporte:hover {
-    background-color: green; /* Cor de fundo verde ao passar o mouse */
-    color: white; /* Cor do texto ao passar o mouse */
-}
-
-#button-suporte {
-    border-color: red; /* Define a cor da borda para vermelho */
-}
-
-#button-suporte:hover {
-    background-color: red; /* Cor de fundo vermelho ao passar o mouse */
-    color: white; /* Cor do texto ao passar o mouse */
-}
-
-.volta-suporte {
+.volta-cadastro {
     text-align: center;
 }
 
-#volta1-suporte,
-#volta2-suporte,
-#volta3-suporte {
+#volta1-cadastro {
+    color: white;
+    font-size: 13px;
+}
+
+#volta2-cadastro {
     color: white;
     font-size: 13px;
     margin-top: 10px;
 }
 
-/* Upload de Arquivo */
-.file-upload {
-    position: relative;
+.file-upload-container {
     display: flex;
-    align-items: center;
-}
-
-.file-upload input[type="file"] {
-    position: absolute;
-    opacity: 0;
-    width: 100%;
-    height: 100%;
-    cursor: pointer;
-}
-
-.file-upload-label {
-    display: inline-flex;
-    align-items: center;
-    padding: 6px 12px; /* Reduzido o padding para ajustar o comprimento */
-    background-color: transparent;
+    align-items: center; /* Alinha verticalmente o botão e o nome do arquivo */
+  }
+  
+  .custom-file-button {
+    background-color: #191515; /* Cor de fundo do botão */
     color: white;
+    border: 2px solid green; /* Borda verde */
+    padding: 9px 5px; /* Ajuste o padding para alterar o comprimento do botão */
+    font-size: 14px;
+    border-radius: 4px;
+    cursor: pointer;
+    width: auto; /* Permite que o botão ajuste seu comprimento de acordo com o conteúdo */
     text-align: center;
-    border-radius: 6px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    font-size: 14px; /* Tamanho da fonte ajustado */
-    font-family: Arial, sans-serif;
-    border: 2px solid #00ff00;
-    box-shadow: 0 0 5px transparent;
-    min-width: 120px; /* Define uma largura mínima */
-    max-width: 127px; /* Define uma largura máxima */
-    text-overflow: ellipsis; /* Adiciona reticências se o texto for muito longo */
-    overflow: hidden; /* Oculta o texto que ultrapassa o botão */
-    white-space: nowrap; /* Garante que o texto não quebre em múltiplas linhas */
-}
-
-.file-upload-label:hover {
-    background-color: #00ff00;
-    color: black;
-    box-shadow: 0 0 15px #00ff00;
-}
-
-.file-name {
-    margin-left: 10px;
-    color: white;
-    font-size: 14px; /* Ajuste o tamanho da fonte para combinar com o botão */
-}
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra padrão */
+    transition: background-color 0.3s, border-color 0.3s, box-shadow 0.3s; /* Transição suave */
+  }
+  
+  .custom-file-button:hover {
+    background-color: #03f40f; /* Cor ao passar o mouse */
+    border-color: #03f40f; /* Cor da borda ao passar o mouse */
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2); /* Sombra ao passar o mouse */
+  }
+  
+  
+  .file-name {
+    margin-left: 10px; /* Espaço entre o botão e o nome do arquivo */
+    font-size: 13px; /* Tamanho da fonte do nome do arquivo */
+    color: #fff; /* Cor do texto do nome do arquivo */
+  }
+ 
+  
+  #text1-cadastro {
+    color: #3E3E3E;
+  }
+  
+  
