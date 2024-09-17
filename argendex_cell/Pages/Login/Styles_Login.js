@@ -45,6 +45,7 @@ export default style = StyleSheet.create({
     Txtbtn: {
         color: '#fff',
         fontSize: 18,
+        
     },
 
     btnCriar: {
@@ -59,7 +60,7 @@ export default style = StyleSheet.create({
     },
     btnvl: {
         justifyContent: 'center',
-        marginLeft:18,
+        
         height: 50,
         
     },

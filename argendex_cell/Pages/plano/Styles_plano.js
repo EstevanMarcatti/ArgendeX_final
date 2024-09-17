@@ -9,7 +9,7 @@ export default styles = StyleSheet.create({
     containerLogo:{
         flex: 1,
         justifyContent: 'center',
-        marginRight: 160,
+        marginRight: 80,
     },
     logo:{
         width: 500,
@@ -71,7 +71,7 @@ export default styles = StyleSheet.create({
     },
     txtplano:{
         color: '#fff',
-        marginLeft: 90,
+        marginLeft: 70,
     },
     btnplano: {
         backgroundColor: '#48DE2F',

@@ -11,7 +11,7 @@ const LoginForm = ({ navigation }) => {
   const handleLogin = async () => {
     setLoading(true); // Inicia o carregamento
     try {
-      const response = await fetch('http://10.135.60.26:8085/login', {
+      const response = await fetch('http://192.168.137.1:8085/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

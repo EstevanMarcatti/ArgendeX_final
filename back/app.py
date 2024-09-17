@@ -78,5 +78,6 @@ def delete_task():
     data = request.json
     print('dados delete: ', data)
     return crud.deletar_tarefa(data['id'])
+
 if __name__ == '__main__':
     app.run(port=8085, host='0.0.0.0', debug=True, threaded=True)
