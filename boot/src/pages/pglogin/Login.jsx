@@ -18,7 +18,7 @@ function LoginForm() {
         }
 
         try {
-            const response = await fetch('http://10.135.60.36:8085/login', {
+            const response = await fetch('http://localhost:8085/login', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
