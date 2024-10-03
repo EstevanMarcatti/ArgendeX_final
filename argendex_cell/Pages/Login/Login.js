@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { TextInput, KeyboardAvoidingView, TouchableOpacity, Text, ScrollView, Image, View, Alert, ActivityIndicator } from "react-native";
+import AsyncStorage from '@react-native-async-storage/async-storage'; // Importando AsyncStorage
 import styles from "./Styles_Login.js";
 import useHeaderOptions from '../../components/Header.js'; // Importando o hook do header
 
@@ -11,7 +12,7 @@ const LoginForm = ({ navigation }) => {
   const handleLogin = async () => {
     setLoading(true); // Inicia o carregamento
     try {
-      const response = await fetch('http://192.168.137.1:8085/login', {
+      const response = await fetch('http://10.135.40.26:8085/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -24,8 +25,10 @@ const LoginForm = ({ navigation }) => {
       if (data.erro) {
         Alert.alert('Erro', data.mensagem.error || 'Erro desconhecido'); // Melhoria na mensagem de erro
       } else {
-        // Sucesso no login, pode navegar para a próxima tela
-        navigation.navigate('Calendario', { userId: data.mensagem.ID }); // Passando ID do usuário se necessário
+        // Sucesso no login, salvar ID no AsyncStorage
+        await AsyncStorage.setItem('userId', data.mensagem.ID.toString()); // Armazenando o ID como string
+        // Navegar para a próxima tela
+        navigation.navigate('Calendario', { userId: data.mensagem.ID });
       }
     } catch (error) {
       console.error('Erro ao realizar login:', error);
@@ -44,7 +47,6 @@ const LoginForm = ({ navigation }) => {
       </View>
 
       <ScrollView keyboardShouldPersistTaps="always" style={styles.container}>
-
         <TextInput
           style={styles.Inputs}
           value={email}
@@ -69,7 +71,6 @@ const LoginForm = ({ navigation }) => {
         <TouchableOpacity style={styles.btnvl} onPress={() => navigation.navigate('Cadastro')}>
           <Text style={styles.Txtbtn}>Ainda não tem conta? Cadastre-se</Text>
         </TouchableOpacity>
-
       </ScrollView>
     </KeyboardAvoidingView>
   );

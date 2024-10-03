@@ -21,7 +21,7 @@ const Calendar = () => {
   const [eventTime, setEventTime] = useState('');
   const [eventDescription, setEventDescription] = useState('');
   const [eventCategory, setEventCategory] = useState('');
-  const userId = 1; // Substitua pelo ID do usuário real
+  const userId = localStorage.getItem('ID'); // Obtenha o ID do usuário do localStorage
 
   const firstDayOfMonth = new Date(currentYear, currentMonth, 1).getDay();
   const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
@@ -48,7 +48,7 @@ const Calendar = () => {
         time: eventTime,
         description: eventDescription,
         category: eventCategory,
-        user_id: userId
+        user_id: userId // Certifique-se de que esta linha esteja presente
       };
 
       try {
@@ -105,10 +105,11 @@ const Calendar = () => {
 
   const handleDeleteEvent = async (id) => {
     try {
-      await fetch(`/api/tarefa/${id}`, {
-        method: 'DELETE'
-      });
-
+      await fetch(`http://localhost:8085/tasks`, {
+        method: 'DELETE',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ id }) // Passando o ID corretamente
+    });
       // Atualizar a lista de eventos local
       setEvents(events.filter(event => event.id !== id));
       setCurrentEvent(null);
@@ -146,20 +147,27 @@ const Calendar = () => {
 
   useEffect(() => {
     const fetchEvents = async () => {
-      try {
-        const response = await fetch('/api/tarefa');
-        if (!response.ok) {
-          throw new Error('Erro na resposta da API');
+        const userId = localStorage.getItem('ID'); // Obtém o ID do usuário logado
+        if (!userId) {
+            console.error('Usuário não autenticado.');
+            return;
         }
-        const data = await response.json();
-        setEvents(data);
-      } catch (error) {
-        console.error('Erro ao carregar tarefas:', error);
-      }
+
+        try {
+            const response = await fetch(`http://localhost:8085/tasks?user_id=${userId}`);
+            if (!response.ok) {
+                throw new Error('Erro na resposta da API');
+            }
+            const data = await response.json();
+            setEvents(data);
+        } catch (error) {
+            console.error('Erro ao carregar tarefas:', error);
+        }
     };
 
     fetchEvents();
-  }, [currentMonth, currentYear]);
+}, [currentMonth, currentYear]);
+
 
   return (
     <div className="calendar">

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, TextInput, StyleSheet, FlatList, TouchableOpacity, Modal, Alert, Animated } from 'react-native';
 import { Calendar, LocaleConfig } from 'react-native-calendars';
 import DateTimePicker from '@react-native-community/datetimepicker';
@@ -6,6 +6,7 @@ import { NavigationContainer, useNavigation } from '@react-navigation/native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import EditTaskScreen from './EditTaskScreen';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5'; // Importação correta do ícone
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
 // Configuração de localidade (opcional)
@@ -37,6 +38,7 @@ const TodoListScreen = () => {
     const [slideAnim] = useState(new Animated.Value(-300)); // Inicialize fora da tela
     const [menuVisible, setMenuVisible] = useState(false);
     const [events, setEvents] = useState([]);
+    
 
 
     // Novo estado para a pesquisa
@@ -60,20 +62,45 @@ const TodoListScreen = () => {
         }
     };
 
-    const addTask = async () => {
-        if (newTask && description && category && time && selectedDate) {
+    React.useEffect(() => {
+        const fetchTasks = async () => {
+            const userId = await AsyncStorage.getItem('userId');
+            if (userId) {
+                try {
+                    const response = await fetch(`http://10.135.40.26:8085/tasks?user_id=${userId}`);
+                    const data = await response.json();
+                    const formattedTasks = {};
+                    data.forEach(task => {
+                        const taskDate = task.date;
+                        if (!formattedTasks[taskDate]) {
+                            formattedTasks[taskDate] = [];
+                        }
+                        formattedTasks[taskDate].push(task);
+                    });
+                    setTasks(formattedTasks);
+                } catch (error) {
+                    console.error('Erro ao carregar tarefas:', error);
+                }
+            }
+        };
+        fetchTasks();
+    }, []);
+    
+
+      const addTask = async () => {
+        const userId = await AsyncStorage.getItem('userId'); // Esta linha deve funcionar agora
+        if (newTask && description && category && time && selectedDate && userId) { // Verifique se userId não é null
             const newTaskData = {
                 title: newTask,
                 description: description,
                 category: category,
                 date: selectedDate,
                 time: time.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
-                user_id: 1
+                user_id: userId // Agora deve usar o userId obtido
             };
     
             try {
-                // Salva a tarefa no backend
-                const response = await fetch('http://192.168.137.1:8085/tasks', {
+                const response = await fetch('http://10.135.40.26:8085/tasks', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
@@ -104,12 +131,12 @@ const TodoListScreen = () => {
                 setCategory('');
                 setTime(new Date());
                 setNewTaskModalVisible(false);
-                setSelectedDate(''); // Deselect the date
-                
+                setSelectedDate('');
+    
                 // Exibir mensagem de sucesso
-                setShowConfirmation(true); // Exibir mensagem de confirmação
+                setShowConfirmation(true);
                 setTimeout(() => {
-                    setShowConfirmation(false); // Ocultar mensagem de confirmação após 3 segundos
+                    setShowConfirmation(false);
                 }, 3000);
     
             } catch (error) {
@@ -119,6 +146,7 @@ const TodoListScreen = () => {
             console.error('Todos os campos são obrigatórios.');
         }
     };
+    
     
 
         

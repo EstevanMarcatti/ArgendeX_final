@@ -65,7 +65,9 @@ def create_task():
 
 @app.route('/tasks', methods=['GET'])
 def get_tasks():
-    return jsonify(crud.listar_tarefas())
+    user_id = request.args.get('user_id')  # Obtém o ID do usuário da query string
+    return jsonify(crud.listar_tarefas(user_id))
+
 
 @app.route('/tasks', methods=['PUT'])
 def update_task():
