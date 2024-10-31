@@ -188,3 +188,18 @@ span.day-number {
 .carnaval {
   color: #cb0000;
 }
+
+.confirmation-container {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: green;
+  padding: 10px;
+  text-align: center;
+}
+
+.confirmation-text {
+  color: white;
+  font-weight: bold;
+}
