@@ -34,7 +34,7 @@ export default function Premium() {
                         <p id="vis">4 -</p>
                         <div className="submit">
                             <input type="hidden" name="acao" value="enviar" />
-                            <a href="cadastro.html"><button type="submit" name="Submit" className="btn_2">Comece grátis</button></a>
+                            <a href="cadastro.html"><button type="submit" id ="free" name="Submit" className="btn_2">Comece grátis</button></a>
                         </div>
                     </div>
                     <div className="universidade">
@@ -47,7 +47,7 @@ export default function Premium() {
                         <p id="vis"> 4 -</p>
                         <div className="submit">
                             <input type="hidden" name="acao" value="enviar" />
-                            <a href="https://pay.kiwify.com.br/Dly1fmM"><button type="submit" name="Submit" className="btn_2">Adquirir agora</button></a>
+                            <a href="https://pay.kiwify.com.br/Dly1fmM"><button type="submit" id="univer" name="Submit" className="btn_2">Adquirir agora</button></a>
                         </div>
                     </div>
                     <div className="avancado">
@@ -60,7 +60,7 @@ export default function Premium() {
                         <p>4 - Agendamentos ilimitados </p>
                         <div className="submit">
                             <input type="hidden" name="acao" value="enviar" />
-                            <a href="https://pay.kiwify.com.br/h9zfQlN"><button type="submit" name="Submit" className="btn_2">Adquirir agora</button></a>
+                            <a href="https://pay.kiwify.com.br/h9zfQlN"><button type="submit" id="avan"name="Submit"  className="btn_2">Adquirir agora</button></a>
                         </div>
                     </div>
 
