@@ -26,6 +26,7 @@ const Calendar = () => {
   const [tasks, setTasks] = useState([]); // Estado para armazenar tarefas
   const [editModalVisible, setEditModalVisible] = useState(false); // Estado para controlar o modal de edição
   const [editedTask, setEditedTask] = useState(null); // Estado para armazenar a tarefa que está sendo editada
+  
 
   const firstDayOfMonth = new Date(currentYear, currentMonth, 1).getDay();
   const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();

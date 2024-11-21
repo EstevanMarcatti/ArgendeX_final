@@ -99,6 +99,7 @@ function LoginForm() {
                                     Acesse nossa central de ajuda.
                                 </a>
                             </p>
+
                         </div>
                     </form>
                 </div>

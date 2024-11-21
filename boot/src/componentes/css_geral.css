@@ -311,3 +311,25 @@ label {
     background-color: rgb(23, 23, 23);
     border: none;
 }
+
+
+#fotoperfil,
+#fotoperfil2 {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+    transition: all 0.5s ease;
+}
+
+#fotoperfil:hover,
+#fotoperfil2:hover {
+    transform: scale(1.1); /* Aumenta o tamanho da imagem quando o mouse passa sobre ela */
+    box-shadow: 0 0 5px #03f40f, 0 0 25px #03f40f, 0 0 50px #03f40f, 0 0 100px #03f40f; /* Efeito de brilho verde */
+}
+
+
+
+
