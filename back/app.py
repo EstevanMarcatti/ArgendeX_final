@@ -4,6 +4,7 @@ from validacao_login import validar_login
 from processamento import processar_dados 
 from processatualizar import atualizar_dados
 from select_atualiz import obter_dados_usuario_por_id, atualizar_dados_usuario
+from datetime import datetime, timedelta
 import conexao
 import crud
 from werkzeug.utils import secure_filename
@@ -146,6 +147,28 @@ def obter_foto_perfil(ID):
             return jsonify({'erro': 'Foto não encontrada.'}), 404
     except Exception as e:
         return jsonify({'erro': 'Erro ao buscar foto de perfil', 'mensagem': str(e)}), 500
+    
+
+@app.route('/tasks/proximos', methods=['GET'])
+def get_eventos_proximos():
+    try:
+        # Obter a data e hora atuais
+        now = datetime.now()
+        now_plus_one_minute = now + timedelta(minutes=1)
+
+        # Chamar o método do CRUD para buscar as tarefas próximas
+        tarefas_proximas = crud.obter_tarefas_proximas(
+            now.strftime('%Y-%m-%d'),
+            now.strftime('%H:%M:%S'),
+            now_plus_one_minute.strftime('%H:%M:%S')
+        )
+
+        if tarefas_proximas:
+            return jsonify(tarefas_proximas), 200
+        else:
+            return jsonify([]), 200
+    except Exception as e:
+        return jsonify({"erro": "Erro ao buscar tarefas próximas", "mensagem": str(e)}), 500
 
 
 

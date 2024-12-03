@@ -93,3 +93,29 @@ def obter_foto_perfil_por_id(ID):
         return resultado[0]  # Retorna o conteúdo binário da foto
     else:
         return None
+
+
+def obter_tarefas_proximas(data, hora_inicio, hora_fim):
+    try:
+        connection = conectar()
+        cursor = connection.cursor(dictionary=True)
+
+        print(f"Buscando tarefas entre {hora_inicio} e {hora_fim} na data {data}")
+
+        query = """
+            SELECT id, title AS titulo, date AS data, time AS hora
+            FROM tasks
+            WHERE date = %s AND time BETWEEN %s AND %s
+        """
+        cursor.execute(query, (data, hora_inicio, hora_fim))
+        tarefas = cursor.fetchall()
+
+        print(f"Tarefas encontradas: {tarefas}")
+
+        cursor.close()
+        connection.close()
+        return tarefas
+    except Exception as e:
+        print(f"Erro ao buscar tarefas próximas: {e}")
+        return None
+
