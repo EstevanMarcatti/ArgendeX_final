@@ -197,6 +197,7 @@ span.day-number {
   background-color: green;
   padding: 10px;
   text-align: center;
+  z-index: 1000; /* Garante que a mensagem fique na frente de outros elementos */
 }
 
 .confirmation-text {

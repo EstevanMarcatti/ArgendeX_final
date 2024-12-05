@@ -6,29 +6,29 @@ function Alertas() {
   const [flutuantes, setFlutuantes] = useState([]);
 
   useEffect(() => {
-    const fetchAlertas = () => {
-      fetch("http://localhost:8085/tasks/proximos")
-        .then((response) => {
-          if (!response.ok) {
-            throw new Error("Erro na requisição");
-          }
-          return response.json();
-        })
-        .then((data) => {
-          console.log("Notificações recebidas:", data); // Adicione logs para verificar os dados recebidos
-          if (data.length > 0) {
-            setAlertas(data);
-            setFlutuantes(data); // Atualiza as notificações flutuantes
-          } else {
-            setAlertas([]);
-          }
-        })
-        .catch((error) => console.error("Erro ao buscar eventos próximos:", error));
+    const fetchAlertas = async () => {
+      try {
+        const response = await fetch("http://localhost:8085/tasks/proximos");
+        if (!response.ok) {
+          throw new Error("Erro na requisição");
+        }
+        const data = await response.json();
+        console.log("Notificações recebidas:", data);
+
+        if (data.length > 0) {
+          setAlertas(data);
+          setFlutuantes(data); // Atualiza notificações flutuantes
+        } else {
+          setAlertas([]);
+        }
+      } catch (error) {
+        console.error("Erro ao buscar eventos próximos:", error);
+      }
     };
-  
-    const interval = setInterval(fetchAlertas, 5000); // Verificar a cada 5 segundos
-    fetchAlertas(); // Busca inicial imediata
-  
+
+    const interval = setInterval(fetchAlertas, 60000); // Verificar a cada 60 segundos
+    fetchAlertas(); // Busca inicial
+
     return () => clearInterval(interval);
   }, []);
 
@@ -41,12 +41,12 @@ function Alertas() {
       {/* Notificações Flutuantes */}
       {flutuantes.map((evento) => (
         <NotificationToast
-        key={evento.id}
-        titulo={evento.titulo}
-        hora={evento.hora}
-        onClose={() => removeFlutuante(evento.id)} // Certifique-se de que essa função está definida no componente pai
-        position="bottom-right"
-      />
+          key={evento.id}
+          titulo={evento.titulo}
+          hora={evento.hora}
+          onClose={() => removeFlutuante(evento.id)}
+          position="bottom-right"
+        />
       ))}
 
       {/* Notificações no Modal */}

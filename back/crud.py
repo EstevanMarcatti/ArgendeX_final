@@ -119,3 +119,22 @@ def obter_tarefas_proximas(data, hora_inicio, hora_fim):
         print(f"Erro ao buscar tarefas próximas: {e}")
         return None
 
+
+
+
+def criar_tarefa(data):
+    connection = conectar()
+    if connection is None:
+        return {'error': 'Erro ao conectar ao banco de dados.'}
+
+    cursor = connection.cursor()
+    sql = """
+        INSERT INTO tasks (title, description, date, time, user_id)
+        VALUES (%s, %s, %s, %s, %s)
+    """
+    valores = (data['title'], data['description'], data['date'], data['time'], data['user_id'])
+    cursor.execute(sql, valores)
+    connection.commit()
+    cursor.close()
+    connection.close()
+    return {'message': 'Tarefa criada com sucesso.'}

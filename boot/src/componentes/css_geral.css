@@ -333,3 +333,63 @@ label {
 
 
 
+
+
+
+
+
+
+/* Contêiner geral dos horários */
+.time-slots-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 10px 0;
+}
+
+/* Botões dos horários */
+.time-slot-button {
+    width: 120px; /* Ajuste conforme necessário */
+    height: 40px;
+    margin: 5px 0;
+    border-radius: 8px;
+    border: none;
+    font-size: 14px;
+    font-weight: bold;
+    color: #ffffff;
+    background-color: #4caf50; /* Verde padrão */
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+/* Botão ao passar o mouse */
+.time-slot-button:hover {
+    background-color: #45a049; /* Tom mais escuro ao hover */
+}
+
+/* Botão para horários passados */
+.time-slot-button.past {
+    background-color: #d3d3d3; /* Cinza */
+    color: #6c757d; /* Cinza mais escuro para o texto */
+    cursor: not-allowed;
+}
+
+/* Botão ao clicar */
+.time-slot-button:active {
+    transform: scale(0.95);
+}
+
+/* Contêiner de cada horário */
+.time-slot-item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+/* Texto adicional (opcional, por exemplo, para exibir "agendado") */
+.time-slot-text {
+    margin-left: 8px;
+    font-size: 12px;
+    color: #333;
+}
