@@ -1,5 +1,6 @@
 import conexao
 
+
 # função para deletar um usuario
 
 def selecionar_usuario():

@@ -35,7 +35,7 @@ function NotificationToast({ titulo, hora, onClose, position = "bottom-right" })
 const styles = {
   toast: {
     position: "fixed",
-    backgroundColor: "#007bff",
+    backgroundColor: "#000000",
     color: "white",
     padding: "15px",
     borderRadius: "5px",

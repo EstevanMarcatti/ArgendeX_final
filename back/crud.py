@@ -138,3 +138,23 @@ def criar_tarefa(data):
     cursor.close()
     connection.close()
     return {'message': 'Tarefa criada com sucesso.'}
+
+
+
+
+
+def deletar_usuario(ID):
+    try:
+        connection = conectar()
+        if connection is None:
+            return {'error': 'Erro ao conectar ao banco de dados.'}
+
+        cursor = connection.cursor()
+        sql = "DELETE FROM cadastro WHERE ID = %s"
+        cursor.execute(sql, (ID,))
+        connection.commit()
+        cursor.close()
+        connection.close()
+        return {'message': 'Usuário deletado com sucesso.'}
+    except Exception as e:
+        return {'error': f'Erro ao deletar o usuário: {e}'}

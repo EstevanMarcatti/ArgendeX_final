@@ -66,6 +66,18 @@ def atualizar_dados_usuario(ID):
     resultado = atualizar_dados(ID, dados)
     return jsonify(resultado)
 
+
+@app.route('/delete_usuario/<int:ID>', methods=['DELETE'])
+def delete_usuario(ID):
+    try:
+        resultado = crud.deletar_usuario(ID)
+        if 'error' in resultado:
+            return jsonify({'erro': resultado['error']}), 500
+        return jsonify({'mensagem': 'Usuário deletado com sucesso'}), 200
+    except Exception as e:
+        return jsonify({'erro': 'Erro ao deletar usuário', 'mensagem': str(e)}), 500
+
+
 @app.route('/tasks', methods=['POST'])
 def create_task():
     data = request.json
