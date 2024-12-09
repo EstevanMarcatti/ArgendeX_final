@@ -67,7 +67,7 @@ const TodoListScreen = () => {
             const userId = await AsyncStorage.getItem('userId');
             if (userId) {
                 try {
-                    const response = await fetch(`http://10.135.40.26:8085/tasks?user_id=${userId}`);
+                    const response = await fetch(`http://10.135.60.62:8085/tasks?user_id=${userId}`);
                     const data = await response.json();
                     const formattedTasks = {};
                     data.forEach(task => {

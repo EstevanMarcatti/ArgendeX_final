@@ -73,7 +73,7 @@ const TodoListScreen = () => {
     
             try {
                 // Salva a tarefa no backend
-                const response = await fetch('http://192.168.137.1:8085/tasks', {
+                const response = await fetch('http://10.135.60.62:8085/tasks', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
