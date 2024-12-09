@@ -204,3 +204,17 @@ span.day-number {
   color: white;
   font-weight: bold;
 }
+#Adddtarefa{
+  background-color: green;
+  color: white;
+  border-radius: 7px;
+  margin-top: 10px;
+  margin-bottom: 8px;
+  
+}
+#bttfechar{
+  background-color: #cb0000;
+  color: white;
+  border-radius: 7px;
+ 
+}

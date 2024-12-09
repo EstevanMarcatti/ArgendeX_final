@@ -7,6 +7,7 @@ import Perfil from './Perfil';
 import Horarios from './Horarios';
 import Notificacoes from './Calendar/Notificacoes';
 import NotificationToast from "./NotificationToast";
+import TodayHeader from "./TodayHeader";
 import './Appsite.css';
 
 function App() {

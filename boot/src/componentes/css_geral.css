@@ -393,3 +393,7 @@ label {
     font-size: 12px;
     color: #333;
 }
+
+#styleHorario {
+    position: relative; /* Isso permite que o 'position: absolute' funcione para os elementos filhos */
+}

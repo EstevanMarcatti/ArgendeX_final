@@ -53,12 +53,12 @@ function Alertas() {
       <div>
         {alertas.length > 0 ? (
           alertas.map((evento) => (
-            <div key={evento.id} style={{ marginBottom: "10px" }}>
+            <div key={evento.id} style={{ marginBottom: "10px", color: "red" }}>
               <strong>{evento.titulo}</strong> - {evento.hora}
             </div>
           ))
         ) : (
-          <p>Nenhuma notificação no momento.</p>
+          <p style={{ color: "#A0A0A0" }}>Nenhuma notificação no momento.</p> /* Cor cinza claro */
         )}
       </div>
     </>

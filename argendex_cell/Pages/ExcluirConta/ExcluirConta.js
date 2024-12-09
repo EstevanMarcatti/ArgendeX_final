@@ -12,7 +12,7 @@ const ExcluirConta = () => {
 
             if (userId) {
                 // Fazer a requisição DELETE para excluir a conta
-                const response = await fetch(`http://10.135.60.62:8085/delete_usuario/${userId}`, {
+                const response = await fetch(`http://10.135.60.15:8085/delete_usuario/${userId}`, {
                     method: 'DELETE',
                     headers: {
                         'Content-Type': 'application/json',

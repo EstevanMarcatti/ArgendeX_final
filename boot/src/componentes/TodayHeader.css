@@ -1,0 +1,7 @@
+#data_atual {
+    color: white;
+    display: block;
+    margin: 0; /* Reseta a margem */
+    padding-left: 45px; /* Adiciona espaçamento à esquerda */
+    margin-bottom: 20px;
+}

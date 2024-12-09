@@ -12,6 +12,7 @@
 import './css_geral.css'
 import Container from 'react-bootstrap/Container';
 import Navbar from 'react-bootstrap/Navbar';
+import TodayHeader from "./TodayHeader";
 import Add from './Add'
 {/*scrool lateral dos horários*/}
 const horarios =[
@@ -165,12 +166,15 @@ const horarios =[
 export default function Horarios() {
     return (
         <div>
+            <TodayHeader/>
             <div id='styleHorario'>
+                
                 <Navbar  id='sephora'>
                     <Container id='containerhora'>
                         <Navbar.Brand href="" id='horas'>
                             {horarios.map(function (item) {
                                 return (
+
                                     <Add
                                     hora00={item.hora00}
                                     hora15={item.hora15}

@@ -1,5 +1,5 @@
 import React from 'react';
-import './css_geral.css'
+import './TodayHeader.css'
 
 const TodayHeader = () => {
   const today = new Date();

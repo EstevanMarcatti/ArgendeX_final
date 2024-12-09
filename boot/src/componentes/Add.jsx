@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
-import TodayHeader from './TodayHeader';
 import './css_geral.css';
 
 function Add(props) {
@@ -70,9 +69,17 @@ function Add(props) {
     }
   };
 
+  // Função para obter a data de hoje formatada
+  const getFormattedDate = () => {
+    const today = new Date();
+    return today.toLocaleDateString('pt-BR');
+  };
+
   return (
-      
     <>
+      {/* Exibe a data de hoje, apenas acima do primeiro botão */}
+     
+
       {/* Mensagem de confirmação */}
       {showConfirmation && (
         <div className="confirmation-container">

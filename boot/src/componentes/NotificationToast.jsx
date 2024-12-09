@@ -20,7 +20,7 @@ function NotificationToast({ titulo, hora, onClose, position = "bottom-right" })
 
   return (
     <div style={{ ...styles.toast, ...positions[position] }}>
-      <p><strong>Falta 1 minuto para o evento!</strong></p>
+      <p style={styles.message}><strong>Falta 1 minuto para o evento!</strong></p>
       <p>
         <strong>{titulo}</strong> - {hora}
       </p>
@@ -42,6 +42,7 @@ const styles = {
     boxShadow: "0 2px 8px rgba(0, 0, 0, 0.2)",
     zIndex: 1000,
     minWidth: "250px",
+    border: "2px solid #4DDB36", // Adicionando a borda
   },
   closeButton: {
     background: "none",
@@ -52,6 +53,9 @@ const styles = {
     top: "5px",
     right: "10px",
     cursor: "pointer",
+  },
+  message: {
+    marginTop: "20px", // Adiciona espaço entre o texto e o botão de fechar
   },
 };
 

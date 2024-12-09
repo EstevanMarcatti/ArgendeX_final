@@ -370,13 +370,7 @@ const TodoListScreen = () => {
                                 value={description}
                                 onChangeText={setDescription}
                             />
-                            <TextInput
-                                style={styles.input}
-                                placeholder="Categoria"
-                                placeholderTextColor="grey"
-                                value={category}
-                                onChangeText={setCategory}
-                            />
+                            
                             <TouchableOpacity onPress={() => setShowTimePicker(true)}>
                                 <Text style={styles.timePickerText}>Escolher Horário: {time.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</Text>
                             </TouchableOpacity>

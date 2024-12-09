@@ -18,7 +18,7 @@ const ConfigConta = () => {
             if (userId) {
                 try {
 
-                    const response = await fetch(`http://10.135.60.62:8085/dados-usuario/${userId}`);
+                    const response = await fetch(`http://10.135.60.15:8085/dados-usuario/${userId}`);
 
                     const data = await response.json();
 

@@ -245,23 +245,22 @@ const Calendar = () => {
                       <div><strong>{task.title}</strong></div>
                       <div>{task.time}</div>
                       <div>{task.description}</div>
-                      <div>Categoria: {task.category}</div>
                       <div className="modal-calendar-buttons">
                         <button onClick={() => handleEditTask(task)}>Editar</button>
-                        <button onClick={() => handleDeleteEvent(task.id)}>Excluir</button>
+                        <button id='exclu' onClick={() => handleDeleteEvent(task.id)}>Excluir</button>
                       </div>
                     </div>
                   ))}
                 </div>
-                <button className="add-task-button" onClick={() => handleAddEvent(selectedDate - 1)}>Adicionar Tarefa</button>
+                <button className="add-task-button" id='Adddtarefa' onClick={() => handleAddEvent(selectedDate - 1)}>Adicionar Tarefa</button>
               </div>
             ) : (
               <div className="no-tasks-message">
                 Não há tarefas para este dia.
-                <button className="add-task-button" onClick={() => handleAddEvent(selectedDate - 1)}>Adicionar Tarefa</button>
+                <button className="add-task-button" id='Adddtarefa' onClick={() => handleAddEvent(selectedDate - 1)}>Adicionar Tarefa</button>
               </div>
             )}
-            <button className="cancel" onClick={() => setModalVisible(false)}>Fechar</button>
+            <button className="cancel" id='bttfechar' onClick={() => setModalVisible(false)}>Fechar</button>
           </div>
         </div>
       )}
@@ -285,12 +284,6 @@ const Calendar = () => {
               value={eventDescription}
               onChange={(e) => setEventDescription(e.target.value)}
               placeholder="Descrição"
-            />
-            <input
-              type="text"
-              value={eventCategory}
-              onChange={(e) => setEventCategory(e.target.value)}
-              placeholder="Categoria"
             />
             <div className="modal-calendar-buttons">
               <button onClick={handleSaveEvent}>
@@ -334,12 +327,6 @@ const Calendar = () => {
               value={eventDescription}
               onChange={(e) => setEventDescription(e.target.value)}
               placeholder="Descrição"
-            />
-            <input
-              type="text"
-              value={eventCategory}
-              onChange={(e) => setEventCategory(e.target.value)}
-              placeholder="Categoria"
             />
             <div className="modal-calendar-buttons">
               <button onClick={handleSaveEvent}>

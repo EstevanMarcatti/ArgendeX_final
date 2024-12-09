@@ -7,7 +7,7 @@ import Home from './Pages/Home/Home';
 import Login from './Pages/Login/Login';
 import Cadastro from './Pages/Cadastro/Cadastro';
 import TodoListScreen from './Pages/Calendar/TodoListScreen';
-import Planos from './Pages/plano/plano';
+import Planos from './Pages/plano/Plano';
 import Suporte from './Pages/Suporte/Suporte';
 import usuario from './Pages/usuario/usuario';
 import AtualizeConta from './Pages/AtualizaConta/AtualizaConta';
@@ -24,55 +24,62 @@ function CustomDrawerContent({ navigation }) {
       <View>
         <Text style={styles.TxtMenu}>Menu</Text>
       </View>
+
       <TouchableOpacity
         style={styles.btnCriar}
         onPress={() => navigation.navigate('Calendario')}
       >
-        <View style={styles.display}>
+        <View style={styles.btnContent}>
+          <Image
+            style={styles.icon}
+            resizeMode="contain"
+            source={require('./assets/images/calendario.png')}
+          />
           <Text style={styles.TxtbtnMenu}>Calendário</Text>
         </View>
       </TouchableOpacity>
-      <View style={styles.display}>
-        <Image
-          style={styles.logocl}
-          resizeMode="contain"
-          source={require('./assets/images/calendario.png')}
-        />
-      </View>
+
       <TouchableOpacity
         style={styles.btnCriar}
         onPress={() => navigation.navigate('usuario')}
       >
-        <View style={styles.display}>
+        <View style={styles.btnContent}>
+          <Image
+            style={styles.icon}
+            resizeMode="contain"
+            source={require('./assets/images/74472.png')}
+          />
           <Text style={styles.TxtbtnMenu}>Usuário</Text>
         </View>
       </TouchableOpacity>
+
       <TouchableOpacity
         style={styles.btnCriar}
         onPress={() => navigation.navigate('Planos')}
       >
-        <Text style={styles.TxtbtnMenu}>Planos</Text>
+        <View style={styles.btnContent}>
+          <Image
+            style={styles.icon}
+            resizeMode="contain"
+            source={require('./assets/images/forma-de-pagamento.png')}
+          />
+          <Text style={styles.TxtbtnMenu}>Planos</Text>
+        </View>
       </TouchableOpacity>
-      <View style={styles.display}>
-        <Image
-          style={styles.logocl}
-          resizeMode="contain"
-          source={require('./assets/images/forma-de-pagamento.png')}
-        />
-      </View>
+
       <TouchableOpacity
         style={styles.btnCriar}
         onPress={() => navigation.navigate('Suporte')}
       >
-        <Text style={styles.TxtbtnMenu}>Suporte</Text>
+        <View style={styles.btnContent}>
+          <Image
+            style={styles.icon}
+            resizeMode="contain"
+            source={require('./assets/images/apoio-suporte.png')}
+          />
+          <Text style={styles.TxtbtnMenu}>Suporte</Text>
+        </View>
       </TouchableOpacity>
-      <View style={styles.display}>
-        <Image
-          style={styles.logocl}
-          resizeMode="contain"
-          source={require('./assets/images/apoio-suporte.png')}
-        />
-      </View>
     </View>
   );
 }
@@ -107,32 +114,36 @@ const styles = StyleSheet.create({
     paddingTop: 50,
     paddingHorizontal: 20,
   },
-  TxtbtnMenu: {
+  TxtMenu: {
+    fontSize: 30,
     color: '#fff',
-    fontSize: 18,
+    marginTop: -35,
   },
   btnCriar: {
     backgroundColor: 'green',
     justifyContent: 'center',
     marginTop: 20,
     marginBottom: 15,
-    alignItems: 'center',
+    alignItems: 'flex-start', // Alinha o conteúdo à esquerda
     width: '90%',
-    height: 45,
+    height: 60, // Aumenta a altura do botão para melhor visualização
     borderRadius: 5,
+    flexDirection: 'row', // Alinha o ícone e o texto na mesma linha
+    padding: 10, // Adiciona um pouco de espaçamento interno
   },
-  TxtMenu: {
-    fontSize: 30,
+  TxtbtnMenu: {
     color: '#fff',
-    marginTop: -35,
+    fontSize: 18,
+    marginLeft: 10, // Adiciona espaçamento entre o ícone e o texto
   },
-  display: {
-    display: 'flex',
+  btnContent: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    width: '100%',
   },
-  logocl: {
-    width: 40,
-    marginTop: -62,
-    marginLeft: 5,
+  icon: {
+    width: 40, // Tamanho maior do ícone
+    height: 40, // Tamanho maior do ícone
   },
 });
 
