@@ -397,3 +397,27 @@ label {
 #styleHorario {
     position: relative; /* Isso permite que o 'position: absolute' funcione para os elementos filhos */
 }
+.btn-primary {
+    --bs-btn-color: #fff;
+    --bs-btn-bg: #03f40f;
+    --bs-btn-border-color: rgb(81, 255, 0);
+    --bs-btn-hover-color: #fff;
+    --bs-btn-hover-bg: #03f40f;
+    --bs-btn-hover-border-color: rgb(81, 255, 0);
+    --bs-btn-focus-shadow-rgb: 49, 132, 253;
+    --bs-btn-active-color: #fff;
+    --bs-btn-active-bg: rgb(81, 255, 0);
+    --bs-btn-active-border-color: rgb(81, 255, 0);
+    --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+    --bs-btn-disabled-color: #fff;
+    --bs-btn-disabled-bg: rgb(81, 255, 0);
+    --bs-btn-disabled-border-color: rgb(81, 255, 0);
+}
+.h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6 {
+    margin-top: 0;
+    margin-bottom: .5rem;
+    font-weight: 500;
+    line-height: 1.2;
+    color: #fff;
+}
+
