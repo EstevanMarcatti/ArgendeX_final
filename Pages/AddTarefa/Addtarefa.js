@@ -56,7 +56,7 @@ const Addtarefa = ({ navigation }) => {
 
             // Enviar a tarefa para o backend
             try {
-                await axios.post('http://10.135.60.15:8085/tasks', {
+                await axios.post('http://192.168.137.1:8085/tasks', {
                     data: selectedDate,
                     hora: newTaskObject.time,
                     titulo: newTaskObject.title,

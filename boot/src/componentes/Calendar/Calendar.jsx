@@ -285,6 +285,11 @@ const Calendar = () => {
               onChange={(e) => setEventDescription(e.target.value)}
               placeholder="Descrição"
             />
+            <textarea
+              value={eventCategory}
+              onChange={(e) => setEventCategory(e.target.value)}
+              placeholder="Categoria"
+            />
             <div className="modal-calendar-buttons">
               <button onClick={handleSaveEvent}>
                 {currentEvent ? 'Salvar' : 'Adicionar'}
@@ -327,6 +332,11 @@ const Calendar = () => {
               value={eventDescription}
               onChange={(e) => setEventDescription(e.target.value)}
               placeholder="Descrição"
+            />
+            <textarea
+              value={eventCategory}
+              onChange={(e) => setEventCategory(e.target.value)}
+              placeholder="Categoria"
             />
             <div className="modal-calendar-buttons">
               <button onClick={handleSaveEvent}>
